@@ -4,15 +4,15 @@
 package com.zz.gateway.core;
 
 /**
- * ���ں�˷����api ��Ϣ
+ * 后端服务接口信息
  * 
  * @author Administrator
  *
  */
 public class ApiInterface {
 
-    private String targetUrl; // Ŀ��url��ַ
-
+    private String targetUrl; //后端接口服务地址
+    
     public String getTargetUrl() {
         return targetUrl;
     }

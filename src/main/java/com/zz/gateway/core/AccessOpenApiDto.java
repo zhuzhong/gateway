@@ -9,9 +9,9 @@ package com.zz.gateway.core;
  */
 public class AccessOpenApiDto {
 
-    private String serviceRsp;  //��˷��񷵻�ֵ
+    private String serviceRsp;  //服务响应值
 
-    private boolean isAuthorized;//�Ƿ�����֤
+    private boolean isAuthorized;//是否授权
     
     public boolean isAuthorized() {
         return isAuthorized;

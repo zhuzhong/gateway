@@ -7,6 +7,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>gateway Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<spring.version>4.2.1.RELEASE</spring.version>
+	</properties>
 	<dependencies>
 
 

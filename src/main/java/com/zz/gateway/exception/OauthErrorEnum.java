@@ -4,33 +4,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum OauthErrorEnum {
-	ERROR("HRT10000", "service unavailable"),
-	GRANTTYPE("HRT10001", "grant_type is required"),
-	APPID("HRT10002", "appid is required"),
-	SECRET("HRT10003", "secret is required"),
-	TIMSTAMP("HRT10004", "timestamp is required"),
-	SIGN("HRT10005", "sign is required"),
-	INVALID_SIGN("HRT10006", "invalid sign"),
-	INVALID_REQUEST("HRT10007", "invalid request"),
-	INVALID_CLIENT("HRT10008", "invalid appId"),
-	INVALID_GRANT("HRT10009", "invalid grant"),
-	UNAUTHORIZED_CLIENT("HRT10010", "unauthorized appId"),
-	UNSUPPORTED_GRANT_TYPE("HRT10011", "unsupported grant_type"),
-	INVALID_TOKEN("HRT10012", "invalid token"),
-	ACCESS_DENIED("HRT10013", "access denied"),
-	SERVICENAME("HRT10014", "service_name is required"),
-	ACCESSTOKEN("HRT10015", "access_token is required"),
-	INVALID_SERVICENAME("HRT10016", "invalid service_name"),
-	CONTENTTYPE("HRT10017", "httprequest header content-type is required"),
-	INVALID_CONTENTTYPE("HRT10018", "invalid content-type,just application/xml or application/json"),
-	INVALID_SECRET("HRT10019", "invalid secret"),
-	UN_VISIBLE_SERVICENAME("HRT10021", "service is not visible"),
-	LOCK_ITEM_APPID("HRT10022", "current appid is locked"),
-	LOCK_ITEM_API("HRT10023", "current service is locked"),
-	APP_UNDEFIND_WHITE("HRT10024","undefind in whiteList"),
-	SERVICE_UNDEFIND_WHITE("HRT10025","service_name undefind in whiteList"),
-	NOT_CALLBACKURL("HRT10026","undefind in user's callBackUrl"),
-	INTERFACE_FREQUENCY("HRT10027", "api freq out of limit")
+	ERROR("zz10000", "service unavailable"),
+	GRANTTYPE("zz10001", "grant_type is required"),
+	APPID("zz10002", "appid is required"),
+	SECRET("zz10003", "secret is required"),
+	TIMSTAMP("zz10004", "timestamp is required"),
+	SIGN("zz10005", "sign is required"),
+	INVALID_SIGN("zz10006", "invalid sign"),
+	INVALID_REQUEST("zz10007", "invalid request"),
+	INVALID_CLIENT("zz10008", "invalid appId"),
+	INVALID_GRANT("zz10009", "invalid grant"),
+	UNAUTHORIZED_CLIENT("zz10010", "unauthorized appId"),
+	UNSUPPORTED_GRANT_TYPE("zz10011", "unsupported grant_type"),
+	INVALID_TOKEN("zz10012", "invalid token"),
+	ACCESS_DENIED("zz10013", "access denied"),
+	SERVICENAME("zz10014", "service_name is required"),
+	ACCESSTOKEN("zz10015", "access_token is required"),
+	INVALID_SERVICENAME("zz10016", "invalid service_name"),
+	CONTENTTYPE("zz10017", "httprequest header content-type is required"),
+	INVALID_CONTENTTYPE("zz10018", "invalid content-type,just application/xml or application/json"),
+	INVALID_SECRET("zz10019", "invalid secret"),
+	UN_VISIBLE_SERVICENAME("zz10021", "service is not visible"),
+	LOCK_ITEM_APPID("zz10022", "current appid is locked"),
+	LOCK_ITEM_API("zz10023", "current service is locked"),
+	APP_UNDEFIND_WHITE("zz10024","undefind in whiteList"),
+	SERVICE_UNDEFIND_WHITE("zz10025","service_name undefind in whiteList"),
+	NOT_CALLBACKURL("zz10026","undefind in user's callBackUrl"),
+	INTERFACE_FREQUENCY("zz10027", "api freq out of limit")
 	;
 	// 成员变量
     private String errCode;
@@ -76,15 +76,15 @@ public enum OauthErrorEnum {
 	private static Map<String,String> oauthErrorMap;
 	static{
 		oauthErrorMap = new HashMap<String,String>();
-		oauthErrorMap.put("error", "HRT10000");
-		oauthErrorMap.put("invalid_request", "HRT10007");
-		oauthErrorMap.put("invalid_client", "HRT10008");
-		oauthErrorMap.put("invalid_grant", "HRT10009");
-		oauthErrorMap.put("unauthorized_client", "HRT10010");
-		oauthErrorMap.put("401", "HRT10010");
-		oauthErrorMap.put("unsupported_grant_type", "HRT10011");
-		oauthErrorMap.put("invalid_token", "HRT10012");
-		oauthErrorMap.put("access_denied", "HRT10013");
+		oauthErrorMap.put("error", "zz10000");
+		oauthErrorMap.put("invalid_request", "zz10007");
+		oauthErrorMap.put("invalid_client", "zz10008");
+		oauthErrorMap.put("invalid_grant", "zz10009");
+		oauthErrorMap.put("unauthorized_client", "zz10010");
+		oauthErrorMap.put("401", "zz10010");
+		oauthErrorMap.put("unsupported_grant_type", "zz10011");
+		oauthErrorMap.put("invalid_token", "zz10012");
+		oauthErrorMap.put("access_denied", "zz10013");
 	}
 	public static Map<String, String> getOauthErrorMap() {
 		return oauthErrorMap;
