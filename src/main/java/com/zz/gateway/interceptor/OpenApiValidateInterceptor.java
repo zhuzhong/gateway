@@ -16,7 +16,7 @@ import com.zz.gateway.util.CommonCodeConstants;
  * @author Administrator
  *
  */
-public abstract class GateWayValidateInterceptor implements HandlerInterceptor {
+public abstract class OpenApiValidateInterceptor implements HandlerInterceptor {
 
    
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -34,6 +34,10 @@ public abstract class GateWayValidateInterceptor implements HandlerInterceptor {
 
   
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
+    	String requestMethod=request.getMethod();
+    	if(requestMethod!="GET"&&requestMethod!="POST"){
+    		throw new RuntimeException("请求方法不对，请求方法必须是 GET 或POST");
+    	}
         // 初始化请求bean
         OpenApiHttpRequestBean reqBean = iniOpenApiHttpRequestBean(request);
         request.setAttribute(CommonCodeConstants.REQ_BEAN_KEY, reqBean);

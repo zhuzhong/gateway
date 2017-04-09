@@ -15,189 +15,225 @@ import com.zz.gateway.util.CommonCodeConstants;
  */
 public class OpenApiHttpRequestBean {
 
-    /**
-     * 请求的协议 { 　 "ald_attrs":{ app_token, time_stamp, format, api_id,version
-     * 
-     * }, "request_data":{}
-     * 
-     * }
-     * 
-     * 
-     */
+	private Map<String, String> reqHeader;
+	private String serviceReqData;
+	private String operationType;
 
-    // ---公共的参数
-    private String appToken;
+	private String clientAddr; // 客户端ip
+	private String localAddr;// 服务端ip
+	private int localPort;// 服务端口
+	private String queryString;
+	private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
 
-    private String timeStamp;
-    private String format;
-    private String apiId;
-    
-    private String version;
+	private String reqId; // 内部定义的请求id
 
-    private Map<String, String> reqHeader;
-    private String serviceReqData;
-    private String operationType;
+	private String printStr; // 响应，这个最终写入response的流中
 
-    private String clientAddr; // 客户端ip
-    private String localAddr;// 服务端ip
-    private int localPort;// 服务端口
-    private String queryString;
-    private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
+	public String getPrintStr() {
+		return printStr;
+	}
 
-    private String reqId; // 内部定义的请求id
+	public void setPrintStr(String printStr) {
+		this.printStr = printStr;
+	}
 
-    private String printStr; // 响应，这个最终写入response的流中
+	public String getServiceReqData() {
+		return serviceReqData;
+	}
 
-    
-    
-    
-    public String getVersion() {
-        return version;
-    }
+	public void setServiceReqData(String serviceReqData) {
+		this.serviceReqData = serviceReqData;
+	}
 
-    public void setVersion(String version) {
-        this.version = version;
-    }
+	public String getOperationType() {
+		return operationType;
+	}
 
-    public String getPrintStr() {
-        return printStr;
-    }
+	public void setOperationType(String operationType) {
+		this.operationType = operationType;
+	}
 
-    public void setPrintStr(String printStr) {
-        this.printStr = printStr;
-    }
+	public String getClientAddr() {
+		return clientAddr;
+	}
 
-    public String getServiceReqData() {
-        return serviceReqData;
-    }
+	public void setClientAddr(String clientAddr) {
+		this.clientAddr = clientAddr;
+	}
 
-    public void setServiceReqData(String serviceReqData) {
-        this.serviceReqData = serviceReqData;
-    }
+	public String getLocalAddr() {
+		return localAddr;
+	}
 
-    public String getOperationType() {
-        return operationType;
-    }
+	public void setLocalAddr(String localAddr) {
+		this.localAddr = localAddr;
+	}
 
-    public void setOperationType(String operationType) {
-        this.operationType = operationType;
-    }
+	public int getLocalPort() {
+		return localPort;
+	}
 
-    public String getClientAddr() {
-        return clientAddr;
-    }
+	public void setLocalPort(int localPort) {
+		this.localPort = localPort;
+	}
 
-    public void setClientAddr(String clientAddr) {
-        this.clientAddr = clientAddr;
-    }
+	public String getQueryString() {
+		return queryString;
+	}
 
-    public String getLocalAddr() {
-        return localAddr;
-    }
+	public void setQueryString(String queryString) {
+		this.queryString = queryString;
+	}
 
-    public void setLocalAddr(String localAddr) {
-        this.localAddr = localAddr;
-    }
+	public Map<String, String> getThdApiUrlParams() {
+		return thdApiUrlParams;
+	}
 
-    public int getLocalPort() {
-        return localPort;
-    }
+	public void setThdApiUrlParams(Map<String, String> thdApiUrlParams) {
+		this.thdApiUrlParams = thdApiUrlParams;
+	}
 
-    public void setLocalPort(int localPort) {
-        this.localPort = localPort;
-    }
+	public Map<String, String> getReqHeader() {
+		return reqHeader;
+	}
 
-    public String getQueryString() {
-        return queryString;
-    }
+	public void setReqHeader(Map<String, String> reqHeader) {
+		this.reqHeader = reqHeader;
+	}
 
-    public void setQueryString(String queryString) {
-        this.queryString = queryString;
-    }
+	// 业务请求参数
+	private String request_data;
 
-    public Map<String, String> getThdApiUrlParams() {
-        return thdApiUrlParams;
-    }
+	public String getAppToken() {
+		return appToken;
+	}
 
-    public void setThdApiUrlParams(Map<String, String> thdApiUrlParams) {
-        this.thdApiUrlParams = thdApiUrlParams;
-    }
+	public void setAppToken(String appToken) {
+		this.appToken = appToken;
+	}
 
-    public Map<String, String> getReqHeader() {
-        return reqHeader;
-    }
+	public String getTimeStamp() {
+		return timeStamp;
+	}
 
-    public void setReqHeader(Map<String, String> reqHeader) {
-        this.reqHeader = reqHeader;
-    }
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 
-    // 业务请求参数
-    private String request_data;
+	public String getFormat() {
+		return format;
+	}
 
-    public String getAppToken() {
-        return appToken;
-    }
+	public void setFormat(String format) {
+		this.format = format;
+	}
 
-    public void setAppToken(String appToken) {
-        this.appToken = appToken;
-    }
+	public String getApiId() {
+		return apiId;
+	}
 
-    public String getTimeStamp() {
-        return timeStamp;
-    }
+	public void setApiId(String apiId) {
+		this.apiId = apiId;
+	}
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
+	public String getRequest_data() {
+		return request_data;
+	}
 
-    public String getFormat() {
-        return format;
-    }
+	public void setRequest_data(String request_data) {
+		this.request_data = request_data;
+	}
 
-    public void setFormat(String format) {
-        this.format = format;
-    }
+	public String getReqId() {
+		return reqId;
+	}
 
-    public String getApiId() {
-        return apiId;
-    }
+	public void setReqId(String reqId) {
+		this.reqId = reqId;
+	}
 
-    public void setApiId(String apiId) {
-        this.apiId = apiId;
-    }
+	public String getRedisKey() {
+		if (this.operationType.equals(CommonCodeConstants.API_SERVICE_KEY)) {
+			return CommonCodeConstants.getRouteBeanRedisKey(reqId);
+		}
 
-    public String getRequest_data() {
-        return request_data;
-    }
+		return CommonCodeConstants.getRouteBeanRedisKey("");
+	}
 
-    public void setRequest_data(String request_data) {
-        this.request_data = request_data;
-    }
+	private String serviceRsp; // 后端服务返回值
 
-    public String getReqId() {
-        return reqId;
-    }
+	public String getServiceRsp() {
+		return serviceRsp;
+	}
 
-    public void setReqId(String reqId) {
-        this.reqId = reqId;
-    }
+	public void setServiceRsp(String serviceRsp) {
+		this.serviceRsp = serviceRsp;
+	}
 
-    public String getRedisKey() {
-        if (this.operationType.equals(CommonCodeConstants.API_SERVICE_KEY)) {
-            return CommonCodeConstants.getRouteBeanRedisKey(reqId);
-        }
+	// 公共的参数 begin ---
+	private String appId;
+	private String apiId;
+	private String version;
+	private String appToken;
+	private String timeStamp;
+	private String signMethod;
+	private String sign;
+	private String deviceToken;
+	private String userToken;
 
-        return CommonCodeConstants.getRouteBeanRedisKey("");
-    }
+	// 公共参数end----
 
-    private String serviceRsp; // 后端服务返回值
+	// 公共部分增加参数
+	private String format;
 
-    public String getServiceRsp() {
-        return serviceRsp;
-    }
+	public String getAppId() {
+		return appId;
+	}
 
-    public void setServiceRsp(String serviceRsp) {
-        this.serviceRsp = serviceRsp;
-    }
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+
+	
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public String getSignMethod() {
+		return signMethod;
+	}
+
+	public void setSignMethod(String signMethod) {
+		this.signMethod = signMethod;
+	}
+
+	public String getSign() {
+		return sign;
+	}
+
+	public void setSign(String sign) {
+		this.sign = sign;
+	}
+
+	public String getDeviceToken() {
+		return deviceToken;
+	}
+
+	public void setDeviceToken(String deviceToken) {
+		this.deviceToken = deviceToken;
+	}
+
+	public String getUserToken() {
+		return userToken;
+	}
+
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
+	}
 
 }
