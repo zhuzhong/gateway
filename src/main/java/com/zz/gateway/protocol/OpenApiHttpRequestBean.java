@@ -3,6 +3,7 @@
  */
 package com.zz.gateway.protocol;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.zz.gateway.util.CommonCodeConstants;
@@ -16,7 +17,7 @@ import com.zz.gateway.util.CommonCodeConstants;
 public class OpenApiHttpRequestBean {
 
 	private Map<String, String> reqHeader;
-	private String serviceReqData;
+	
 	private String operationType;
 
 	private String clientAddr; // 客户端ip
@@ -28,6 +29,31 @@ public class OpenApiHttpRequestBean {
 	private String reqId; // 内部定义的请求id
 
 	private String printStr; // 响应，这个最终写入response的流中
+	
+	private String serviceReqData;  //post请求方法参数
+	private String requestMethod;
+	private Map<String,Object> serviceGetReqData; //get请求参数
+	
+	
+
+	public Map<String, Object> getServiceGetReqData() {
+		return serviceGetReqData;
+	}
+
+	public void addServiceGetReqData(String key, Object value) {
+		if(this.serviceGetReqData==null){
+			this.serviceGetReqData=new HashMap<String,Object>();
+		}
+		this.serviceGetReqData.put(key, value);
+	}
+
+	public String getRequestMethod() {
+		return requestMethod;
+	}
+
+	public void setRequestMethod(String requestMethod) {
+		this.requestMethod = requestMethod;
+	}
 
 	public String getPrintStr() {
 		return printStr;

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +38,7 @@ public class GateWayServiceParamValidateInterceptor extends
 		String requestMethod = request.getMethod();
 
 		OpenApiHttpRequestBean bean = new OpenApiHttpRequestBean();
-		if (requestMethod.equalsIgnoreCase("post")) {
+		if (requestMethod.equalsIgnoreCase("POST")) {
 			try {
 				parsePostMethod(request, bean);
 			} catch (IOException e) {
@@ -47,19 +46,66 @@ public class GateWayServiceParamValidateInterceptor extends
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-		}
-		
-		if (requestMethod.equalsIgnoreCase("get")) {
+		} else if (requestMethod.equalsIgnoreCase("GET")) {
 			parseGetMethod(request, bean);
 		}
 
+		bean.setLocalAddr(request.getLocalAddr());
+		bean.setLocalPort(request.getLocalPort());
+		bean.setClientAddr(NetworkUtil.getClientIpAddr(request));
+		bean.setReqHeader(getHeadersInfo(request)); // 获取请求头
 		bean.setOperationType(CommonCodeConstants.API_SERVICE_KEY);
 		return bean;
 	}
 
 	private void parseGetMethod(HttpServletRequest request,
 			OpenApiHttpRequestBean bean) {
+		bean.setSignMethod("MD5");
+		bean.setFormat("json");
+		Enumeration<String> enums = request.getAttributeNames();
+		while (enums.hasMoreElements()) {
+			String mapJson = enums.nextElement();
+			String value = (String) request.getAttribute(mapJson);
+			// 公共参数
+			// app_id
+			if (mapJson.equals(CommonCodeConstants.app_id)) {
+				bean.setAppId(value);
+			} else if (mapJson.equals(CommonCodeConstants.api_id)) {
+				bean.setApiId(value); // api_id
+			} else if (mapJson.equals(CommonCodeConstants.version)) {
+				bean.setVersion(value);// version
 
+			} else if (mapJson.equals(CommonCodeConstants.app_token)) {
+				bean.setAppToken(value); // app_token
+			} else if (mapJson.equals(CommonCodeConstants.time_stamp)) {
+				bean.setTimeStamp(value); // time_stamp
+			} else if (mapJson.equals(CommonCodeConstants.sign_method)) {
+				bean.setSignMethod(value); // sign_method
+			}
+			/*
+			 * else{ bean.setSignMethod("MD5"); //sign_method默认值 }
+			 */
+
+			else if (mapJson.equals(CommonCodeConstants.sign)) {
+				bean.setSign(value); // sign
+
+			} else if (mapJson.equals(CommonCodeConstants.device_token)) {
+				bean.setDeviceToken(value); // device_token
+
+			} else if (mapJson.equals(CommonCodeConstants.user_token)) {
+				bean.setUserToken(value);
+			} // user_token
+
+			else if (mapJson.equals(CommonCodeConstants.format)) {
+				bean.setFormat(value);
+			}
+			/*
+			 * else{ bean.setFormat("json"); //业务请求参数默认是json格式 }
+			 */
+			else {
+				bean.addServiceGetReqData(mapJson, value);
+			}
+		}
 	}
 
 	private void parsePostMethod(HttpServletRequest request,
@@ -81,65 +127,60 @@ public class GateWayServiceParamValidateInterceptor extends
 
 			JSONObject jsonObject = JSONObject.parseObject(bodyContent);
 			if (jsonObject.containsKey(CommonCodeConstants.pub_attrs)) {
-				JSONObject jsonObject2 = jsonObject.getJSONObject(CommonCodeConstants.pub_attrs);
+				JSONObject jsonObject2 = jsonObject
+						.getJSONObject(CommonCodeConstants.pub_attrs);
 				Map mapJson = (Map) jsonObject2;
 				// 公共参数
-				//app_id
-				if(mapJson.get(CommonCodeConstants.app_id)!=null){
-					bean.setAppId(mapJson.get(CommonCodeConstants.app_id).toString());
+				// app_id
+				if (mapJson.get(CommonCodeConstants.app_id) != null) {
+					bean.setAppId(mapJson.get(CommonCodeConstants.app_id)
+							.toString());
 				}
 				if (mapJson.get(CommonCodeConstants.api_id) != null)
 					bean.setApiId(mapJson.get(CommonCodeConstants.api_id)
 							.toString()); // api_id
 				if (mapJson.get(CommonCodeConstants.version) != null)
 					bean.setVersion(mapJson.get(CommonCodeConstants.version)
-							.toString());//version
-				
+							.toString());// version
+
 				if (mapJson.get(CommonCodeConstants.app_token) != null)
 					bean.setAppToken(mapJson.get(CommonCodeConstants.app_token)
-							.toString()); //app_token
+							.toString()); // app_token
 				if (mapJson.get(CommonCodeConstants.time_stamp) != null)
 					bean.setTimeStamp(mapJson.get(
-							CommonCodeConstants.time_stamp).toString()); //time_stamp
-				if (mapJson.get(CommonCodeConstants.sign_method) != null){
+							CommonCodeConstants.time_stamp).toString()); // time_stamp
+				if (mapJson.get(CommonCodeConstants.sign_method) != null) {
 					bean.setSignMethod(mapJson.get(
-							CommonCodeConstants.sign_method).toString()); //sign_method
-				}else{
-					bean.setSignMethod("MD5"); //sign_method默认值
+							CommonCodeConstants.sign_method).toString()); // sign_method
+				} else {
+					bean.setSignMethod("MD5"); // sign_method默认值
 				}
-				
+
 				if (mapJson.get(CommonCodeConstants.sign) != null)
 					bean.setSign(mapJson.get(CommonCodeConstants.sign)
-							.toString()); //sign
+							.toString()); // sign
 
 				if (mapJson.get(CommonCodeConstants.device_token) != null)
-					bean.setDeviceToken(mapJson.get(CommonCodeConstants.device_token)
-							.toString()); //device_token
-				
-				if(mapJson.get(CommonCodeConstants.user_token)!=null){
-					bean.setUserToken(mapJson.get(CommonCodeConstants.user_token).toString());
-				} //user_token
-				
-				if (mapJson.get(CommonCodeConstants.format) != null){
+					bean.setDeviceToken(mapJson.get(
+							CommonCodeConstants.device_token).toString()); // device_token
+
+				if (mapJson.get(CommonCodeConstants.user_token) != null) {
+					bean.setUserToken(mapJson.get(
+							CommonCodeConstants.user_token).toString());
+				} // user_token
+
+				if (mapJson.get(CommonCodeConstants.format) != null) {
 					bean.setFormat(mapJson.get(CommonCodeConstants.format)
 							.toString());
-				}else{
-					bean.setFormat("json"); //业务请求参数默认是json格式
+				} else {
+					bean.setFormat("json"); // 业务请求参数默认是json格式
 				}
-			
-			
-
-				bean.setReqHeader(getHeadersInfo(request)); // 获取请求头
-				String reqData = jsonObject.getJSONObject(CommonCodeConstants.busi_attrs)
-						.toJSONString();
+				String reqData = jsonObject.getJSONObject(
+						CommonCodeConstants.busi_attrs).toJSONString();
 				bean.setServiceReqData(reqData); // 请求体
 				// bean.setServiceReqData(getHttpRequestBodyString(request)); //
 				// 请求体
-
-				bean.setLocalAddr(request.getLocalAddr());
-				bean.setLocalPort(request.getLocalPort());
-				bean.setClientAddr(NetworkUtil.getClientIpAddr(request));
-
+				bean.setRequestMethod("POST");
 			}
 
 		}

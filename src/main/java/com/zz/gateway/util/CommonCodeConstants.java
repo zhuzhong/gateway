@@ -49,12 +49,13 @@ public class CommonCodeConstants {
 	请求格式:
 	1.对于post方法:
 	{
-		publAttrs:{},
-		busiAttrs:{}
+		"publAttrs":{},
+		"busiAttrs":{}
 	}
 	
 	2.对于get方法:
 		公共参数及业务参数直接串接在url地址上
+		而相应的业务参数以parameter+阿拉伯数字进行编号
  */
     
     public static String pub_attrs="publAttrs";
