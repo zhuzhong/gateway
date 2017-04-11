@@ -55,7 +55,10 @@ public class CommonCodeConstants {
 	
 	2.对于get方法:
 		公共参数及业务参数直接串接在url地址上
-		而相应的业务参数以parameter+阿拉伯数字进行编号
+		对于后端使用restful格式的get，在进行服务注册时使用方法名 user/1000  对应的注册格式 user/${userId}
+		然后前端请请使用的参数名为userId,前端请求格式 GET /serice.htm?userId=1000
+		而对于使用非restful格式的get方法直接将参数串在url地址上就可以了
+		
  */
     
     public static String pub_attrs="publAttrs";
