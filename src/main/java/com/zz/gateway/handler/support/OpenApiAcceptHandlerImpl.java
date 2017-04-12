@@ -38,14 +38,11 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler {
 
         OpenApiHttpRequestBean reqBean = (OpenApiHttpRequestBean) request
                 .getAttribute(CommonCodeConstants.REQ_BEAN_KEY);
-        OpenApiHttpSessionBean sessionBean = new OpenApiHttpSessionBean(reqBean);
-
         String reqId = idGenerator.genInnerRequestId();
         reqBean.setReqId(reqId);
-        sessionBean.setRequest(reqBean);
         request.setAttribute(CommonCodeConstants.REQ_BEAN_KEY, reqBean); // 重新设置bean
         // 将当前请求放入线程池处理，若超过线程池最大处理数则抛出reach queue max deepth 异常
-        addTask2Pool(response, sessionBean);
+        addTask2Pool(response, new OpenApiHttpSessionBean(reqBean));
     }
 
     @Autowired

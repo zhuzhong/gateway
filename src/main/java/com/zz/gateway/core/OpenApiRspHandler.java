@@ -18,11 +18,11 @@ import com.zz.gateway.service.CacheService;
 public class OpenApiRspHandler extends OpenApiHandler {
     private static final Log logger = LogFactory.getLog(OpenApiRspHandler.class);
 
-    @Override
+  /*  @Override
     public boolean execute(Context context) {
         logger.info("step1----");
         return doExcuteBiz(context);
-    }
+    }*/
 
     @Override
     public boolean doExcuteBiz(Context context) {

@@ -76,12 +76,7 @@ public class OpenApiReqHandler extends OpenApiHandler {
 
 
 
-    // step1
-    @Override
-    public boolean execute(Context context) {
-        log.info("step1,调用execute　方法");
-        return doExcuteBiz(context);
-    }
+  
 
  
   
@@ -90,15 +85,14 @@ public class OpenApiReqHandler extends OpenApiHandler {
     @Override
     public boolean doExcuteBiz(Context context) {
         log.info("step2...");
-        OpenApiContext blCtx = (OpenApiContext) context;
-        OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) blCtx.getOpenApiHttpSessionBean();
+        OpenApiContext openApiContext = (OpenApiContext) context;
+        OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) openApiContext.getOpenApiHttpSessionBean();
         OpenApiHttpRequestBean request = httpSessionBean.getRequest();
-        String requestId = httpSessionBean.getRequest().getReqId();
+        String requestId = request.getReqId();
         log.info(String.format("doExecuteBiz执行begin,request_id=%s，相应的request为%s", requestId, JSON.toJSONString(request)));
         String redisKey = request.getRedisKey();
         OpenApiRouteBean routeBean = (OpenApiRouteBean) cacheService.get(redisKey);
-        // routeBean.setThdApiUrlParams(request.getThdApiUrlParams());
-
+        
         AccessOpenApiDto obj = executeInvokeServce(routeBean, request);
         request.setServiceRsp(obj.getServiceRsp()); // 返回值
         log.info(String.format("doExecuteBiz执行end,request_id=%s", requestId));

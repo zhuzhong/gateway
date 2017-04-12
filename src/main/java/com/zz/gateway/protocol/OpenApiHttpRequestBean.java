@@ -3,6 +3,7 @@
  */
 package com.zz.gateway.protocol;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +26,42 @@ public class OpenApiHttpRequestBean {
 	private int localPort;// 服务端口
 	private String queryString;
 	private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
+	
+    private Date requestTime; // 请求时间
+    private Date responseTime;//响应时间
+    private Long elapsedTime;//耗时 
+    
+    
+    
+	public Date getRequestTime() {
+        return requestTime;
+    }
 
-	private String reqId; // 内部定义的请求id
+    public void setRequestTime(Date requestTime) {
+        this.requestTime = requestTime;
+    }
+
+    public Date getResponseTime() {
+        return responseTime;
+    }
+
+    public void setResponseTime(Date responseTime) {
+        this.responseTime = responseTime;
+    }
+
+    public Long getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(Long elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
+
+    public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
+        this.serviceGetReqData = serviceGetReqData;
+    }
+
+    private String reqId; // 内部定义的请求id
 
 	private String printStr; // 响应，这个最终写入response的流中
 	

@@ -56,11 +56,7 @@ public abstract class OpenApiHandler implements Command {
         return map;
     }
 
-    // step1
-    protected void setAuditContext(OpenApiHttpRequestBean request) {
-        // 对于请求信息进行审计
-        log.info("setAuditContext设置审计的上下文信息...,我也没有实现");
-    }
+  
 
     public void validateRequestHeader(OpenApiHttpRequestBean routeBean) {
         String contentType = routeBean.getReqHeader().get(CONTENT_TYPE_KEY);
@@ -73,6 +69,12 @@ public abstract class OpenApiHandler implements Command {
         }
     }
 
+    // step1
+    @Override
+    public boolean execute(Context context) {
+        log.info("step1,调用execute　方法");
+        return doExcuteBiz(context);
+    }
     public abstract boolean doExcuteBiz(Context context);
 
 }

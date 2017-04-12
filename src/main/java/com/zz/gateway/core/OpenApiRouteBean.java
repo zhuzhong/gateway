@@ -12,7 +12,7 @@ import java.util.Map;
 public class OpenApiRouteBean {
 
     private String apiId;
-
+    private String version; // api_version
     private String timeStamp;
 
     private Map<String, String> reqHeader;
@@ -22,10 +22,6 @@ public class OpenApiRouteBean {
     private String operationType;
 
     private String serviceReqData;
-
-    private String version;
-
-  
 
     public String getVersion() {
         return version;

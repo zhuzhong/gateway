@@ -118,7 +118,7 @@
 	<!-- 定义无Controller的path<->view直接映射 <mvc:view-controller path="/" view-name="redirect:${web.view.index}"/> -->
 
 
-	<bean id="exceptionHandler" class="com.ald.gateway.exception.OpenApiExceptionHandler" />
+	<bean id="exceptionHandler" class="com.zz.gateway.exception.OpenApiExceptionHandler" />
 
 
 
@@ -126,7 +126,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/service**" />
 			<bean
-				class="com.zz.gateway.interceptor.GateWayServiceParamValidateInterceptor" />
+				class="com.zz.gateway.interceptor.OpenApiServiceParamValidateInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

@@ -4,6 +4,7 @@
 package com.zz.gateway.handler.support;
 
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,6 +17,7 @@ import com.zz.gateway.exception.OpenApiException;
 import com.zz.gateway.exception.OpenApiServiceErrorEnum;
 import com.zz.gateway.handler.ThreadPoolHandler;
 import com.zz.gateway.protocol.AbstractTask;
+import com.zz.gateway.protocol.OpenApiHttpSessionBean;
 
 /**
  * @author Administrator
@@ -32,12 +34,12 @@ public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
     @Override
     public Object addTask(AbstractTask task) {
         try {
-            FutureTask<Object> tsFutre = new FutureTask<Object>(task);
+            FutureTask<OpenApiHttpSessionBean> tsFutre = new FutureTask<OpenApiHttpSessionBean>(task);
             taskExecutor.execute(tsFutre);
             while (!tsFutre.isDone()) {
                 try {
                     logger.debug("waitting for result");
-                    Thread.sleep(200);
+                    TimeUnit.MICROSECONDS.sleep(200);
                 } catch (InterruptedException e) {
                     logger.error("exception happend on executing task with " + e.getMessage());
                 }

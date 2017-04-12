@@ -29,10 +29,10 @@ public class OpenApiHttpReqTask extends AbstractTask {
     }
 
     @Override
-    public Object doBussiness() throws Exception {
-        OpenApiContext blCtx = new OpenApiContext();
-        blCtx.setOpenApiHttpSessionBean(httpSessionBean);
-        this.handlerExecuteTemplate.execute(blCtx);
-        return blCtx.getOpenApiHttpSessionBean();
+    public OpenApiHttpSessionBean doBussiness() throws Exception {
+        OpenApiContext context = new OpenApiContext();
+        context.setOpenApiHttpSessionBean(httpSessionBean);
+        this.handlerExecuteTemplate.execute(context);
+        return context.getOpenApiHttpSessionBean();
     }
 }

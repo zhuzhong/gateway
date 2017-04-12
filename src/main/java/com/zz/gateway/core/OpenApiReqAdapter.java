@@ -34,32 +34,41 @@ public class OpenApiReqAdapter extends OpenApiHandler {
     public OpenApiReqAdapter() {
     }
 
-    private OpenApiRouteBean iniBean(OpenApiHttpRequestBean request) {
+    private OpenApiRouteBean initRouteBean(OpenApiHttpRequestBean request) {
         OpenApiRouteBean bean = null;
-        // 初始化service_route_bean
-        bean = iniApiRouteBean(request);
-
-        cacheService.put(request.getRedisKey(), bean);
-        return bean;
-    }
-
-    private OpenApiRouteBean iniApiRouteBean(OpenApiHttpRequestBean request) {
         log.info("iniApiRouteBean，这一步可以校验token,当然这个根据我们的实际情况去实同");
         String accessToken = request.getAppToken();
         if (StringUtils.isBlank(accessToken)) {
             throw new OpenApiException(OauthErrorEnum.ACCESSTOKEN.getErrCode(), OauthErrorEnum.ACCESSTOKEN.getErrMsg());
         }
         log.info("init 路由bean ");
-        OpenApiRouteBean bean = new OpenApiRouteBean();
+        bean = new OpenApiRouteBean();
         bean.setApiId(request.getApiId());
         bean.setReqHeader(request.getReqHeader());
         bean.setTimeStamp(request.getTimeStamp());
         bean.setReqId(request.getReqId());
         bean.setOperationType(request.getOperationType());
         bean.setServiceReqData(request.getServiceReqData());
+
+        cacheService.put(request.getRedisKey(), bean);
         return bean;
     }
 
+    /*
+     * private OpenApiRouteBean iniApiRouteBean(OpenApiHttpRequestBean request)
+     * { log.info("iniApiRouteBean，这一步可以校验token,当然这个根据我们的实际情况去实同"); String
+     * accessToken = request.getAppToken(); if
+     * (StringUtils.isBlank(accessToken)) { throw new
+     * OpenApiException(OauthErrorEnum.ACCESSTOKEN.getErrCode(),
+     * OauthErrorEnum.ACCESSTOKEN.getErrMsg()); } log.info("init 路由bean ");
+     * OpenApiRouteBean bean = new OpenApiRouteBean();
+     * bean.setApiId(request.getApiId());
+     * bean.setReqHeader(request.getReqHeader());
+     * bean.setTimeStamp(request.getTimeStamp());
+     * bean.setReqId(request.getReqId());
+     * bean.setOperationType(request.getOperationType());
+     * bean.setServiceReqData(request.getServiceReqData()); return bean; }
+     */
     // 路由参数的校验
     private void validateApiRouteParam(OpenApiHttpRequestBean routeBean) {
         log.info("validateApiRouteParam方法是对路由参数的校验,但是现在我没有去实现");
@@ -72,25 +81,25 @@ public class OpenApiReqAdapter extends OpenApiHandler {
         validateApiRouteParam(request);
     }
 
-    @Override
-    public boolean execute(Context context) {
-        return doExcuteBiz(context);
+    // step1
+    private void setAuditContext(OpenApiHttpRequestBean request) {
+        // 对于请求信息进行审计
+        log.info("setAuditContext设置审计的上下文信息...,我也没有实现");
     }
 
     @Override
     public boolean doExcuteBiz(Context context) {
-        OpenApiContext blCtx = (OpenApiContext) context;
-        OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) blCtx.getOpenApiHttpSessionBean();
+        OpenApiContext openApiContext = (OpenApiContext) context;
+        OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) openApiContext.getOpenApiHttpSessionBean();
         OpenApiHttpRequestBean request = httpSessionBean.getRequest();
-        String requestId = httpSessionBean.getRequest().getReqId();
+        String requestId = request.getReqId();
         log.info(String.format("doExecuteBiz执行begin,request_id=%s，相应的request为%s", requestId, JSON.toJSONString(request)));
         // 设置audit上下文参数
         setAuditContext(request); //
         // 校验参数
         validateParam(request); // 参数校验
-        iniBean(httpSessionBean.getRequest());
-        // 根据accessToken加载appid并维护到routebean,放入redis
-        // resetRouteBean(request);
+        initRouteBean(httpSessionBean.getRequest()); // 初始化路由bean
+
         log.info(String.format("doExecuteBiz执行end,request_id=%s", requestId));
         return false;
     }
