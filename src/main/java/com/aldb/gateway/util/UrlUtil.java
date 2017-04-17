@@ -24,7 +24,9 @@ public class UrlUtil {
      * @return
      */
     public static String dealUrl(String targetUrl, Properties properties) {
-
+        if (properties == null) {
+            return targetUrl;
+        }
         PropertyPlaceholderHelper pp = new PropertyPlaceholderHelper("{", "}");
         return pp.replacePlaceholders(targetUrl, properties);
 

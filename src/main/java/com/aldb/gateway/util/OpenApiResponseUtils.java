@@ -25,7 +25,7 @@ public class OpenApiResponseUtils {
     public static final String CONTENT_TYPE_JSON = "application/json";
     public static final String HEADER_HOST_KEY = "host";
     public static final String HEADER_SERVER_KEY = "server";
-    public static Map<String, HttpServletResponse> sessionMap = new HashMap<String, HttpServletResponse>();
+   // public static Map<String, HttpServletResponse> sessionMap = new HashMap<String, HttpServletResponse>();
 
     public static void writeRsp(HttpServletResponse response, OpenApiHttpRequestBean requestBean) {
         setResponseHeader(response, requestBean.getReqHeader());
@@ -36,9 +36,10 @@ public class OpenApiResponseUtils {
             writer.close();
         } catch (Exception e) {
             logger.error("Write body to response error, " + e.getMessage());
-        } finally {
+        } 
+        /*finally {
             sessionMap.remove(requestBean.getReqId());
-        }
+        }*/
     }
 
     private static void setResponseHeader(HttpServletResponse response, Map<String, String> httpHeader) {

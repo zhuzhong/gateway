@@ -38,7 +38,7 @@ public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
             taskExecutor.execute(tsFutre);
             while (!tsFutre.isDone()) {
                 try {
-                    logger.debug("waitting for result");
+                   // logger.debug("waitting for result");
                     TimeUnit.MICROSECONDS.sleep(200);
                 } catch (InterruptedException e) {
                     logger.error("exception happend on executing task with " + e.getMessage());

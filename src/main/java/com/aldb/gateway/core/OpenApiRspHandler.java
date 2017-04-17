@@ -34,7 +34,9 @@ public class OpenApiRspHandler extends OpenApiHandler {
         log.info(String.format("doExecuteBiz执行begin,request_id=%s，相应的request为%s", requestId, JSON.toJSONString(request)));
         String printStr = this.executePrint(request);
         request.setPrintStr(printStr);
-        log.info(String.format("doExecuteBiz执行end,request_id=%s", requestId));
+
+
+        log.info(String.format("doExecuteBiz执行end,request_id=%s,执行后的request为%s", requestId, JSON.toJSONString(request)));
         return false;
     }
 
@@ -60,9 +62,9 @@ public class OpenApiRspHandler extends OpenApiHandler {
             return "errrrrrrrrrrrrrr";
         } finally {
             // 从redis移除当前routebean
-            String redisKey = request.getRedisKey();
-            if (StringUtils.isNotBlank(redisKey)) {
-                cacheService.remove(redisKey);
+            String routeBeanKey = request.getRouteBeanKey();
+            if (StringUtils.isNotBlank(routeBeanKey)) {
+                cacheService.remove(routeBeanKey);
             }
 
             /*
@@ -79,7 +81,9 @@ public class OpenApiRspHandler extends OpenApiHandler {
 
     private String getResponseBody(OpenApiHttpRequestBean bean) {
         log.info("step4....");
-        Object body = (Object) bean.getServiceRsp();
+        String routeBeanKey = bean.getRouteBeanKey();
+        OpenApiRouteBean routeBean = (OpenApiRouteBean) cacheService.get(routeBeanKey);
+        Object body = (Object) routeBean.getServiceRsp();
         if (body instanceof String) {
             return body.toString();
         }

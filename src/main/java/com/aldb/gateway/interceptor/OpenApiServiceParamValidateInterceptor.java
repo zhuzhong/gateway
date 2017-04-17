@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.aldb.gateway.core.OpenApiHandler;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.util.CommonCodeConstants;
 import com.aldb.gateway.util.NetworkUtil;
@@ -37,7 +38,7 @@ public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInter
         String requestMethod = request.getMethod();
 
         OpenApiHttpRequestBean bean = new OpenApiHttpRequestBean();
-        if (requestMethod.equalsIgnoreCase("POST")) {
+        if (requestMethod.equalsIgnoreCase(CommonCodeConstants.REQUEST_METHOD.POST.name())) {
             try {
                 parsePostMethod(request, bean);
             } catch (IOException e) {
@@ -45,7 +46,7 @@ public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInter
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }
-        } else if (requestMethod.equalsIgnoreCase("GET")) {
+        } else if (requestMethod.equalsIgnoreCase(CommonCodeConstants.REQUEST_METHOD.GET.name())) {
             parseGetMethod(request, bean);
             bean.setQueryString(request.getQueryString());
         }
@@ -54,13 +55,19 @@ public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInter
         bean.setLocalPort(request.getLocalPort());
         bean.setClientAddr(NetworkUtil.getClientIpAddr(request));
         bean.setReqHeader(getHeadersInfo(request)); // 获取请求头
+        if (request.getContentType() != null)
+            bean.getReqHeader().put("content-type", request.getContentType());
         bean.setOperationType(CommonCodeConstants.API_SERVICE_KEY);
+        bean.setRequestMethod(requestMethod);
+        if (bean.getSignMethod() == null)
+            bean.setSignMethod("MD5");
+        if (bean.getFormat() == null)
+            bean.setFormat("json");
         return bean;
     }
 
     private void parseGetMethod(HttpServletRequest request, OpenApiHttpRequestBean bean) {
-        bean.setSignMethod("MD5");
-        bean.setFormat("json");
+
         Enumeration<String> enums = request.getParameterNames();
         while (enums.hasMoreElements()) {
             String mapJson = enums.nextElement();
@@ -109,11 +116,7 @@ public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInter
 
     private void parsePostMethod(HttpServletRequest request, OpenApiHttpRequestBean bean) throws IOException {
 
-        String contentType = null;
-        if ("POST".equalsIgnoreCase(request.getMethod())) {
-            contentType = request.getContentType();
-        }
-
+        String contentType = request.getContentType();
         if (CommonCodeConstants.content_type.equalsIgnoreCase(contentType)) { // 是son格式的，我们能够处理
 
             int len = request.getContentLength();
@@ -164,16 +167,12 @@ public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInter
                 }
                 String reqData = jsonObject.getJSONObject(CommonCodeConstants.busi_attrs).toJSONString();
                 bean.setServiceReqData(reqData); // 请求体
-               
-                // 请求体
-                bean.setRequestMethod("POST");
             }
 
         }
 
     }
 
-    
     private Map<String, String> extractThdUrlParams(HttpServletRequest request) {
         Map<String, String> urlParams = new HashMap<String, String>();
         Map<String, String[]> orignalUrlParams = request.getParameterMap();
@@ -189,23 +188,22 @@ public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInter
                         || key.equals(CommonCodeConstants.version) || key.equals(CommonCodeConstants.app_token)
                         || key.equals(CommonCodeConstants.time_stamp) || key.equals(CommonCodeConstants.sign_method)
                         || key.equals(CommonCodeConstants.sign) || key.equals(CommonCodeConstants.device_token)
-                        || key.equals(CommonCodeConstants.user_token) || key.equals(CommonCodeConstants.format)
-                        ) {
+                        || key.equals(CommonCodeConstants.user_token) || key.equals(CommonCodeConstants.format)) {
                     continue;
                 }
                 String val = values[0];
                 try {
-                    val = java.net.URLEncoder.encode(val,"utf-8");
+                    val = java.net.URLEncoder.encode(val, "utf-8");
                 } catch (UnsupportedEncodingException e) {
-                    log.error("exception on prceeding chinese char: "+val+" with "+e.getMessage());
+                    log.error("exception on prceeding chinese char: " + val + " with " + e.getMessage());
                 }
-                        
+
                 urlParams.put(key, null != values ? val : "");
             }
         }
         return urlParams;
     }
-    
+
     private Map<String, String> getHeadersInfo(HttpServletRequest request) {
         Map<String, String> map = new HashMap<String, String>();
         Enumeration<String> headerNames = request.getHeaderNames();
@@ -214,6 +212,7 @@ public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInter
             String value = request.getHeader(key);
             map.put(key, value);
         }
+
         return map;
     }
 

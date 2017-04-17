@@ -7,7 +7,7 @@
 	<display-name>Archetype Created Web Application</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:/spring/applicationContext.xml</param-value>
+		<param-value>classpath:/spring/applicationContext.xml</param-value>
 	</context-param>
 
 
@@ -36,7 +36,7 @@
 
 	<filter>
 		<filter-name>requestFilter</filter-name>
-		<filter-class>com.zz.gateway.filter.GateWayFilter</filter-class>
+		<filter-class>com.aldb.gateway.filter.GateWayFilter</filter-class>
 	</filter>
 
 	<filter-mapping>

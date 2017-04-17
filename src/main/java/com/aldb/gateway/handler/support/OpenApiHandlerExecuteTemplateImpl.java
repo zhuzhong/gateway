@@ -43,7 +43,9 @@ public class OpenApiHandlerExecuteTemplateImpl implements OpenApiHandlerExecuteT
         Command cmd = null;
         while (cmdIterator.hasNext()) {
             cmd = (Command) cmdIterator.next();
-            cmd.execute(context);
+            if (cmd.execute(context)) {
+                break; //有一个处理它了，就直接跳出
+            }
         }
         return false;
     }

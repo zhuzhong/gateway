@@ -1,5 +1,7 @@
 package com.aldb.gateway.core;
 
+import java.util.Map;
+
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,23 +37,31 @@ public class OpenApiReqAdapter extends OpenApiHandler {
     }
 
     private OpenApiRouteBean initRouteBean(OpenApiHttpRequestBean request) {
-        OpenApiRouteBean bean = null;
+        OpenApiRouteBean routeBean = null;
         log.info("iniApiRouteBean，这一步可以校验token,当然这个根据我们的实际情况去实同");
         String accessToken = request.getAppToken();
         if (StringUtils.isBlank(accessToken)) {
             throw new OpenApiException(OauthErrorEnum.ACCESSTOKEN.getErrCode(), OauthErrorEnum.ACCESSTOKEN.getErrMsg());
         }
         log.info("init 路由bean ");
-        bean = new OpenApiRouteBean();
-        bean.setApiId(request.getApiId());
-        bean.setReqHeader(request.getReqHeader());
-        bean.setTimeStamp(request.getTimeStamp());
-        bean.setReqId(request.getReqId());
-        bean.setOperationType(request.getOperationType());
-        bean.setServiceReqData(request.getServiceReqData());
+        routeBean = new OpenApiRouteBean();
+        routeBean.setReqId(request.getReqId()); // 内部请求id,利于跟踪
+        routeBean.setApiId(request.getApiId());// 请求api_id
+        routeBean.setVersion(request.getVersion());// api_version
+        routeBean.setReqHeader(request.getReqHeader());// 请求头
+        routeBean.setTimeStamp(request.getTimeStamp());// 请求时间
 
-        cacheService.put(request.getRedisKey(), bean);
-        return bean;
+        routeBean.setOperationType(request.getOperationType()); // 请求操作类型
+        routeBean.setRequestMethod(request.getRequestMethod());// 请求方法
+        routeBean.setServiceReqData(request.getServiceReqData());// post请求参数
+        routeBean.setQueryString(request.getQueryString());// get请求参数
+        if (request.getThdApiUrlParams() != null) {
+            for (Map.Entry<String, String> maps : request.getThdApiUrlParams().entrySet()) {
+                routeBean.addThdApiUrlParams(maps.getKey(), maps.getValue());
+            }
+        }
+        cacheService.put(request.getRouteBeanKey(), routeBean);
+        return routeBean;
     }
 
     /*
@@ -95,12 +105,15 @@ public class OpenApiReqAdapter extends OpenApiHandler {
         String requestId = request.getReqId();
         log.info(String.format("doExecuteBiz执行begin,request_id=%s，相应的request为%s", requestId, JSON.toJSONString(request)));
         // 设置audit上下文参数
-        setAuditContext(request); //
+        setAuditContext(request);
         // 校验参数
-        validateParam(request); // 参数校验
+        validateParam(request);
         initRouteBean(httpSessionBean.getRequest()); // 初始化路由bean
 
         log.info(String.format("doExecuteBiz执行end,request_id=%s", requestId));
+        if (StringUtils.isNotBlank(request.getPrintStr())) {
+            return true;
+        }
         return false;
     }
 }

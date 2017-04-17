@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
 import com.aldb.gateway.util.ApiHttpUtil;
 import com.aldb.gateway.util.StringUtil;
 
-public class ApiMutiHttpClientUtil implements ApiMultiHttpClientService {
+public class ApiMutiHttpClientUtil  {
 
 	public static final String TIME_OUT_ERROR = "timeout";
 

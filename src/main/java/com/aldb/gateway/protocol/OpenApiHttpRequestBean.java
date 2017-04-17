@@ -24,7 +24,7 @@ public class OpenApiHttpRequestBean {
 	private String clientAddr; // 客户端ip
 	private String localAddr;// 服务端ip
 	private int localPort;// 服务端口
-	private String queryString; //请求string
+	private String queryString; //get请求string
 	private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
 	
     private Date requestTime; // 请求时间
@@ -43,7 +43,7 @@ public class OpenApiHttpRequestBean {
     private Map<String,Object> serviceGetReqData; //get请求参数
     
     
-    private String serviceRsp; // 后端服务返回值
+   // private String serviceRsp; // 后端服务返回值
     // 公共的参数 begin ---
     private String appId;
     private String apiId;
@@ -87,9 +87,9 @@ public class OpenApiHttpRequestBean {
         this.elapsedTime = elapsedTime;
     }
 
-    public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
+ /*   public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
         this.serviceGetReqData = serviceGetReqData;
-    }
+    }*/
 
 
 	
@@ -236,7 +236,7 @@ public class OpenApiHttpRequestBean {
 		this.reqId = reqId;
 	}
 
-	public String getRedisKey() {
+	public String getRouteBeanKey() {
 		if (this.operationType.equals(CommonCodeConstants.API_SERVICE_KEY)) {
 			return CommonCodeConstants.getRouteBeanRedisKey(reqId);
 		}
@@ -246,13 +246,13 @@ public class OpenApiHttpRequestBean {
 
 	
 
-	public String getServiceRsp() {
+	/*public String getServiceRsp() {
 		return serviceRsp;
 	}
 
 	public void setServiceRsp(String serviceRsp) {
 		this.serviceRsp = serviceRsp;
-	}
+	}*/
 
 
 

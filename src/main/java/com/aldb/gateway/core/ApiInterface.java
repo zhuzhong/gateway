@@ -15,7 +15,7 @@ public class ApiInterface {
     private String apiId;
     private String version;// 版本号
     private String hostAddress;// 服务器地址
-    private int port;// 服务端口
+    private Integer port;// 服务端口
 
     private String targetUrl; // 后端接口服务路径
     private String requestMethod;// 请求方法
@@ -27,12 +27,23 @@ public class ApiInterface {
 
     private String url; // 解析之后服务路径
 
+    // http://192.168.2.100:8089/targetUrl
     public String getUrl() {
+        StringBuffer sb = new StringBuffer(protocol);
+        sb.append("://");
+        sb.append(hostAddress);
+        if (port != null) {
+            sb.append(":");
+            sb.append(port);
+        }
+        if (targetUrl != null) {
+            sb.append("/");
+            sb.append(targetUrl);
+        } else {
+            sb.append("/");
+        }
+        this.url = sb.toString();
         return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getTargetUrl() {
@@ -67,11 +78,11 @@ public class ApiInterface {
         this.hostAddress = hostAddress;
     }
 
-    public int getPort() {
+    public Integer getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 

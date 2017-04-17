@@ -23,9 +23,23 @@ public class OpenApiRouteBean {
 
     private String operationType;
 
-    private String serviceReqData;//post请求方法参数
+    private String serviceReqData;// post请求方法参数
     private String queryString; // 请求string
     private Properties thdApiUrlParams;// 第三方接口所需传入的url参数
+
+    private String serviceRsp; // 后端服务返回值
+
+    public String getServiceRsp() {
+        return serviceRsp;
+    }
+
+    public void setServiceRsp(String serviceRsp) {
+        this.serviceRsp = serviceRsp;
+    }
+
+    public void setThdApiUrlParams(Properties thdApiUrlParams) {
+        this.thdApiUrlParams = thdApiUrlParams;
+    }
 
     public String getQueryString() {
         return this.queryString;

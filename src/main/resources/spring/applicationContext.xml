@@ -54,13 +54,13 @@
 	<bean id="serviceReqHandler" class="com.aldb.gateway.core.OpenApiReqHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 		<property name="apiInterfaceService" ref="apiInterfaceServiceImpl"></property>
-		<property name="mutiHttpClientUtil" ref="mutiHttpClientUtil"></property>
+		<property name="apiHttpClientService" ref="apiHttpClientService"></property>
 	</bean>
 	<bean id="serviceRspHandler" class="com.aldb.gateway.core.OpenApiRspHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
 
-	<bean id="mutiHttpClientUtil" class="com.aldb.gateway.core.ApiMutiHttpClientUtil">
+	<bean id="apiHttpClientService" class="com.aldb.gateway.core.HttpClientImpl">
 
 	</bean>
 </beans>
