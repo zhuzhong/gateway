@@ -31,7 +31,7 @@ public class UrlUtil {
     }
 
     public static void main(String args[]) {
-        String targetUrl = "/deptname/${deptId}/${user}/${userId}";
+        String targetUrl = "/deptname/{deptId}/{user}/{userId}";
         Properties properties = new Properties();
         properties.put("deptId", "10");
         properties.put("user", "zhuzhong");
