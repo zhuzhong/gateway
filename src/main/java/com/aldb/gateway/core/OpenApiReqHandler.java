@@ -140,7 +140,7 @@ public class OpenApiReqHandler extends OpenApiHandler {
                 } else {
                     serviceRspData = apiHttpClientService.doPost(url, bean.getServiceReqData(), contentType);
                 }
-                if (ApiMutiHttpClientUtil.TIME_OUT_ERROR.equals(serviceRspData)) {
+                if ("timeout".equals(serviceRspData)) {
                     log.error("invoke service: response is null!");
                     throw new OpenApiException(OauthErrorEnum.ERROR.getErrCode(), OauthErrorEnum.ERROR.getErrMsg());
                 }
@@ -176,7 +176,7 @@ public class OpenApiReqHandler extends OpenApiHandler {
                         serviceRspData = apiHttpClientService.doPost(url, bean.getServiceReqData(), contentType);
                     }
                 }
-                if (ApiMutiHttpClientUtil.TIME_OUT_ERROR.equals(serviceRspData)) {
+                if ("timeout".equals(serviceRspData)) {
                     log.error("invoke service: response is null!");
                     throw new OpenApiException(OauthErrorEnum.ERROR.getErrCode(), OauthErrorEnum.ERROR.getErrMsg());
                 }
