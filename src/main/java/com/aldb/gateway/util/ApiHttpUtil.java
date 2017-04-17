@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+/*import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
@@ -18,7 +18,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
-import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.httpclient.params.HttpMethodParams;*/
 
 /**
  * 
@@ -38,12 +38,12 @@ public class ApiHttpUtil {
 	 * @param paramMap
 	 * @return String
 	 */
-	@SuppressWarnings("rawtypes")
+	/*@SuppressWarnings("rawtypes")
 	public static String HttpPost(String url, String method, Map paramMap) {
 		return HttpPost(url + '/' + method, paramMap);
-	}
+	}*/
 
-	public static String HttpPost(String webUrl, Map paramMap) {
+	/*public static String HttpPost(String webUrl, Map paramMap) {
 		String encoding = "UTF-8";
 		if (encoding == null || "".equals(encoding))
 			encoding = "UTF-8";
@@ -97,9 +97,9 @@ public class ApiHttpUtil {
 			postMethod.releaseConnection();
 		}
 		return sBuffer.toString();
-	}
+	}*/
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/*@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static String HttpGet(String webUrl, Map paramMap) {
 
 		// 设置编码格式
@@ -152,7 +152,7 @@ public class ApiHttpUtil {
 			// End2：
 		}
 		return sBuffer.toString();
-	}
+	}*/
 
 	/**
 	 * 发送Get请求工具方法
@@ -164,13 +164,13 @@ public class ApiHttpUtil {
 	 * @param paramMap
 	 * @return String
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/*@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static String HttpGet(String url, String method, Map paramMap) {
 
 		String webUrl = url + "/" + method;
 
 		return HttpGet(webUrl, paramMap);
-	}
+	}*/
 
 	/**
 	 * 发送Get请求工具方法,处理参数有中文字符
@@ -182,7 +182,7 @@ public class ApiHttpUtil {
 	 * @param paramMap
 	 * @return String
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/*@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static String HttpGetByUtf(String url, String method, Map paramMap) {
 		// 设置编码格式
 		String encoding = "UTF-8";
@@ -235,7 +235,7 @@ public class ApiHttpUtil {
 			// End2：
 		}
 		return sBuffer.toString();
-	}
+	}*/
 
 	/**
 	 * 执行一个HTTP POST请求，返回请求响应的HTML
@@ -246,7 +246,7 @@ public class ApiHttpUtil {
 	 *            请求的查询参数,可以为null
 	 * @return 返回请求响应的HTML
 	 */
-	@SuppressWarnings("deprecation")
+	/*@SuppressWarnings("deprecation")
 	public static String doPost(String url, String reqData, String contentType) {
 		String response = null;
 		HttpClient client = new HttpClient();
@@ -274,7 +274,7 @@ public class ApiHttpUtil {
 		}
 		return response;
 	}
-
+*/
 	/**
 	 * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
 	 * 
