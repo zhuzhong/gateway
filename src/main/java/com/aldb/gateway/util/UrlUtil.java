@@ -27,10 +27,12 @@ public class UrlUtil {
         if (properties == null) {
             return targetUrl;
         }
-        PropertyPlaceholderHelper pp = new PropertyPlaceholderHelper("{", "}");
-        return pp.replacePlaceholders(targetUrl, properties);
+
+        return propertyPlaceHolder.replacePlaceholders(targetUrl, properties);
 
     }
+
+    private static PropertyPlaceholderHelper propertyPlaceHolder = new PropertyPlaceholderHelper("{", "}");
 
     public static void main(String args[]) {
         String targetUrl = "/deptname/{deptId}/{user}/{userId}";
