@@ -17,14 +17,14 @@ import com.aldb.gateway.util.CommonCodeConstants;
  */
 public class OpenApiHttpRequestBean {
 
-	private Map<String, String> reqHeader;
+	private Map<String, String> reqHeader;//请求头
 	
-	private String operationType;
+	private String operationType;//内部请求类型
 
 	private String clientAddr; // 客户端ip
 	private String localAddr;// 服务端ip
 	private int localPort;// 服务端口
-	private String queryString;
+	private String queryString; //请求string
 	private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
 	
     private Date requestTime; // 请求时间
@@ -32,6 +32,36 @@ public class OpenApiHttpRequestBean {
     private Long elapsedTime;//耗时 
     
     
+    
+    
+    private String reqId; // 内部定义的请求id
+
+    private String printStr; // 响应，这个最终写入response的流中
+    
+    private String serviceReqData;  //post请求方法参数
+    private String requestMethod;
+    private Map<String,Object> serviceGetReqData; //get请求参数
+    
+    
+    private String serviceRsp; // 后端服务返回值
+    // 公共的参数 begin ---
+    private String appId;
+    private String apiId;
+    private String version;
+    private String appToken;
+    private String timeStamp;
+    private String signMethod;
+    private String sign;
+    private String deviceToken;
+    private String userToken;
+
+    // 公共参数end----
+
+    // 公共部分增加参数
+    private String format;
+    
+    // 业务请求参数
+   // private String request_data;
     
 	public Date getRequestTime() {
         return requestTime;
@@ -61,13 +91,7 @@ public class OpenApiHttpRequestBean {
         this.serviceGetReqData = serviceGetReqData;
     }
 
-    private String reqId; // 内部定义的请求id
 
-	private String printStr; // 响应，这个最终写入response的流中
-	
-	private String serviceReqData;  //post请求方法参数
-	private String requestMethod;
-	private Map<String,Object> serviceGetReqData; //get请求参数
 	
 	
 
@@ -162,8 +186,7 @@ public class OpenApiHttpRequestBean {
 		this.reqHeader = reqHeader;
 	}
 
-	// 业务请求参数
-	private String request_data;
+
 
 	public String getAppToken() {
 		return appToken;
@@ -197,13 +220,13 @@ public class OpenApiHttpRequestBean {
 		this.apiId = apiId;
 	}
 
-	public String getRequest_data() {
+/*	public String getRequest_data() {
 		return request_data;
 	}
 
 	public void setRequest_data(String request_data) {
 		this.request_data = request_data;
-	}
+	}*/
 
 	public String getReqId() {
 		return reqId;
@@ -221,7 +244,7 @@ public class OpenApiHttpRequestBean {
 		return CommonCodeConstants.getRouteBeanRedisKey("");
 	}
 
-	private String serviceRsp; // 后端服务返回值
+	
 
 	public String getServiceRsp() {
 		return serviceRsp;
@@ -231,21 +254,7 @@ public class OpenApiHttpRequestBean {
 		this.serviceRsp = serviceRsp;
 	}
 
-	// 公共的参数 begin ---
-	private String appId;
-	private String apiId;
-	private String version;
-	private String appToken;
-	private String timeStamp;
-	private String signMethod;
-	private String sign;
-	private String deviceToken;
-	private String userToken;
 
-	// 公共参数end----
-
-	// 公共部分增加参数
-	private String format;
 
 	public String getAppId() {
 		return appId;

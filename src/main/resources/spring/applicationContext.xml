@@ -18,7 +18,7 @@
 
 
 
-	<context:component-scan base-package="com.zz.gateway">
+	<context:component-scan base-package="com.aldb.gateway">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -38,29 +38,29 @@
 
 
 	<bean name="serviceHandlerExecuteTemplate"
-		class="com.zz.gateway.handler.support.OpenApiHandlerExecuteTemplateImpl">
+		class="com.aldb.gateway.handler.support.OpenApiHandlerExecuteTemplateImpl">
 		<constructor-arg>
 			<list>
-				<ref bean="serviceValHandler" />
-				<ref bean="reqServiceHandler" />
-				<ref bean="rspHandler" />
+				<ref bean="serviceReqAdapter" />
+				<ref bean="serviceReqHandler" />
+				<ref bean="serviceRspHandler" />
 			</list>
 		</constructor-arg>
 	</bean>
 
-	<bean id="serviceValHandler" class="com.zz.gateway.core.OpenApiReqAdapter">
+	<bean id="serviceReqAdapter" class="com.aldb.gateway.core.OpenApiReqAdapter">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
-	<bean id="reqServiceHandler" class="com.zz.gateway.core.OpenApiReqHandler">
+	<bean id="serviceReqHandler" class="com.aldb.gateway.core.OpenApiReqHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 		<property name="apiInterfaceService" ref="apiInterfaceServiceImpl"></property>
 		<property name="mutiHttpClientUtil" ref="mutiHttpClientUtil"></property>
 	</bean>
-	<bean id="rspHandler" class="com.zz.gateway.core.OpenApiRspHandler">
+	<bean id="serviceRspHandler" class="com.aldb.gateway.core.OpenApiRspHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
 
-	<bean id="mutiHttpClientUtil" class="com.zz.gateway.core.ApiMutiHttpClientUtil">
+	<bean id="mutiHttpClientUtil" class="com.aldb.gateway.core.ApiMutiHttpClientUtil">
 
 	</bean>
 </beans>
