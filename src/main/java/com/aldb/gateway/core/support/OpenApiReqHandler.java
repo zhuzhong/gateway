@@ -1,8 +1,12 @@
-package com.aldb.gateway.core;
+package com.aldb.gateway.core.support;
 
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
 
+import com.aldb.gateway.core.ApiHttpClientService;
+import com.aldb.gateway.core.ApiInterface;
+import com.aldb.gateway.core.AbstractOpenApiHandler;
+import com.aldb.gateway.core.OpenApiRouteBean;
 import com.aldb.gateway.exception.OauthErrorEnum;
 import com.aldb.gateway.exception.OpenApiException;
 import com.aldb.gateway.protocol.OpenApiContext;
@@ -14,7 +18,7 @@ import com.aldb.gateway.util.CommonCodeConstants;
 import com.aldb.gateway.util.UrlUtil;
 import com.alibaba.fastjson.JSON;
 
-public class OpenApiReqHandler extends OpenApiHandler {
+public class OpenApiReqHandler extends AbstractOpenApiHandler {
 
     private final int maxReqDataLth = 500;
 

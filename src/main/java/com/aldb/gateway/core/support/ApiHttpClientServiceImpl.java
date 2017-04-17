@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.aldb.gateway.core;
+package com.aldb.gateway.core.support;
 
 import java.io.IOException;
 import java.util.Map;
@@ -35,11 +35,13 @@ import org.apache.http.impl.conn.SystemDefaultDnsResolver;
 import org.apache.http.impl.io.DefaultHttpRequestWriterFactory;
 import org.apache.http.util.EntityUtils;
 
+import com.aldb.gateway.core.ApiHttpClientService;
+
 /**
  * @author sunff
  *
  */
-public class HttpClientImpl implements ApiHttpClientService {
+public class ApiHttpClientServiceImpl implements ApiHttpClientService {
 
     private static PoolingHttpClientConnectionManager manager = null;
     private static CloseableHttpClient httpClient = null;

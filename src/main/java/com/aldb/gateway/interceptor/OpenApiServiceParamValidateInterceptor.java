@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.aldb.gateway.core.OpenApiHandler;
+import com.aldb.gateway.core.AbstractOpenApiHandler;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.util.CommonCodeConstants;
 import com.aldb.gateway.util.NetworkUtil;

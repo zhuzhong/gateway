@@ -17,9 +17,9 @@ import com.aldb.gateway.exception.OpenApiException;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 
 
-public abstract class OpenApiHandler implements Command {
+public abstract class AbstractOpenApiHandler implements Command {
 
-    protected static Log log = LogFactory.getLog(OpenApiHandler.class);
+    protected static Log log = LogFactory.getLog(AbstractOpenApiHandler.class);
 
     public String accessServiceUri;
 

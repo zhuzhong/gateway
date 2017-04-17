@@ -48,19 +48,19 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="serviceReqAdapter" class="com.aldb.gateway.core.OpenApiReqAdapter">
+	<bean id="serviceReqAdapter" class="com.aldb.gateway.core.support.OpenApiReqAdapter">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
-	<bean id="serviceReqHandler" class="com.aldb.gateway.core.OpenApiReqHandler">
+	<bean id="serviceReqHandler" class="com.aldb.gateway.core.support.OpenApiReqHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 		<property name="apiInterfaceService" ref="apiInterfaceServiceImpl"></property>
 		<property name="apiHttpClientService" ref="apiHttpClientService"></property>
 	</bean>
-	<bean id="serviceRspHandler" class="com.aldb.gateway.core.OpenApiRspHandler">
+	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
 
-	<bean id="apiHttpClientService" class="com.aldb.gateway.core.HttpClientImpl">
+	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.ApiHttpClientServiceImpl">
 
 	</bean>
 </beans>

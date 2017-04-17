@@ -20,8 +20,9 @@ public class IdServiceImpl implements IdService {
 
     @Override
     public String genInnerRequestId() {
-        // TODO Auto-generated method stub
         return String.valueOf(ai.getAndIncrement());
     }
+    
+    
 
 }
