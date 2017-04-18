@@ -19,7 +19,7 @@
 
 
 ##业务方法调用方式
-前端请求统一的url地址/gateway/service.htm,然后根据请求方法的不同拼接不同的url参数或提交相应的请求体。
+前端请求统一的url地址/gateway/gateway.do,然后根据请求方法的不同拼接不同的url参数或提交相应的请求体。
 ###业务方法的公共请求参数：
 	appId   String  16  是   打包app的唯一标识  not null    
 	service   String  64  是   API编码即api的唯一标识 not null 
@@ -33,7 +33,7 @@
 
 ###GET请求
 
-对于get请求方法，则直接将相应的业务参数及公共的请求参数，串在url地址后面，类似这样的形式:http://localhost:8080/gateway/serviceInner.htm?appId=test&apiId=2&apiVersion=1.1.0&appToken=token&timeStamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000 其中testa=000000为业务参数其他参数为公共的请求参数
+对于get请求方法，则直接将相应的业务参数及公共的请求参数，串在url地址后面，类似这样的形式:http://localhost:8080/gateway/gateway.do?appId=test&apiId=2&apiVersion=1.1.0&appToken=token&timeStamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000 其中testa=000000为业务参数其他参数为公共的请求参数
 
 ###POST请求
    对于post请求，则相应格式如下：
@@ -42,7 +42,7 @@
 ##如何开始
 gateway网关系统，可以不依赖任何外部系统测试运行。对于api服务默认实现在com.aldb.gateway.service.support.TestApiInterfaceServiceImpl
 只需要将该实现类配置在spring配置文件即可进行测试,测试类似如下:
-http://localhost:8080/gateway/serviceInner.htm?appId=test&apiId=2&apiVersion=1.1.0&appToken=token&timeStamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000
+http://localhost:8080/gateway/gateway.do?appId=test&apiId=2&apiVersion=1.1.0&appToken=token&timeStamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000
 
 
 - apiId=1 为百度
