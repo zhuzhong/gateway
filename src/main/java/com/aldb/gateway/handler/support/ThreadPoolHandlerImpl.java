@@ -38,10 +38,10 @@ public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
             taskExecutor.execute(tsFutre);
             while (!tsFutre.isDone()) {
                 try {
-                   // logger.debug("waitting for result");
+                    // logger.debug("waitting for result");
                     TimeUnit.MICROSECONDS.sleep(200);
                 } catch (InterruptedException e) {
-                    logger.error("exception happend on executing task with " + e.getMessage());
+                    logger.error(String.format("exception happend on executing task with ", e.getMessage()));
                 }
             }
             return tsFutre.get();
@@ -53,7 +53,7 @@ public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
             if (throwable instanceof OpenApiException) {
                 throw (OpenApiException) throwable;
             }
-            logger.error("exception happend on executing task with " + e.getMessage());
+            logger.error(String.format("exception happend on executing task with %s", e.getMessage()));
             OpenApiException ex = new OpenApiException(OpenApiServiceErrorEnum.SYSTEM_BUSY, throwable);
             throw ex;
         }

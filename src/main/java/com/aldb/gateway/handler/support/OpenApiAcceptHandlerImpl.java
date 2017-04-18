@@ -53,6 +53,10 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler {
     private ThreadPoolHandler poolHandler;
 
     private void addTask2Pool(HttpServletResponse response, OpenApiHttpSessionBean sessionBean) {
+        long currentTime = System.currentTimeMillis();
+        if (logger.isDebugEnabled()) {
+            logger.debug(String.format(" sessionbean=%s dealed begin,current_time=%d", sessionBean, currentTime));
+        }
         logger.info("added one task to thread pool");
         OpenApiHttpReqTask task = null;
         String operationType = sessionBean.getRequest().getOperationType();
@@ -66,6 +70,10 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler {
         OpenApiHttpSessionBean tmp = (OpenApiHttpSessionBean) poolHandler.addTask(task);
         // 写入响应
         OpenApiResponseUtils.writeRsp(response, tmp.getRequest());
+        if (logger.isDebugEnabled()) {
+            logger.debug(String.format("sessionbean=%s dealed end,current_time=%d,elapsed_time=%d seconds", tmp,
+                    System.currentTimeMillis(), (System.currentTimeMillis() - currentTime) / 1000));
+        }
     }
 
 }

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.aldb.gateway.core.AbstractOpenApiHandler;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.util.CommonCodeConstants;
 import com.aldb.gateway.util.NetworkUtil;
@@ -26,7 +25,7 @@ import com.alibaba.fastjson.JSONObject;
  * @author Administrator
  *
  */
-public class OpenApiServiceParamValidateInterceptor extends OpenApiValidateInterceptor {
+public class OpenApiServiceParamValidateInterceptor extends AbstractOpenApiValidateInterceptor {
 
     private static final Log log = LogFactory.getLog(OpenApiServiceParamValidateInterceptor.class);
 

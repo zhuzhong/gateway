@@ -150,7 +150,7 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
                 }
             }
         } else {
-            String reqData = bean.getServiceReqData(); // 请求的json格式数据参数
+         /*   String reqData = bean.getServiceReqData(); // 请求的json格式数据参数
             if (StringUtils.isNotBlank(reqData) && reqData.length() > this.maxReqDataLth) {
                 reqData = reqData.substring(0, this.maxReqDataLth - 1);
             }
@@ -167,7 +167,7 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
                 } else {
                     if (bean.getApiId().equals("bl.kd100.tms.backstatus")
                             || bean.getApiId().equals("bl.order.dc.tmsexpress")) {
-                        /*
+                        
                          * url = this.generatePassUrl(apiInfo.getTargetUrl(),
                          * user.getSalt(), bean.getAccessToken(),
                          * bean.getTimeStamp()); String params =
@@ -175,7 +175,7 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
                          * bean.getTimeStamp(), bean.getThdApiUrlParams());
                          * serviceRspData = mutiHttpClientUtil.doPost(url,
                          * bean.getServiceReqData(), contentType, params);
-                         */
+                         
                     } else {
                         serviceRspData = apiHttpClientService.doPost(url, bean.getServiceReqData(), contentType);
                     }
@@ -187,7 +187,7 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
             } catch (Exception e) {
                 log.error("invoke service: " + e.getMessage());
                 throw new OpenApiException(OauthErrorEnum.ERROR.getErrCode(), OauthErrorEnum.ERROR.getErrMsg());
-            }
+            }*/
         }
         return serviceRspData;
     }

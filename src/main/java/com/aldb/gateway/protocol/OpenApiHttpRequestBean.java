@@ -24,9 +24,17 @@ public class OpenApiHttpRequestBean {
 	private String clientAddr; // 客户端ip
 	private String localAddr;// 服务端ip
 	private int localPort;// 服务端口
-	private String queryString; //get请求string
-	private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
 	
+	private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
+    private String serviceReqData;  //post请求方法参数
+    private String requestMethod;
+    /**
+     *  这两个有部分内容是重复的，为了后面调用的方便所以增加了　queryString参数，实际上不需要
+     */
+    private Map<String,Object> serviceGetReqData; //get请求参数
+    private String queryString; //get请求string 
+    
+    
     private Date requestTime; // 请求时间
     private Date responseTime;//响应时间
     private Long elapsedTime;//耗时 
@@ -38,9 +46,7 @@ public class OpenApiHttpRequestBean {
 
     private String printStr; // 响应，这个最终写入response的流中
     
-    private String serviceReqData;  //post请求方法参数
-    private String requestMethod;
-    private Map<String,Object> serviceGetReqData; //get请求参数
+
     
     
    // private String serviceRsp; // 后端服务返回值

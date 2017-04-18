@@ -34,19 +34,25 @@ public class CommonCodeConstants {
     public static final String USER_LOGIN_KEY = "BL_OPENAPI_USER_LOGIN";
 
     /**
-     * 公共的请求参数 appId String 16 是 打包app的唯一标识 not null apiId String 64 是
-     * API编码即api的唯一标识 not null apiVersion String 8 是 API版本号 not null appToken
-     * String 32 是 app授权令牌,用于授权 not null timeStamp String 19 是 时间戳，格式为yyyy-mm-dd
-     * HH:mm:ss，时区为GMT+8 not null signMethod String 8 是
-     * 生成服务请求签名字符串所使用的算法类型，目前仅支持MD5， sign String 32 是 服务请求的签名字符串 not null
-     * deviceToken String 16 否 硬件标识token,app首次安装时发放的硬件唯一性标识 userToken String 16
-     * 否 用户token
+     * 公共的请求参数
+       appId   String  16  是   打包app的唯一标识  not null    
+       apiId   String  64  是   API编码即api的唯一标识 not null 
+       apiVersion  String  8   是   API版本号 not null 
+       appToken    String  32  是   app授权令牌,用于授权  not null      
+       timeStamp   String  19  是   时间戳，格式为yyyy-mm-dd HH:mm:ss，时区为GMT+8 not null    
+       signMethod  String  8   是   生成服务请求签名字符串所使用的算法类型，目前仅支持MD5， 
+       sign    String  32  是   服务请求的签名字符串  not null 
+       deviceToken String  16  否   硬件标识token,app首次安装时发放的硬件唯一性标识
+       userToken   String  16  否   用户token
      * 
-     * 请求格式: 1.对于post方法: { "publAttrs":{}, "busiAttrs":{} }
-     * 
+     * 请求格式: 
+     * 1.对于post方法: { "publAttrs":{}, "busiAttrs":{} }
      * 2.对于get方法: 公共参数及业务参数直接串接在url地址上 对于后端使用restful格式的get，在进行服务注册时使用方法名
-     * user/1000 对应的注册格式 user/${userId} 然后前端请请使用的参数名为userId,前端请求格式 GET
-     * /serice.htm?userId=1000 而对于使用非restful格式的get方法直接将参数串在url地址上就可以了
+     * user/1000 对应的注册格式 user/{userId} 
+     * 然后前端请请使用的参数名为userId,
+     * 前端请求格式 GET
+     * /serice.htm?userId=1000 
+     * 而对于使用非restful格式的get方法直接将参数串在url地址上就可以了
      */
 
     public static String pub_attrs = "publAttrs";

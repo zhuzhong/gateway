@@ -11,6 +11,10 @@ import java.io.Serializable;
  */
 public class OpenApiHttpSessionBean implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private OpenApiHttpRequestBean request;
 
     /**
@@ -28,4 +32,11 @@ public class OpenApiHttpSessionBean implements Serializable{
         this.request = request;
     }
 
+    @Override
+    public String toString() {
+        return "OpenApiHttpSessionBean [request=" + request + "]";
+    }
+
+    
+    
 }

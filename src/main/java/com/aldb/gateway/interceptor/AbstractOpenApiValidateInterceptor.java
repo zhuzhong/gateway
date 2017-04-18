@@ -16,7 +16,7 @@ import com.aldb.gateway.util.CommonCodeConstants;
  * @author Administrator
  *
  */
-public abstract class OpenApiValidateInterceptor implements HandlerInterceptor {
+public abstract class AbstractOpenApiValidateInterceptor implements HandlerInterceptor {
 
    
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -35,7 +35,7 @@ public abstract class OpenApiValidateInterceptor implements HandlerInterceptor {
   
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
     	String requestMethod=request.getMethod();
-    	if(requestMethod!="GET"&&requestMethod!="POST"){
+    	if(!requestMethod.equals(CommonCodeConstants.REQUEST_METHOD.GET.name())&&!requestMethod.equals(CommonCodeConstants.REQUEST_METHOD.POST.name())){
     		throw new RuntimeException("请求方法不对，请求方法必须是 GET 或POST");
     	}
         // 初始化请求bean
