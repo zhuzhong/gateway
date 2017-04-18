@@ -9,7 +9,7 @@
 
 
 ##关于鉴权
-关于鉴权部分功能代码还没有开发，后续补上。
+鉴权需要调用gateway_register工程的服务进行鉴权。下一步开发gateway_register工程中关于api注册及app订阅api功能。
 
 ##deviceToken获取调用方式
 
