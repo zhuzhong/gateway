@@ -46,9 +46,10 @@ public class OpenApiHttpRequestBean {
     // private String serviceRsp; // 后端服务返回值
     // 公共的参数 begin ---
     private String appId;
+    private String appToken;
     private String apiId;
     private String version;
-    private String appToken;
+   
     private String timeStamp;
     private String signMethod;
     private String sign;

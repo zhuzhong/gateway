@@ -41,10 +41,10 @@ public class CommonCodeConstants {
 
     /**
      * 公共的请求参数
-       appId   String  16  是   打包app的唯一标识  not null    
+       appId   String  16  是   打包app的唯一标识  not null
+       appToken    String  32  是   app授权令牌,用于授权  not null     
        apiId   String  64  是   API编码即api的唯一标识 not null 
        apiVersion  String  8   是   API版本号 not null 
-       appToken    String  32  是   app授权令牌,用于授权  not null      
        timeStamp   String  19  是   时间戳，格式为yyyy-mm-dd HH:mm:ss，时区为GMT+8 not null    
        signMethod  String  8   是   生成服务请求签名字符串所使用的算法类型，目前仅支持MD5， 
        sign    String  32  是   服务请求的签名字符串  not null 
@@ -66,9 +66,9 @@ public class CommonCodeConstants {
     public static String content_type = "application/json";
     // 协议的公共参数
     public static String app_id = "appId";
+    public static String app_token = "appToken";
     public static String api_id = "apiId"; // 必须
     public static String version = "apiVersion";
-    public static String app_token = "appToken";
     public static String time_stamp = "timeStamp";
     public static String sign_method = "signMethod";
     public static String sign = "sign";
