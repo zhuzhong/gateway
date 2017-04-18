@@ -19,12 +19,12 @@ import com.aldb.gateway.handler.OpenApiHandlerExecuteTemplate;
  * @author Administrator
  *
  */
-public class OpenApiHandlerExecuteTemplateImpl implements OpenApiHandlerExecuteTemplate, Chain {
+public class OpenApiServiceHandlerExecuteTemplateImpl implements OpenApiHandlerExecuteTemplate, Chain {
 
-    private static Log logger = LogFactory.getLog(OpenApiHandlerExecuteTemplateImpl.class);
+    private static Log logger = LogFactory.getLog(OpenApiServiceHandlerExecuteTemplateImpl.class);
     private List<Command> commands = new ArrayList<Command>();
 
-    public OpenApiHandlerExecuteTemplateImpl(List<Command> commands) {
+    public OpenApiServiceHandlerExecuteTemplateImpl(List<Command> commands) {
         this.commands = commands;
     }
 

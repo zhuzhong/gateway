@@ -128,5 +128,9 @@
 			<bean
 				class="com.aldb.gateway.interceptor.OpenApiServiceParamValidateInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/getToken**"/>
+			<bean class="com.aldb.gateway.interceptor.OpenApiTokenParamValidateInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

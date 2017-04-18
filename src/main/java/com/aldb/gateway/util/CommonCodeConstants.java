@@ -9,10 +9,20 @@ package com.aldb.gateway.util;
  */
 public class CommonCodeConstants {
 
+    
+    
+    public static final String API_SERVICE_KEY = "openapi.service.HandlerExecuteTemplate";
+    public static final String API_TOKEN_KEY = "openapi.gettoken.HandlerExecuteTemplate";
+    public static final String API_WTSERVICE_KEY = "openapi.wtService";
+    public static final String API_SYSERVICE_KEY = "openapi.syService";
+    public static final String API_GETDATA_KEY = "openapi.getSyData";
+    
+    
+    
     public static final String REQ_BEAN_KEY = "GATE_WAY_BEAN";
 
-    public static final String API_SERVICE_KEY = "service";
-
+    
+    
     public static final String ROUTE_BEAN_KEY = "BL_OPENAPI_ROUTE_BEAN";
     public static final String USER_TOKEN_KEY = "BL_OPENAPI_USER_TOKEN";
     public static final String USER_TOKEN_SYNC_SINGAL_KEY = "BL_OPENAPI_USER_TOKEN_SYNC_SINGAL";
@@ -20,11 +30,7 @@ public class CommonCodeConstants {
     public static final String CTRL_STR = "_";
     public static final String ROUTE_APPID_KEY = "appId";
     public static final String ROUTE_TOKEN_KEY = "accessToken";
-    public static final String API_TOKEN_KEY = "bl.openapi.oauth.gettoken";
-
-    public static final String API_WTSERVICE_KEY = "wtService";
-    public static final String API_SYSERVICE_KEY = "syService";
-    public static final String API_GETDATA_KEY = "getSyData";
+   
     public static final String SERVICE_TYPE_KEY = "servcieType";
     public static final String SERVICE_BODY_KEY = "body";
     public static final String SYSTEM_ERROR_KEY = "500";

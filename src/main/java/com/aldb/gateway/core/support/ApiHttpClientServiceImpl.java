@@ -51,7 +51,7 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
     private static PoolingHttpClientConnectionManager manager = null;
     private static CloseableHttpClient httpClient = null;
 
-    private static synchronized CloseableHttpClient getHttpClient() {
+    private synchronized CloseableHttpClient getHttpClient() {
         if (httpClient == null) {
             // 注册访问协议相关的socket工厂
             Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder
@@ -68,13 +68,13 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
             SocketConfig defaultSocketConfig = SocketConfig.custom().setTcpNoDelay(true).build();
             manager.setDefaultSocketConfig(defaultSocketConfig);
 
-            manager.setMaxTotal(300);// 设置整个连接池的最大连接数
-            manager.setDefaultMaxPerRoute(200);// 每个路由最大连接数
-            manager.setValidateAfterInactivity(5 * 1000);
+            manager.setMaxTotal(this.maxTotal);// 设置整个连接池的最大连接数
+            manager.setDefaultMaxPerRoute(this.defaultMaxPerRoute);// 每个路由最大连接数
+            manager.setValidateAfterInactivity(this.validateAfterInactivity);
 
-            RequestConfig defaultRequestConfig = RequestConfig.custom().setConnectTimeout(2 * 1000) // 2s
-                    .setSocketTimeout(5 * 1000) // 5s
-                    .setConnectionRequestTimeout(2000).build();
+            RequestConfig defaultRequestConfig = RequestConfig.custom().setConnectTimeout(this.connectionTimeout) // 2s
+                    .setSocketTimeout(this.socketTimeout) // 5s
+                    .setConnectionRequestTimeout(this.connectionRequestTimeout).build();
             httpClient = HttpClients.custom().setConnectionManager(manager).setConnectionManagerShared(false)
                     .evictIdleConnections(60, TimeUnit.SECONDS).evictExpiredConnections()
                     .setConnectionTimeToLive(60, TimeUnit.SECONDS).setDefaultRequestConfig(defaultRequestConfig)
@@ -96,6 +96,37 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
 
         }
         return httpClient;
+    }
+
+    private int maxTotal = 300;
+    private int defaultMaxPerRoute = 200;
+    private int validateAfterInactivity = 5000;
+    private int connectionTimeout = 2000;// 2s
+    private int socketTimeout = 5000;// 5s
+    private int connectionRequestTimeout = 2000;
+
+    public void setConnectionTimeout(int connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public void setSocketTimeout(int socketTimeout) {
+        this.socketTimeout = socketTimeout;
+    }
+
+    public void setConnectionRequestTimeout(int connectionRequestTimeout) {
+        this.connectionRequestTimeout = connectionRequestTimeout;
+    }
+
+    public void setMaxTotal(int maxTotal) {
+        this.maxTotal = maxTotal;
+    }
+
+    public void setDefaultMaxPerRoute(int defaultMaxPerRoute) {
+        this.defaultMaxPerRoute = defaultMaxPerRoute;
+    }
+
+    public void setValidateAfterInactivity(int validateAfterInactivity) {
+        this.validateAfterInactivity = validateAfterInactivity;
     }
 
     @Override

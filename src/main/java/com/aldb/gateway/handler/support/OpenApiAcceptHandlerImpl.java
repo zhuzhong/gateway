@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import com.aldb.gateway.handler.OpenApiAcceptHandler;
@@ -27,7 +30,7 @@ import com.aldb.gateway.util.OpenApiResponseUtils;
  *
  */
 @Service
-public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler {
+public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler, ApplicationContextAware {
 
     private static Log logger = LogFactory.getLog(OpenApiAcceptHandlerImpl.class);
     @Autowired
@@ -46,24 +49,21 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler {
     }
 
     @Autowired
-    @Qualifier("serviceHandlerExecuteTemplate")
-    private OpenApiHandlerExecuteTemplate serviceHandlerExecuteTemplate;
-
-    @Autowired
     private ThreadPoolHandler poolHandler;
 
     private void addTask2Pool(HttpServletResponse response, OpenApiHttpSessionBean sessionBean) {
         long currentTime = System.currentTimeMillis();
         if (logger.isDebugEnabled()) {
-            logger.debug(String.format("begin deal_sessionbean,current_time=%d,sessionbean=%s ", currentTime,sessionBean));
+            logger.debug(String.format("begin deal_sessionbean,current_time=%d,sessionbean=%s ", currentTime,
+                    sessionBean));
         }
         logger.info("added one task to thread pool");
         OpenApiHttpReqTask task = null;
         String operationType = sessionBean.getRequest().getOperationType();
-        if (CommonCodeConstants.API_SERVICE_KEY.equals(operationType)) {
-            task = new OpenApiHttpReqTask(sessionBean, this.serviceHandlerExecuteTemplate);
-        }
 
+        OpenApiHandlerExecuteTemplate handlerExecuteTemplate = applicationContext.getBean(operationType,
+                OpenApiHandlerExecuteTemplate.class);
+        task = new OpenApiHttpReqTask(sessionBean, handlerExecuteTemplate);
         /**
          * 走责任链，将相关的请求处理
          */
@@ -71,9 +71,17 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler {
         // 写入响应
         OpenApiResponseUtils.writeRsp(response, tmp.getRequest());
         if (logger.isDebugEnabled()) {
-            logger.debug(String.format("end deal_sessionbean,current_time=%d,elapase_time=%d milseconds,sessionbean=%s", 
-                    System.currentTimeMillis(), (System.currentTimeMillis() - currentTime) ,tmp));
+            logger.debug(String.format(
+                    "end deal_sessionbean,current_time=%d,elapase_time=%d milseconds,sessionbean=%s",
+                    System.currentTimeMillis(), (System.currentTimeMillis() - currentTime), tmp));
         }
+    }
+
+    private ApplicationContext applicationContext;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 
 }

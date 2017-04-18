@@ -26,14 +26,18 @@ public class GateWayController {
     private OpenApiAcceptHandler acceptHandler;
     //这个供外部使用
     @RequestMapping(value = "service",method = {RequestMethod.POST,RequestMethod.GET})
-    public void accessOpenApi(HttpServletRequest request, HttpServletResponse response) {
+    public void service(HttpServletRequest request, HttpServletResponse response) {
         this.acceptHandler.acceptRequest(request, response);
     }
     
-    
+    //这个供内部使用
+    @RequestMapping(value = "getToken",method = {RequestMethod.POST,RequestMethod.GET})
+    public void getToken(HttpServletRequest request, HttpServletResponse response) {
+        this.acceptHandler.acceptRequest(request, response);
+    }
     //这个供内部使用
     @RequestMapping(value = "serviceInner",method = {RequestMethod.POST,RequestMethod.GET})
-    public void accessOpenApi2(HttpServletRequest request, HttpServletResponse response) {
+    public void serviceInner(HttpServletRequest request, HttpServletResponse response) {
         this.acceptHandler.acceptRequest(request, response);
     }
 }

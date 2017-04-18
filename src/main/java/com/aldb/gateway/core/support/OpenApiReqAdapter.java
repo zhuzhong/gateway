@@ -13,21 +13,8 @@ import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 import com.aldb.gateway.service.CacheService;
-import com.alibaba.fastjson.JSON;
 
 public class OpenApiReqAdapter extends AbstractOpenApiHandler {
-
-    /*
-     * private ApiInterfaceService apiRouteService;
-     * 
-     * private OauthService oauthService;
-     * 
-     * private ApiUsersService apiUsersService;
-     * 
-     * private ApiUserInterfaceService apiUserInterfaceService;
-     * 
-     * private String desKey;
-     */
 
     private CacheService cacheService;
 
@@ -56,8 +43,8 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
         routeBean.setOperationType(request.getOperationType()); // 请求操作类型
         routeBean.setRequestMethod(request.getRequestMethod());// 请求方法
         routeBean.setServiceReqData(request.getServiceReqData());// post请求参数
-        //routeBean.setQueryString(request.getQueryString());// get请求参数
-        routeBean.setServiceGetReqData(request.getServiceGetReqData()); //get请求参数
+        // routeBean.setQueryString(request.getQueryString());// get请求参数
+        routeBean.setServiceGetReqData(request.getServiceGetReqData()); // get请求参数
         if (request.getThdApiUrlParams() != null) {
             for (Map.Entry<String, String> maps : request.getThdApiUrlParams().entrySet()) {
                 routeBean.addThdApiUrlParams(maps.getKey(), maps.getValue());
@@ -67,21 +54,6 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
         return routeBean;
     }
 
-    /*
-     * private OpenApiRouteBean iniApiRouteBean(OpenApiHttpRequestBean request)
-     * { log.info("iniApiRouteBean，这一步可以校验token,当然这个根据我们的实际情况去实同"); String
-     * accessToken = request.getAppToken(); if
-     * (StringUtils.isBlank(accessToken)) { throw new
-     * OpenApiException(OauthErrorEnum.ACCESSTOKEN.getErrCode(),
-     * OauthErrorEnum.ACCESSTOKEN.getErrMsg()); } log.info("init 路由bean ");
-     * OpenApiRouteBean bean = new OpenApiRouteBean();
-     * bean.setApiId(request.getApiId());
-     * bean.setReqHeader(request.getReqHeader());
-     * bean.setTimeStamp(request.getTimeStamp());
-     * bean.setReqId(request.getReqId());
-     * bean.setOperationType(request.getOperationType());
-     * bean.setServiceReqData(request.getServiceReqData()); return bean; }
-     */
     // 路由参数的校验
     private void validateApiRouteParam(OpenApiHttpRequestBean routeBean) {
         logger.info("validateApiRouteParam方法是对路由参数的校验,但是现在我没有去实现");
@@ -105,20 +77,23 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
         OpenApiContext openApiContext = (OpenApiContext) context;
         OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) openApiContext.getOpenApiHttpSessionBean();
         OpenApiHttpRequestBean request = httpSessionBean.getRequest();
-        long currentTime=System.currentTimeMillis();
-        if(logger.isDebugEnabled()){
-            logger.info(String.format("begin run doExecuteBiz,currentTime=%d,httpSessonBean=%s", currentTime,httpSessionBean));    
+        long currentTime = System.currentTimeMillis();
+        if (logger.isDebugEnabled()) {
+            logger.info(String.format("begin run doExecuteBiz,currentTime=%d,httpSessonBean=%s", currentTime,
+                    httpSessionBean));
         }
-        
+
         // 设置audit上下文参数
         setAuditContext(request);
         // 校验参数
         validateParam(request);
         initRouteBean(httpSessionBean.getRequest()); // 初始化路由bean
-        if(logger.isDebugEnabled()){
-            logger.info(String.format("end run doExecuteBiz,currentTime=%d,elapase_time=%d milseconds,httpSessonBean=%s",System.currentTimeMillis(),(System.currentTimeMillis()-currentTime), httpSessionBean));    
+        if (logger.isDebugEnabled()) {
+            logger.info(String.format(
+                    "end run doExecuteBiz,currentTime=%d,elapase_time=%d milseconds,httpSessonBean=%s",
+                    System.currentTimeMillis(), (System.currentTimeMillis() - currentTime), httpSessionBean));
         }
-        
+
         if (StringUtils.isNotBlank(request.getPrintStr())) {
             return true;
         }

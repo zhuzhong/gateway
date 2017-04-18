@@ -36,9 +36,9 @@
 	</bean>
 
 
-
-	<bean name="serviceHandlerExecuteTemplate"
-		class="com.aldb.gateway.handler.support.OpenApiHandlerExecuteTemplateImpl">
+	<!--  bean id 取自CommonCodeConstants类 -->
+	<bean name="openapi.service.HandlerExecuteTemplate"
+		class="com.aldb.gateway.handler.support.OpenApiServiceHandlerExecuteTemplateImpl">
 		<constructor-arg>
 			<list>
 				<ref bean="serviceReqAdapter" />
@@ -59,8 +59,10 @@
 	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
+	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.ApiHttpClientServiceImpl" />
 
-	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.ApiHttpClientServiceImpl">
-
+	<bean name="openapi.gettoken.HandlerExecuteTemplate"
+		class="com.aldb.gateway.handler.support.OpenApiTokenHandlerExecuteTemplateImpl">
 	</bean>
+
 </beans>
