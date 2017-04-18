@@ -67,8 +67,8 @@ public class CommonCodeConstants {
     // 协议的公共参数
     public static String app_id = "appId";
     public static String app_token = "appToken";
-    public static String api_id = "apiId"; // 必须
-    public static String version = "apiVersion";
+    public static String api_id = "service"; // 必须
+    public static String version = "version";
     public static String time_stamp = "timeStamp";
     public static String sign_method = "signMethod";
     public static String sign = "sign";

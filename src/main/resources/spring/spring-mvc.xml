@@ -124,7 +124,7 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/service**" />
+			<mvc:mapping path="/gateway**" />
 			<bean
 				class="com.aldb.gateway.interceptor.OpenApiServiceParamValidateInterceptor" />
 		</mvc:interceptor>

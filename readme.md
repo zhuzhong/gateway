@@ -22,8 +22,8 @@
 前端请求统一的url地址/gateway/service.htm,然后根据请求方法的不同拼接不同的url参数或提交相应的请求体。
 ###业务方法的公共请求参数：
 	appId   String  16  是   打包app的唯一标识  not null    
-	apiId   String  64  是   API编码即api的唯一标识 not null 
-	apiVersion  String  8   是   API版本号 not null 
+	service   String  64  是   API编码即api的唯一标识 not null 
+	version  String  8   是   API版本号 not null 
 	appToken    String  32  是   app授权令牌,用于授权  not null      
 	timeStamp   String  19  是   时间戳,对应时间的毫秒数 not null    
 	signMethod  String  8   是   生成服务请求签名字符串所使用的算法类型，目前仅支持MD5， 

@@ -25,7 +25,7 @@ public class GateWayController {
    @Autowired
     private OpenApiAcceptHandler acceptHandler;
     //这个供外部使用
-    @RequestMapping(value = "service",method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "gateway",method = {RequestMethod.POST,RequestMethod.GET})
     public void service(HttpServletRequest request, HttpServletResponse response) {
         this.acceptHandler.acceptRequest(request, response);
     }
@@ -36,7 +36,7 @@ public class GateWayController {
         this.acceptHandler.acceptRequest(request, response);
     }
     //这个供内部使用
-    @RequestMapping(value = "serviceInner",method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "gatewayInner",method = {RequestMethod.POST,RequestMethod.GET})
     public void serviceInner(HttpServletRequest request, HttpServletResponse response) {
         this.acceptHandler.acceptRequest(request, response);
     }

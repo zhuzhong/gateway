@@ -41,7 +41,7 @@
 
 	<filter-mapping>
 		<filter-name>requestFilter</filter-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 
 
