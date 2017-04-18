@@ -13,7 +13,6 @@ import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 import com.aldb.gateway.service.ApiInterfaceService;
-import com.aldb.gateway.service.CacheService;
 import com.aldb.gateway.util.CommonCodeConstants;
 import com.aldb.gateway.util.UrlUtil;
 
@@ -21,38 +20,10 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
 
     private final int maxReqDataLth = 500;
 
-    private CacheService cacheService;
+
     private ApiInterfaceService apiInterfaceService;
 
     private ApiHttpClientService apiHttpClientService;
-
-    /*
-     * @SuppressWarnings("rawtypes") private String generatePassUrl(String
-     * targetUrl, String salt, String token, String timeStamp) { // 透传业务接口url参数
-     * StringBuilder sb = new StringBuilder();
-     * sb.append(targetUrl).append("?salt="
-     * ).append(salt).append("&token=").append(token).append("&timestamp=")
-     * .append(timeStamp); return sb.toString(); }
-     */
-
-    /*
-     * private String getParams(String salt, String token, String timeStamp,
-     * Map<String, String> urlParams) { // 透传业务接口url参数 StringBuilder sb = new
-     * StringBuilder();
-     * sb.append("salt=").append(salt).append("&token=").append(
-     * token).append("&timestamp=").append(timeStamp); String key = null; String
-     * value = null; if (null != urlParams) { Iterator entries =
-     * urlParams.entrySet().iterator(); while (entries.hasNext()) { Map.Entry
-     * entry = (Map.Entry) entries.next(); key = (String) entry.getKey(); value
-     * = (String) entry.getValue();
-     * sb.append("&").append(key).append("=").append(value); } } return
-     * sb.toString(); }
-     */
-
-    public void setCacheService(CacheService cacheService) {
-        this.cacheService = cacheService;
-    }
-
     public void setApiInterfaceService(ApiInterfaceService apiInterfaceService) {
         this.apiInterfaceService = apiInterfaceService;
     }

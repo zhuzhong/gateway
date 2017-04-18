@@ -36,7 +36,7 @@
 	</bean>
 
 
-	<!--  bean id 取自CommonCodeConstants类 -->
+	<!-- bean id 取自CommonCodeConstants类 -->
 	<bean name="openapi.service.HandlerExecuteTemplate"
 		class="com.aldb.gateway.handler.support.OpenApiServiceHandlerExecuteTemplateImpl">
 		<constructor-arg>
@@ -48,17 +48,24 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="serviceReqAdapter" class="com.aldb.gateway.core.support.OpenApiReqAdapter">
-		<property name="cacheService" ref="cacheServiceImpl"></property>
+	<bean id="parentReq" class="com.aldb.gateway.core.AbstractOpenApiHandler"
+		abstract="true">
+		<!-- <property name="cacheService" ref="cacheServiceImpl"></property> -->
 	</bean>
-	<bean id="serviceReqHandler" class="com.aldb.gateway.core.support.OpenApiReqHandler">
-		<property name="cacheService" ref="cacheServiceImpl"></property>
+	
+	<bean id="serviceReqAdapter" class="com.aldb.gateway.core.support.OpenApiReqAdapter"
+		parent="parentReq" />
+
+	<bean id="serviceReqHandler" class="com.aldb.gateway.core.support.OpenApiReqHandler"
+		parent="parentReq">
 		<property name="apiInterfaceService" ref="apiInterfaceServiceImpl"></property>
 		<property name="apiHttpClientService" ref="apiHttpClientService"></property>
 	</bean>
-	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler">
-		<property name="cacheService" ref="cacheServiceImpl"></property>
-	</bean>
+
+
+
+	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler"
+		parent="parentReq" />
 	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.ApiHttpClientServiceImpl" />
 
 	<bean name="openapi.gettoken.HandlerExecuteTemplate"

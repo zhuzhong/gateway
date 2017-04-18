@@ -1,24 +1,22 @@
 package com.aldb.gateway.exception;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public enum OauthErrorEnum {
 	ERROR("zz10000", "service unavailable"),
 	GRANTTYPE("zz10001", "grant_type is required"),
-	APPID("zz10002", "appid is required"),
+	APP_ID("zz10002", "appid is required"),
 	SECRET("zz10003", "secret is required"),
 	TIMSTAMP("zz10004", "timestamp is required"),
 	SIGN("zz10005", "sign is required"),
 	INVALID_SIGN("zz10006", "invalid sign"),
 	INVALID_REQUEST("zz10007", "invalid request"),
-	INVALID_CLIENT("zz10008", "invalid appId"),
+	INVALID_CLIENT("zz10008", "invalid appId or apptoken"),
 	INVALID_GRANT("zz10009", "invalid grant"),
 	UNAUTHORIZED_CLIENT("zz10010", "unauthorized appId"),
 	UNSUPPORTED_GRANT_TYPE("zz10011", "unsupported grant_type"),
 	INVALID_TOKEN("zz10012", "invalid token"),
 	ACCESS_DENIED("zz10013", "access denied"),
-	SERVICENAME("zz10014", "service_name is required"),
+	API_ID("zz10014", "apiId is required"),
 	ACCESSTOKEN("zz10015", "access_token is required"),
 	INVALID_SERVICENAME("zz10016", "invalid service_name"),
 	CONTENTTYPE("zz10017", "httprequest header content-type is required"),
@@ -30,7 +28,8 @@ public enum OauthErrorEnum {
 	APP_UNDEFIND_WHITE("zz10024","undefind in whiteList"),
 	SERVICE_UNDEFIND_WHITE("zz10025","service_name undefind in whiteList"),
 	NOT_CALLBACKURL("zz10026","undefind in user's callBackUrl"),
-	INTERFACE_FREQUENCY("zz10027", "api freq out of limit")
+	INTERFACE_FREQUENCY("zz10027", "api freq out of limit"),
+	APP_TOKEN("zz10028", "apptoken is required"),
 	;
 	// 成员变量
     private String errCode;
@@ -41,7 +40,7 @@ public enum OauthErrorEnum {
         this.errCode = errCode;
         this.errMsg = errMsg;
     }
-    // 普通方法
+/*    // 普通方法
     public static String getErrMsg(String errCode) {
         for (OauthErrorEnum c : OauthErrorEnum.values()) {
             if (c.getErrCode().equals(errCode)) {
@@ -58,22 +57,23 @@ public enum OauthErrorEnum {
             }
         }
         return null;
-    }
+    }*/
     
     public String getErrCode() {
 		return errCode;
 	}
-	public void setErrCode(String errCode) {
-		this.errCode = errCode;
-	}
+	
 	public String getErrMsg() {
 		return errMsg;
 	}
-	public void setErrMsg(String errMsg) {
+	/*public void setErrMsg(String errMsg) {
 		this.errMsg = errMsg;
 	}
+	public void setErrCode(String errCode) {
+        this.errCode = errCode;
+    }*/
 	
-	private static Map<String,String> oauthErrorMap;
+	/*private static Map<String,String> oauthErrorMap;
 	static{
 		oauthErrorMap = new HashMap<String,String>();
 		oauthErrorMap.put("error", "zz10000");
@@ -91,5 +91,5 @@ public enum OauthErrorEnum {
 	}
 	public static void setOauthErrorMap(Map<String, String> oauthErrorMap) {
 		OauthErrorEnum.oauthErrorMap = oauthErrorMap;
-	}
+	}*/
 }

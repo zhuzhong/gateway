@@ -12,15 +12,10 @@ import com.aldb.gateway.exception.OpenApiException;
 import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
-import com.aldb.gateway.service.CacheService;
+import com.aldb.gateway.resp.CommonResponse;
+import com.aldb.gateway.service.AuthenticationService;
 
 public class OpenApiReqAdapter extends AbstractOpenApiHandler {
-
-    private CacheService cacheService;
-
-    public void setCacheService(CacheService cacheService) {
-        this.cacheService = cacheService;
-    }
 
     public OpenApiReqAdapter() {
     }
@@ -54,22 +49,39 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
         return routeBean;
     }
 
-    // 路由参数的校验
-    private void validateApiRouteParam(OpenApiHttpRequestBean routeBean) {
-        logger.info("validateApiRouteParam方法是对路由参数的校验,但是现在我没有去实现");
+    private void setError(String errorCode, String errMsg, OpenApiHttpRequestBean requestBean) {
+        CommonResponse<String> r = new CommonResponse<String>(false);
+        r.setErrorCode(errorCode);
+        r.setErrorMsg(errMsg);
+        requestBean.setPrintStr(r.toString());
     }
 
-    private void validateParam(OpenApiHttpRequestBean request) {
-        // 验证头信息
-        // validateRequestHeader(request);
-        // 验证业务字段
-        validateApiRouteParam(request);
+    private void validateParam(OpenApiHttpRequestBean requestBean) {
+        String appId = requestBean.getAppId();
+        if (StringUtils.isBlank(appId)) { // appId为空
+            setError(OauthErrorEnum.APP_ID.getErrCode(), OauthErrorEnum.APP_ID.getErrMsg(), requestBean);
+            return;
+        }
+        String appToken = requestBean.getAppToken();
+
+        if (StringUtils.isBlank(appToken)) {// appToken为空
+            setError(OauthErrorEnum.APP_TOKEN.getErrCode(), OauthErrorEnum.APP_TOKEN.getErrMsg(), requestBean);
+            return;
+        }
+        if (StringUtils.isBlank(requestBean.getApiId())) {
+            setError(OauthErrorEnum.API_ID.getErrCode(), OauthErrorEnum.API_ID.getErrMsg(), requestBean);
+            return;
+        }
+
     }
 
     // step1
-    private void setAuditContext(OpenApiHttpRequestBean request) {
+    private void authRequestBean(OpenApiHttpRequestBean requestBean) {
         // 对于请求信息进行审计
-        logger.info("setAuditContext设置审计的上下文信息...,我也没有实现");
+        logger.info("authRequestBean权限校验...");
+        if (this.authenticationService != null) {
+            this.authenticationService.doAuthOpenApiHttpRequestBean(requestBean);
+        }
     }
 
     @Override
@@ -83,10 +95,11 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
                     httpSessionBean));
         }
 
-        // 设置audit上下文参数
-        setAuditContext(request);
-        // 校验参数
+        // 参数校验
         validateParam(request);
+        // 权限校验
+        authRequestBean(request);
+
         initRouteBean(httpSessionBean.getRequest()); // 初始化路由bean
         if (logger.isDebugEnabled()) {
             logger.info(String.format(
@@ -98,5 +111,12 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
             return true;
         }
         return false;
+    }
+
+    // 外部依赖的服务--------------------------------------
+    private AuthenticationService authenticationService;
+
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 }

@@ -14,8 +14,8 @@ import com.aldb.gateway.service.CacheService;
  * @author Administrator
  *
  */
-@Service("cacheServiceImpl")
-public class CacheServiceImpl implements CacheService {
+
+public class DefaultCacheServiceImpl implements CacheService {
 
     private Map<String, Object> m = new HashMap<String, Object>();
 

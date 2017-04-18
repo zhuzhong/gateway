@@ -24,7 +24,6 @@ public class ApiInterface {
      * 
      * 以上参数可以组织出api的访问地址 protocol://hostAddress:port//targetUrl
      */
-
     private String url; // 解析之后服务路径
 
     // http://192.168.2.100:8089/targetUrl

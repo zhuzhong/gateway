@@ -14,7 +14,6 @@ import com.aldb.gateway.exception.OpenApiServiceErrorEnum;
 import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
-import com.aldb.gateway.service.CacheService;
 
 public class OpenApiRspHandler extends AbstractOpenApiHandler {
     private static final Log logger = LogFactory.getLog(OpenApiRspHandler.class);
@@ -39,17 +38,12 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
         request.setPrintStr(printStr);
 
         if (logger.isDebugEnabled()) {
-            logger.info(String.format("end run doExecuteBiz,currentTime=%d,elapase_time=%d milseconds,httpSessonBean=%s",
-                    System.currentTimeMillis(), (System.currentTimeMillis() - currentTime) , httpSessionBean));
+            logger.info(String.format(
+                    "end run doExecuteBiz,currentTime=%d,elapase_time=%d milseconds,httpSessonBean=%s",
+                    System.currentTimeMillis(), (System.currentTimeMillis() - currentTime), httpSessionBean));
         }
 
         return false;
-    }
-
-    private CacheService cacheService;
-
-    public void setCacheService(CacheService cacheService) {
-        this.cacheService = cacheService;
     }
 
     private String executePrint(OpenApiHttpRequestBean request) {
