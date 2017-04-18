@@ -33,7 +33,7 @@ public class GateWayController {
     
     //这个供内部使用
     @RequestMapping(value = "serviceInner",method = {RequestMethod.POST,RequestMethod.GET})
-    public void accessOpenApi２(HttpServletRequest request, HttpServletResponse response) {
+    public void accessOpenApi2(HttpServletRequest request, HttpServletResponse response) {
         this.acceptHandler.acceptRequest(request, response);
     }
 }

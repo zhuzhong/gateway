@@ -37,12 +37,12 @@ public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
             FutureTask<OpenApiHttpSessionBean> tsFutre = new FutureTask<OpenApiHttpSessionBean>(task);
             taskExecutor.execute(tsFutre);
             while (!tsFutre.isDone()) {
-                try {
+                /*try {
                     // logger.debug("waitting for result");
                     TimeUnit.MICROSECONDS.sleep(200);
                 } catch (InterruptedException e) {
                     logger.error(String.format("exception happend on executing task with ", e.getMessage()));
-                }
+                }*/
             }
             return tsFutre.get();
         } catch (TaskRejectedException e) {

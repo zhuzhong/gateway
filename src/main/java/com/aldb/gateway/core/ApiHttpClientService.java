@@ -3,6 +3,8 @@
  */
 package com.aldb.gateway.core;
 
+import java.util.Map;
+
 
 /**
  * @author Administrator
@@ -12,8 +14,10 @@ public interface ApiHttpClientService {
 
     // get请求
     public String doGet(String webUrl);
+    public String doGet(String webUrl, Map<String,String> paramMap);
     public String doHttpsGet(String webUrl);
-
+    
+    public String doHttpsGet(String webUrl, Map<String,String> paramMap);
     
 /*    public Map<String, String> HttpGet(String webUrl, Map paramMap);
 

@@ -15,30 +15,34 @@ import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 import com.aldb.gateway.service.CacheService;
-import com.alibaba.fastjson.JSON;
 
 public class OpenApiRspHandler extends AbstractOpenApiHandler {
     private static final Log logger = LogFactory.getLog(OpenApiRspHandler.class);
 
-  /*  @Override
-    public boolean execute(Context context) {
-        logger.info("step1----");
-        return doExcuteBiz(context);
-    }*/
+    /*
+     * @Override public boolean execute(Context context) {
+     * logger.info("step1----"); return doExcuteBiz(context); }
+     */
 
     @Override
     public boolean doExcuteBiz(Context context) {
-        log.info("step2----");
+        logger.info("step2----");
         OpenApiContext blCtx = (OpenApiContext) context;
         OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) blCtx.getOpenApiHttpSessionBean();
         OpenApiHttpRequestBean request = httpSessionBean.getRequest();
-        String requestId = httpSessionBean.getRequest().getReqId();
-        log.info(String.format("doExecuteBiz执行begin,request_id=%s，相应的request为%s", requestId, JSON.toJSONString(request)));
+        long currentTime = System.currentTimeMillis();
+        if (logger.isDebugEnabled()) {
+            logger.info(String.format("begin run doExecuteBiz,currentTime=%d,httpSessonBean=%s", currentTime,
+                    httpSessionBean));
+        }
         String printStr = this.executePrint(request);
         request.setPrintStr(printStr);
 
+        if (logger.isDebugEnabled()) {
+            logger.info(String.format("end run doExecuteBiz,currentTime=%d,elapase_time=%d milseconds,httpSessonBean=%s",
+                    System.currentTimeMillis(), (System.currentTimeMillis() - currentTime) , httpSessionBean));
+        }
 
-        log.info(String.format("doExecuteBiz执行end,request_id=%s,执行后的request为%s", requestId, JSON.toJSONString(request)));
         return false;
     }
 
@@ -49,7 +53,7 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
     }
 
     private String executePrint(OpenApiHttpRequestBean request) {
-        log.info("step3...");
+        logger.info("step3...");
         try {
             return this.getResponseBody(request);
         } catch (Exception e) {
@@ -82,7 +86,7 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
     }
 
     private String getResponseBody(OpenApiHttpRequestBean bean) {
-        log.info("step4....");
+        logger.info("step4....");
         String routeBeanKey = bean.getRouteBeanKey();
         OpenApiRouteBean routeBean = (OpenApiRouteBean) cacheService.get(routeBeanKey);
         Object body = (Object) routeBean.getServiceRsp();

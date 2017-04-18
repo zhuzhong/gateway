@@ -4,11 +4,15 @@
 package com.aldb.gateway.core.support;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -43,6 +47,7 @@ import com.aldb.gateway.core.ApiHttpClientService;
  */
 public class ApiHttpClientServiceImpl implements ApiHttpClientService {
 
+    private static Log logger = LogFactory.getLog(ApiHttpClientServiceImpl.class);
     private static PoolingHttpClientConnectionManager manager = null;
     private static CloseableHttpClient httpClient = null;
 
@@ -124,9 +129,9 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
 
     @Override
     public String doGet(String webUrl) {
+        logger.info(String.format("run doGet method,weburl=%s", webUrl));
         String body = "";
         org.apache.http.client.methods.HttpGet httpGet = new org.apache.http.client.methods.HttpGet(webUrl);
-        //httpGet.setHeader("Content-type", contentType);
         try {
             CloseableHttpResponse response = getHttpClient().execute(httpGet);
             HttpEntity entity = response.getEntity();
@@ -136,10 +141,8 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
             EntityUtils.consume(entity);
             response.close();
         } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -147,34 +150,72 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
     }
 
     @Override
-    public String doHttpsGet(String webUrl) { //https   协议
+    public String doGet(String webUrl, Map<String, String> paramMap) {
+        logger.info(String.format("run doGet method,weburl=%s", webUrl));
+        String url = webUrl;
+        // 设置编码格式
+        String queryString = createLinkString(paramMap);
+        url = url + "?" + queryString;
+        return doGet(url);
+    }
+
+    /**
+     * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
+     * 
+     * @param params
+     *            需要排序并参与字符拼接的参数组
+     * @return 拼接后字符串
+     */
+    private String createLinkString(Map<String, String> params) {
+        List<String> keys = new ArrayList<String>(params.keySet());
+        Collections.sort(keys);
+        String prestr = "";
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            String value = params.get(key);
+
+            if (i == keys.size() - 1) {// 拼接时，不包括最后一个&字符
+                prestr = prestr + key + "=" + value;
+            } else {
+                prestr = prestr + key + "=" + value + "&";
+            }
+        }
+
+        return prestr;
+    }
+
+    @Override
+    public String doHttpsGet(String webUrl) { // https 协议
         return null;
     }
 
-   
+    @Override
+    public String doHttpsGet(String webUrl, Map<String, String> paramMap) {
+        /**
+         * 这个不我会实现呀.......................................
+         */
+        return null;
+    }
+
     public String doPost(String url, String reqData, String contentType, String params) {
         // TODO Auto-generated method stub
         return null;
     }
 
-   
     public Map<String, String> HttpGet(String webUrl, Map paramMap) {
 
         return null;
     }
 
-   
     public Map<String, String> HttpGet(String url, String method, Map paramMap) {
 
         return null;
     }
 
-   
     public String HttpPost(String webUrl, Map paramMap) {
         return null;
     }
 
-   
     public String HttpPost(String url, String method, Map paramMap) {
 
         return null;

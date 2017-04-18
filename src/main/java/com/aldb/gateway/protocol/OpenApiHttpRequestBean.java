@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.aldb.gateway.util.CommonCodeConstants;
+import com.alibaba.fastjson.JSON;
 
 /**
  * 
@@ -17,39 +18,32 @@ import com.aldb.gateway.util.CommonCodeConstants;
  */
 public class OpenApiHttpRequestBean {
 
-	private Map<String, String> reqHeader;//请求头
-	
-	private String operationType;//内部请求类型
+    private Map<String, String> reqHeader;// 请求头
 
-	private String clientAddr; // 客户端ip
-	private String localAddr;// 服务端ip
-	private int localPort;// 服务端口
-	
-	private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
-    private String serviceReqData;  //post请求方法参数
+    private String operationType;// 内部请求类型
+
+    private String clientAddr; // 客户端ip
+    private String localAddr;// 服务端ip
+    private int localPort;// 服务端口
+
+    private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
+    private String serviceReqData; // post请求方法参数
     private String requestMethod;
     /**
-     *  这两个有部分内容是重复的，为了后面调用的方便所以增加了　queryString参数，实际上不需要
+     * 这两个有部分内容是重复的，为了后面调用的方便所以增加了　queryString参数，实际上不需要
      */
-    private Map<String,Object> serviceGetReqData; //get请求参数
-    private String queryString; //get请求string 
-    
-    
+    private Map<String, String> serviceGetReqData; // get请求参数
+    private String queryString; // get请求string
+
     private Date requestTime; // 请求时间
-    private Date responseTime;//响应时间
-    private Long elapsedTime;//耗时 
-    
-    
-    
-    
+    private Date responseTime;// 响应时间
+    private Long elapsedTime;// 耗时
+
     private String reqId; // 内部定义的请求id
 
     private String printStr; // 响应，这个最终写入response的流中
-    
 
-    
-    
-   // private String serviceRsp; // 后端服务返回值
+    // private String serviceRsp; // 后端服务返回值
     // 公共的参数 begin ---
     private String appId;
     private String apiId;
@@ -65,11 +59,11 @@ public class OpenApiHttpRequestBean {
 
     // 公共部分增加参数
     private String format;
-    
+
     // 业务请求参数
-   // private String request_data;
-    
-	public Date getRequestTime() {
+    // private String request_data;
+
+    public Date getRequestTime() {
         return requestTime;
     }
 
@@ -93,223 +87,220 @@ public class OpenApiHttpRequestBean {
         this.elapsedTime = elapsedTime;
     }
 
- /*   public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
+    /*
+     * public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
+     * this.serviceGetReqData = serviceGetReqData; }
+     */
+
+    public Map<String, String> getServiceGetReqData() {
+        return serviceGetReqData;
+    }
+
+    public void addServiceGetReqData(String key, String value) {
+        if (this.serviceGetReqData == null) {
+            this.serviceGetReqData = new HashMap<String, String>();
+        }
+        this.serviceGetReqData.put(key, value);
+    }
+
+   
+   /* public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
         this.serviceGetReqData = serviceGetReqData;
     }*/
 
+    public String getRequestMethod() {
+        return requestMethod;
+    }
 
-	
-	
+    public void setRequestMethod(String requestMethod) {
+        this.requestMethod = requestMethod;
+    }
 
-	public Map<String, Object> getServiceGetReqData() {
-		return serviceGetReqData;
-	}
+    public String getPrintStr() {
+        return printStr;
+    }
 
-	public void addServiceGetReqData(String key, Object value) {
-		if(this.serviceGetReqData==null){
-			this.serviceGetReqData=new HashMap<String,Object>();
-		}
-		this.serviceGetReqData.put(key, value);
-	}
+    public void setPrintStr(String printStr) {
+        this.printStr = printStr;
+    }
 
-	public String getRequestMethod() {
-		return requestMethod;
-	}
+    public String getServiceReqData() {
+        return serviceReqData;
+    }
 
-	public void setRequestMethod(String requestMethod) {
-		this.requestMethod = requestMethod;
-	}
+    public void setServiceReqData(String serviceReqData) {
+        this.serviceReqData = serviceReqData;
+    }
 
-	public String getPrintStr() {
-		return printStr;
-	}
+    public String getOperationType() {
+        return operationType;
+    }
 
-	public void setPrintStr(String printStr) {
-		this.printStr = printStr;
-	}
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
+    }
 
-	public String getServiceReqData() {
-		return serviceReqData;
-	}
+    public String getClientAddr() {
+        return clientAddr;
+    }
 
-	public void setServiceReqData(String serviceReqData) {
-		this.serviceReqData = serviceReqData;
-	}
+    public void setClientAddr(String clientAddr) {
+        this.clientAddr = clientAddr;
+    }
 
-	public String getOperationType() {
-		return operationType;
-	}
+    public String getLocalAddr() {
+        return localAddr;
+    }
 
-	public void setOperationType(String operationType) {
-		this.operationType = operationType;
-	}
+    public void setLocalAddr(String localAddr) {
+        this.localAddr = localAddr;
+    }
 
-	public String getClientAddr() {
-		return clientAddr;
-	}
+    public int getLocalPort() {
+        return localPort;
+    }
 
-	public void setClientAddr(String clientAddr) {
-		this.clientAddr = clientAddr;
-	}
+    public void setLocalPort(int localPort) {
+        this.localPort = localPort;
+    }
 
-	public String getLocalAddr() {
-		return localAddr;
-	}
+    public String getQueryString() {
+        return queryString;
+    }
 
-	public void setLocalAddr(String localAddr) {
-		this.localAddr = localAddr;
-	}
+    public void setQueryString(String queryString) {
+        this.queryString = queryString;
+    }
 
-	public int getLocalPort() {
-		return localPort;
-	}
+    public Map<String, String> getThdApiUrlParams() {
+        return thdApiUrlParams;
+    }
 
-	public void setLocalPort(int localPort) {
-		this.localPort = localPort;
-	}
+    public void setThdApiUrlParams(Map<String, String> thdApiUrlParams) {
+        this.thdApiUrlParams = thdApiUrlParams;
+    }
 
-	public String getQueryString() {
-		return queryString;
-	}
+    public Map<String, String> getReqHeader() {
+        return reqHeader;
+    }
 
-	public void setQueryString(String queryString) {
-		this.queryString = queryString;
-	}
+    public void setReqHeader(Map<String, String> reqHeader) {
+        this.reqHeader = reqHeader;
+    }
 
-	public Map<String, String> getThdApiUrlParams() {
-		return thdApiUrlParams;
-	}
+    public String getAppToken() {
+        return appToken;
+    }
 
-	public void setThdApiUrlParams(Map<String, String> thdApiUrlParams) {
-		this.thdApiUrlParams = thdApiUrlParams;
-	}
+    public void setAppToken(String appToken) {
+        this.appToken = appToken;
+    }
 
-	public Map<String, String> getReqHeader() {
-		return reqHeader;
-	}
+    public String getTimeStamp() {
+        return timeStamp;
+    }
 
-	public void setReqHeader(Map<String, String> reqHeader) {
-		this.reqHeader = reqHeader;
-	}
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
+    public String getFormat() {
+        return format;
+    }
 
+    public void setFormat(String format) {
+        this.format = format;
+    }
 
-	public String getAppToken() {
-		return appToken;
-	}
+    public String getApiId() {
+        return apiId;
+    }
 
-	public void setAppToken(String appToken) {
-		this.appToken = appToken;
-	}
+    public void setApiId(String apiId) {
+        this.apiId = apiId;
+    }
 
-	public String getTimeStamp() {
-		return timeStamp;
-	}
+    /*
+     * public String getRequest_data() { return request_data; }
+     * 
+     * public void setRequest_data(String request_data) { this.request_data =
+     * request_data; }
+     */
 
-	public void setTimeStamp(String timeStamp) {
-		this.timeStamp = timeStamp;
-	}
+    public String getReqId() {
+        return reqId;
+    }
 
-	public String getFormat() {
-		return format;
-	}
+    public void setReqId(String reqId) {
+        this.reqId = reqId;
+    }
 
-	public void setFormat(String format) {
-		this.format = format;
-	}
+    public String getRouteBeanKey() {
+        if (this.operationType.equals(CommonCodeConstants.API_SERVICE_KEY)) {
+            return CommonCodeConstants.getRouteBeanRedisKey(reqId);
+        }
 
-	public String getApiId() {
-		return apiId;
-	}
+        return CommonCodeConstants.getRouteBeanRedisKey("");
+    }
 
-	public void setApiId(String apiId) {
-		this.apiId = apiId;
-	}
+    /*
+     * public String getServiceRsp() { return serviceRsp; }
+     * 
+     * public void setServiceRsp(String serviceRsp) { this.serviceRsp =
+     * serviceRsp; }
+     */
 
-/*	public String getRequest_data() {
-		return request_data;
-	}
+    public String getAppId() {
+        return appId;
+    }
 
-	public void setRequest_data(String request_data) {
-		this.request_data = request_data;
-	}*/
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
-	public String getReqId() {
-		return reqId;
-	}
+    public String getVersion() {
+        return version;
+    }
 
-	public void setReqId(String reqId) {
-		this.reqId = reqId;
-	}
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
-	public String getRouteBeanKey() {
-		if (this.operationType.equals(CommonCodeConstants.API_SERVICE_KEY)) {
-			return CommonCodeConstants.getRouteBeanRedisKey(reqId);
-		}
+    public String getSignMethod() {
+        return signMethod;
+    }
 
-		return CommonCodeConstants.getRouteBeanRedisKey("");
-	}
+    public void setSignMethod(String signMethod) {
+        this.signMethod = signMethod;
+    }
 
-	
+    public String getSign() {
+        return sign;
+    }
 
-	/*public String getServiceRsp() {
-		return serviceRsp;
-	}
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
 
-	public void setServiceRsp(String serviceRsp) {
-		this.serviceRsp = serviceRsp;
-	}*/
+    public String getDeviceToken() {
+        return deviceToken;
+    }
 
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
 
+    public String getUserToken() {
+        return userToken;
+    }
 
-	public String getAppId() {
-		return appId;
-	}
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
 
-	public void setAppId(String appId) {
-		this.appId = appId;
-	}
-
-	
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public String getSignMethod() {
-		return signMethod;
-	}
-
-	public void setSignMethod(String signMethod) {
-		this.signMethod = signMethod;
-	}
-
-	public String getSign() {
-		return sign;
-	}
-
-	public void setSign(String sign) {
-		this.sign = sign;
-	}
-
-	public String getDeviceToken() {
-		return deviceToken;
-	}
-
-	public void setDeviceToken(String deviceToken) {
-		this.deviceToken = deviceToken;
-	}
-
-	public String getUserToken() {
-		return userToken;
-	}
-
-	public void setUserToken(String userToken) {
-		this.userToken = userToken;
-	}
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
+    }
 
 }

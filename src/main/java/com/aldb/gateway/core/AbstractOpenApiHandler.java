@@ -19,7 +19,7 @@ import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 
 public abstract class AbstractOpenApiHandler implements Command {
 
-    protected static Log log = LogFactory.getLog(AbstractOpenApiHandler.class);
+    protected static Log logger = LogFactory.getLog(AbstractOpenApiHandler.class);
 
     public String accessServiceUri;
 
@@ -72,7 +72,7 @@ public abstract class AbstractOpenApiHandler implements Command {
     // step1
     @Override
     public boolean execute(Context context) {
-        log.info("step1,调用execute　方法");
+        //logger.info("step1,调用execute　方法");
         return doExcuteBiz(context);
     }
     public abstract boolean doExcuteBiz(Context context);
