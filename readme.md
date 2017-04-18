@@ -39,4 +39,15 @@
    对于post请求，则相应格式如下：
    { "publAttrs":{}, "busiAttrs":{} }，其只publAttrs中放的是公共请求参数，busiAttrs为业务请求参数，并且格式为application/json，目前也只支持这种请求格式
 
+##如何开始
+gateway网关系统，可以不依赖任何外部系统测试运行。对于api服务默认实现在com.aldb.gateway.service.support.TestApiInterfaceServiceImpl
+只需要将该实现类配置在spring配置文件即可进行测试,测试类似如下:
+http://localhost:8080/gateway/serviceInner.htm?appId=test&apiId=2&apiVersion=1.1.0&appToken=token&timeStamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000
+
+
+- apiId=1 为百度
+- apiId=2 为sina
+- apiId=3为jd.com
+
+其他的参数均没有校验，对于需要权限认证及注册与订阅api功能的请参考[网关注册服务系统](https://github.com/zhuzhong/gateway_register "网关注册服务")
 

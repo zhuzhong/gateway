@@ -37,6 +37,7 @@
 
 
 	<!-- bean id 取自CommonCodeConstants类 -->
+	<!-- api服务调用 -->
 	<bean name="openapi.service.HandlerExecuteTemplate"
 		class="com.aldb.gateway.handler.support.OpenApiServiceHandlerExecuteTemplateImpl">
 		<constructor-arg>
@@ -68,8 +69,10 @@
 		parent="parentReq" />
 	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.ApiHttpClientServiceImpl" />
 
+	<!-- token服务调用 -->
 	<bean name="openapi.gettoken.HandlerExecuteTemplate"
 		class="com.aldb.gateway.handler.support.OpenApiTokenHandlerExecuteTemplateImpl">
 	</bean>
-
+	<!-- 不依赖于外部系统即api的服务提供由硬编码完成 -->
+	<bean id="apiInterfaceServiceImpl" class="com.aldb.gateway.service.support.TestApiInterfaceServiceImpl"/>
 </beans>
