@@ -1,10 +1,10 @@
 package com.aldb.gateway.service.support;
 
-import com.aldb.gateway.exception.OauthErrorEnum;
+import com.aldb.gateway.common.exception.OauthErrorEnum;
+import com.aldb.gateway.common.resp.CommonResponse;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.regist.api.ApiInfoService;
 import com.aldb.gateway.regist.api.bean.ApiInfo;
-import com.aldb.gateway.resp.CommonResponse;
 import com.aldb.gateway.service.AuthenticationService;
 import com.aldb.gateway.sub.api.ApiSubscriptionService;
 import com.aldb.gateway.sub.api.AppSubscriptionService;

@@ -3,7 +3,7 @@
  */
 package com.aldb.gateway.service;
 
-import com.aldb.gateway.core.ApiInterface;
+import com.aldb.gateway.common.entity.ApiInterface;
 
 /**
  * @author Administrator

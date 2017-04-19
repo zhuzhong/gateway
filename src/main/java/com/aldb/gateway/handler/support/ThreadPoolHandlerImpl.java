@@ -13,8 +13,8 @@ import org.springframework.core.task.TaskRejectedException;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
-import com.aldb.gateway.exception.OpenApiException;
-import com.aldb.gateway.exception.OpenApiServiceErrorEnum;
+import com.aldb.gateway.common.exception.OpenApiException;
+import com.aldb.gateway.common.exception.OpenApiServiceErrorEnum;
 import com.aldb.gateway.handler.ThreadPoolHandler;
 import com.aldb.gateway.protocol.AbstractTask;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;

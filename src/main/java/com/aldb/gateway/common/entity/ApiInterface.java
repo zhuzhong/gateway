@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.aldb.gateway.core;
+package com.aldb.gateway.common.entity;
 
 /**
  * 后端服务接口信息

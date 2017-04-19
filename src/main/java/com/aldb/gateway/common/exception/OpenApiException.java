@@ -1,4 +1,5 @@
-package com.aldb.gateway.exception;
+package com.aldb.gateway.common.exception;
+
 
 public class OpenApiException extends RuntimeException {
     /**

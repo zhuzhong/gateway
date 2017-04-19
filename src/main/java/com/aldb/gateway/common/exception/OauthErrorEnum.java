@@ -1,4 +1,4 @@
-package com.aldb.gateway.exception;
+package com.aldb.gateway.common.exception;
 
 
 public enum OauthErrorEnum {

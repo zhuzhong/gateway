@@ -1,4 +1,4 @@
-package com.aldb.gateway.exception;
+package com.aldb.gateway.common.exception;
 
 public enum OpenApiServiceErrorEnum {
     // TODO:common error errorcode from zz00000 to zz09999

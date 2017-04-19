@@ -1,4 +1,4 @@
-package com.aldb.gateway.resp;
+package com.aldb.gateway.common.resp;
 
 import java.io.Serializable;
 

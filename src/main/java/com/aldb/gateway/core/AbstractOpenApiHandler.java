@@ -12,8 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.aldb.gateway.exception.OauthErrorEnum;
-import com.aldb.gateway.exception.OpenApiException;
+import com.aldb.gateway.common.exception.OauthErrorEnum;
+import com.aldb.gateway.common.exception.OpenApiException;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.service.CacheService;
 import com.aldb.gateway.service.support.DefaultCacheServiceImpl;

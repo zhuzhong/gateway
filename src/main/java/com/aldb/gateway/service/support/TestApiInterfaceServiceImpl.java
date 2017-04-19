@@ -6,7 +6,7 @@ package com.aldb.gateway.service.support;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.aldb.gateway.core.ApiInterface;
+import com.aldb.gateway.common.entity.ApiInterface;
 import com.aldb.gateway.service.ApiInterfaceService;
 import com.aldb.gateway.util.CommonCodeConstants;
 
