@@ -13,6 +13,7 @@ import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 import com.aldb.gateway.service.ApiInterfaceService;
+import com.aldb.gateway.service.CacheService;
 import com.aldb.gateway.util.CommonCodeConstants;
 import com.aldb.gateway.util.UrlUtil;
 
@@ -31,7 +32,12 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
     public void setApiHttpClientService(ApiHttpClientService apiHttpClientService) {
         this.apiHttpClientService = apiHttpClientService;
     }
+    private  CacheService cacheService;
 
+    public void setCacheService(CacheService cacheService) {
+        this.cacheService = cacheService;
+    }
+    
     // step2
     @Override
     public boolean doExcuteBiz(Context context) {

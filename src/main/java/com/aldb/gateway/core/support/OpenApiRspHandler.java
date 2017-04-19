@@ -16,6 +16,7 @@ import com.aldb.gateway.core.OpenApiRouteBean;
 import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
+import com.aldb.gateway.service.CacheService;
 import com.alibaba.fastjson.JSON;
 
 public class OpenApiRspHandler extends AbstractOpenApiHandler {
@@ -54,6 +55,14 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
 		return false;
 	}
 
+	
+    private  CacheService cacheService;
+
+    public void setCacheService(CacheService cacheService) {
+        this.cacheService = cacheService;
+    }
+    
+    
 	private String executePrint(OpenApiHttpRequestBean request) {
 		logger.info("step3...");
 		try {

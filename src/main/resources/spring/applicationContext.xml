@@ -49,30 +49,32 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="parentReq" class="com.aldb.gateway.core.AbstractOpenApiHandler"
-		abstract="true">
-		<!-- <property name="cacheService" ref="cacheServiceImpl"></property> -->
-	</bean>
-	
-	<bean id="serviceReqAdapter" class="com.aldb.gateway.core.support.OpenApiReqAdapter"
-		parent="parentReq" />
 
-	<bean id="serviceReqHandler" class="com.aldb.gateway.core.support.OpenApiReqHandler"
-		parent="parentReq">
+
+	<bean id="serviceReqAdapter" class="com.aldb.gateway.core.support.OpenApiReqAdapter">
+		<property name="cacheService" ref="cacheServiceImpl"></property>
+	</bean>
+
+	<bean id="serviceReqHandler" class="com.aldb.gateway.core.support.OpenApiReqHandler">
+		<property name="cacheService" ref="cacheServiceImpl"></property>
 		<property name="apiInterfaceService" ref="apiInterfaceServiceImpl"></property>
 		<property name="apiHttpClientService" ref="apiHttpClientService"></property>
 	</bean>
 
 
 
-	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler"
-		parent="parentReq" />
+	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler">
+		<property name="cacheService" ref="cacheServiceImpl"></property>
+	</bean>
 	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.ApiHttpClientServiceImpl" />
 
+	<bean id="cacheServiceImpl"
+		class="com.aldb.gateway.service.support.DefaultCacheServiceImpl" />
 	<!-- token服务调用 -->
 	<bean name="openapi.gettoken.HandlerExecuteTemplate"
 		class="com.aldb.gateway.handler.support.OpenApiTokenHandlerExecuteTemplateImpl">
 	</bean>
 	<!-- 不依赖于外部系统即api的服务提供由硬编码完成 -->
-	<bean id="apiInterfaceServiceImpl" class="com.aldb.gateway.service.support.TestApiInterfaceServiceImpl"/>
+	<bean id="apiInterfaceServiceImpl"
+		class="com.aldb.gateway.service.support.TestApiInterfaceServiceImpl" />
 </beans>

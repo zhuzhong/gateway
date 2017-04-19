@@ -74,9 +74,9 @@ public abstract class AbstractOpenApiHandler implements Command {
 
     public abstract boolean doExcuteBiz(Context context);
 
-    protected CacheService cacheService = new DefaultCacheServiceImpl(); // 饿汉模式，注入一个默认的
+   /* protected CacheService cacheService = new DefaultCacheServiceImpl(); // 饿汉模式，注入一个默认的
 
     public void setCacheService(CacheService cacheService) {
         this.cacheService = cacheService;
-    }
+    }*/
 }

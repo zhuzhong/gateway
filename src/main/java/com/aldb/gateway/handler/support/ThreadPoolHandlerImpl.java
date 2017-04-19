@@ -4,7 +4,6 @@
 package com.aldb.gateway.handler.support;
 
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -14,6 +14,7 @@ import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpRequestBean;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 import com.aldb.gateway.service.AuthenticationService;
+import com.aldb.gateway.service.CacheService;
 
 public class OpenApiReqAdapter extends AbstractOpenApiHandler {
 
@@ -49,6 +50,12 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
         return routeBean;
     }
 
+    private  CacheService cacheService;
+
+    public void setCacheService(CacheService cacheService) {
+        this.cacheService = cacheService;
+    }
+    
     private void setError(String errorCode, String errMsg, OpenApiHttpRequestBean requestBean) {
         CommonResponse<String> r = new CommonResponse<String>(false);
         r.setErrorCode(errorCode);
