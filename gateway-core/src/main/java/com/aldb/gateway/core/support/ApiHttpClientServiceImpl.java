@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,79 +53,74 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
 	private static PoolingHttpClientConnectionManager manager = null;
 	private static CloseableHttpClient httpClient = null;
 
-	private ReentrantLock lock = new ReentrantLock();
+	public void init() {
+		initHttpClient();
+	}
+
+	private void initHttpClient() {
+		// 注册访问协议相关的socket工厂
+		Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder
+				.<ConnectionSocketFactory> create()
+				.register("http", PlainConnectionSocketFactory.INSTANCE)
+				.register("https",
+						SSLConnectionSocketFactory.getSystemSocketFactory())
+				.build();
+		// httpclient 工厂
+		HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connFactory = new ManagedHttpClientConnectionFactory(
+				DefaultHttpRequestWriterFactory.INSTANCE,
+				DefaultHttpResponseParserFactory.INSTANCE);
+		// dns解析器
+		DnsResolver dnsResolver = SystemDefaultDnsResolver.INSTANCE;
+		// 创建池化连接管理器
+		manager = new PoolingHttpClientConnectionManager(socketFactoryRegistry,
+				connFactory, dnsResolver);
+		// 默认socket配置
+		SocketConfig defaultSocketConfig = SocketConfig.custom()
+				.setTcpNoDelay(true).build();
+		manager.setDefaultSocketConfig(defaultSocketConfig);
+
+		manager.setMaxTotal(this.maxTotal);// 设置整个连接池的最大连接数
+		manager.setDefaultMaxPerRoute(this.defaultMaxPerRoute);// 每个路由最大连接数
+		manager.setValidateAfterInactivity(this.validateAfterInactivity);
+
+		RequestConfig defaultRequestConfig = RequestConfig.custom()
+				.setConnectTimeout(this.connectionTimeout)
+				// 2s
+				.setSocketTimeout(this.socketTimeout)
+				// 5s
+				.setConnectionRequestTimeout(this.connectionRequestTimeout)
+				.build();
+		httpClient = HttpClients
+				.custom()
+				.setConnectionManager(manager)
+				.setConnectionManagerShared(false)
+				.evictIdleConnections(60, TimeUnit.SECONDS)
+				.evictExpiredConnections()
+				.setConnectionTimeToLive(60, TimeUnit.SECONDS)
+				.setDefaultRequestConfig(defaultRequestConfig)
+				.setConnectionReuseStrategy(
+						DefaultConnectionReuseStrategy.INSTANCE)
+				.setKeepAliveStrategy(
+						DefaultConnectionKeepAliveStrategy.INSTANCE)
+				.setRetryHandler(new DefaultHttpRequestRetryHandler(0, false))
+				.build();
+
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				try {
+					httpClient.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		});
+	}
 
 	private CloseableHttpClient getHttpClient() {
-		if (httpClient != null) {
-			return httpClient;
-		}
-		try {
-			lock.lock();
-
-			// 注册访问协议相关的socket工厂
-			Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder
-					.<ConnectionSocketFactory> create()
-					.register("http", PlainConnectionSocketFactory.INSTANCE)
-					.register("https",
-							SSLConnectionSocketFactory.getSystemSocketFactory())
-					.build();
-			// httpclient 工厂
-			HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connFactory = new ManagedHttpClientConnectionFactory(
-					DefaultHttpRequestWriterFactory.INSTANCE,
-					DefaultHttpResponseParserFactory.INSTANCE);
-			// dns解析器
-			DnsResolver dnsResolver = SystemDefaultDnsResolver.INSTANCE;
-			// 创建池化连接管理器
-			manager = new PoolingHttpClientConnectionManager(
-					socketFactoryRegistry, connFactory, dnsResolver);
-			// 默认socket配置
-			SocketConfig defaultSocketConfig = SocketConfig.custom()
-					.setTcpNoDelay(true).build();
-			manager.setDefaultSocketConfig(defaultSocketConfig);
-
-			manager.setMaxTotal(this.maxTotal);// 设置整个连接池的最大连接数
-			manager.setDefaultMaxPerRoute(this.defaultMaxPerRoute);// 每个路由最大连接数
-			manager.setValidateAfterInactivity(this.validateAfterInactivity);
-
-			RequestConfig defaultRequestConfig = RequestConfig.custom()
-					.setConnectTimeout(this.connectionTimeout)
-					// 2s
-					.setSocketTimeout(this.socketTimeout)
-					// 5s
-					.setConnectionRequestTimeout(this.connectionRequestTimeout)
-					.build();
-			httpClient = HttpClients
-					.custom()
-					.setConnectionManager(manager)
-					.setConnectionManagerShared(false)
-					.evictIdleConnections(60, TimeUnit.SECONDS)
-					.evictExpiredConnections()
-					.setConnectionTimeToLive(60, TimeUnit.SECONDS)
-					.setDefaultRequestConfig(defaultRequestConfig)
-					.setConnectionReuseStrategy(
-							DefaultConnectionReuseStrategy.INSTANCE)
-					.setKeepAliveStrategy(
-							DefaultConnectionKeepAliveStrategy.INSTANCE)
-					.setRetryHandler(
-							new DefaultHttpRequestRetryHandler(0, false))
-					.build();
-
-			Runtime.getRuntime().addShutdownHook(new Thread() {
-				@Override
-				public void run() {
-					try {
-						httpClient.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-
-			});
-
-		} finally {
-			lock.unlock();
-		}
 		return httpClient;
+
 	}
 
 	private int maxTotal = 300;
@@ -161,8 +155,8 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
 	}
 
 	@Override
-	public String doHttpsPost(String url, String content, String contentType) {
-		return null;
+	public String doHttpsPost(String url, String reqData, String contentType) {
+		return doPost(url, reqData, contentType);
 	}
 
 	@Override
@@ -262,38 +256,27 @@ public class ApiHttpClientServiceImpl implements ApiHttpClientService {
 
 	@Override
 	public String doHttpsGet(String webUrl, Map<String, String> paramMap) {
-		
+
 		return doGet(webUrl, paramMap);
 	}
 
-	
-	public static void main(String args[]){
-		ApiHttpClientServiceImpl t=new ApiHttpClientServiceImpl();
-		System.out.println(t.doHttpsGet("https://www.baidu.com/"));
-	}
-	public String doPost(String url, String reqData, String contentType,
-			String params) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Map<String, String> HttpGet(String webUrl, Map paramMap) {
-
-		return null;
-	}
-
-	public Map<String, String> HttpGet(String url, String method, Map paramMap) {
-
-		return null;
-	}
-
-	public String HttpPost(String webUrl, Map paramMap) {
-		return null;
-	}
-
-	public String HttpPost(String url, String method, Map paramMap) {
-
-		return null;
-	}
-
+	/*
+	 * public String doPost(String url, String reqData, String contentType,
+	 * String params) { return null; }
+	 * 
+	 * public Map<String, String> HttpGet(String webUrl, Map paramMap) {
+	 * 
+	 * return null; }
+	 * 
+	 * public Map<String, String> HttpGet(String url, String method, Map
+	 * paramMap) {
+	 * 
+	 * return null; }
+	 * 
+	 * public String HttpPost(String webUrl, Map paramMap) { return null; }
+	 * 
+	 * public String HttpPost(String url, String method, Map paramMap) {
+	 * 
+	 * return null; }
+	 */
 }
