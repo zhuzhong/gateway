@@ -70,11 +70,16 @@
 
 	<bean id="cacheServiceImpl"
 		class="com.aldb.gateway.service.support.DefaultCacheServiceImpl" />
-	<!-- token服务调用 -->
-	<bean name="openapi.gettoken.HandlerExecuteTemplate"
-		class="com.aldb.gateway.handler.support.OpenApiTokenHandlerExecuteTemplateImpl">
-	</bean>
+
+
+
 	<!-- 不依赖于外部系统即api的服务提供由硬编码完成 -->
+	<bean id="idService" class="com.aldb.gateway.service.support.DefaultIdServiceImpl" />
+	<bean id="authenticationService"
+		class="com.aldb.gateway.service.support.DefaultAuthenticationServiceImpl" />
 	<bean id="apiInterfaceServiceImpl"
 		class="com.aldb.gateway.service.support.TestApiInterfaceServiceImpl" />
+
+
+
 </beans>
