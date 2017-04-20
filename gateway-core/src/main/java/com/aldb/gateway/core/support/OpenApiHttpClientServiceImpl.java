@@ -40,16 +40,16 @@ import org.apache.http.impl.conn.SystemDefaultDnsResolver;
 import org.apache.http.impl.io.DefaultHttpRequestWriterFactory;
 import org.apache.http.util.EntityUtils;
 
-import com.aldb.gateway.core.ApiHttpClientService;
+import com.aldb.gateway.core.OpenApiHttpClientService;
 
 /**
  * @author sunff
  *
  */
-public class ApiHttpClientServiceImpl implements ApiHttpClientService {
+public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
 
 	private static Log logger = LogFactory
-			.getLog(ApiHttpClientServiceImpl.class);
+			.getLog(OpenApiHttpClientServiceImpl.class);
 	private static PoolingHttpClientConnectionManager manager = null;
 	private static CloseableHttpClient httpClient = null;
 

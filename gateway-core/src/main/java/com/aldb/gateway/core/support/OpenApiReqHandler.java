@@ -9,7 +9,7 @@ import com.aldb.gateway.common.exception.OauthErrorEnum;
 import com.aldb.gateway.common.exception.OpenApiException;
 import com.aldb.gateway.common.util.CommonCodeConstants;
 import com.aldb.gateway.core.AbstractOpenApiHandler;
-import com.aldb.gateway.core.ApiHttpClientService;
+import com.aldb.gateway.core.OpenApiHttpClientService;
 import com.aldb.gateway.core.OpenApiRouteBean;
 import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
@@ -24,12 +24,12 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
 
     private ApiInterfaceService apiInterfaceService;
 
-    private ApiHttpClientService apiHttpClientService;
+    private OpenApiHttpClientService apiHttpClientService;
     public void setApiInterfaceService(ApiInterfaceService apiInterfaceService) {
         this.apiInterfaceService = apiInterfaceService;
     }
 
-    public void setApiHttpClientService(ApiHttpClientService apiHttpClientService) {
+    public void setApiHttpClientService(OpenApiHttpClientService apiHttpClientService) {
         this.apiHttpClientService = apiHttpClientService;
     }
     private  CacheService cacheService;

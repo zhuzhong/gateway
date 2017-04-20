@@ -66,7 +66,7 @@
 	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
-	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.ApiHttpClientServiceImpl" init-method="init"/>
+	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.OpenApiHttpClientServiceImpl" init-method="init"/>
 
 	<bean id="cacheServiceImpl"
 		class="com.aldb.gateway.service.support.DefaultCacheServiceImpl" />

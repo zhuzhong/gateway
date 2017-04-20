@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Administrator
  *
  */
-public interface ApiHttpClientService {
+public interface OpenApiHttpClientService {
 
     // get请求
     public String doGet(String webUrl);
