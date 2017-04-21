@@ -18,33 +18,33 @@ import com.alibaba.fastjson.JSON;
  */
 public class OpenApiHttpRequestBean {
 
-    private Map<String, String> reqHeader;// ÇëÇóÍ·
+    private Map<String, String> reqHeader;// ï¿½ï¿½ï¿½ï¿½Í·
 
-    private String operationType;// ÄÚ²¿ÇëÇóÀàÐÍ
+    private String operationType;// ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    private String clientAddr; // ¿Í»§¶Ëip
-    private String localAddr;// ·þÎñ¶Ëip
-    private int localPort;// ·þÎñ¶Ë¿Ú
+    private String clientAddr; // ï¿½Í»ï¿½ï¿½ï¿½ip
+    private String localAddr;// ï¿½ï¿½ï¿½ï¿½ï¿½ip
+    private int localPort;// ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
 
-    private Map<String, String> thdApiUrlParams;// µÚÈý·½½Ó¿ÚËùÐè´«ÈëµÄurl²ÎÊý
-    private String serviceReqData; // postÇëÇó·½·¨²ÎÊý
+    private Map<String, String> thdApiUrlParams;// ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½è´«ï¿½ï¿½ï¿½urlï¿½ï¿½ï¿½ï¿½
+    private String serviceReqData; // postï¿½ï¿½ï¿½ó·½·ï¿½ï¿½ï¿½ï¿½ï¿½
     private String requestMethod;
     /**
-     * ÕâÁ½¸öÓÐ²¿·ÖÄÚÈÝÊÇÖØ¸´µÄ£¬ÎªÁËºóÃæµ÷ÓÃµÄ·½±ãËùÒÔÔö¼ÓÁË¡¡queryString²ÎÊý£¬Êµ¼ÊÉÏ²»ÐèÒª
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½Ä£ï¿½Îªï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½ÃµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½queryStringï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½Òª
      */
-    private Map<String, String> serviceGetReqData; // getÇëÇó²ÎÊý
-    private String queryString; // getÇëÇóstring
+    private Map<String, String> serviceGetReqData; // getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private String queryString; // getï¿½ï¿½ï¿½ï¿½string
 
-    private Date requestTime; // ÇëÇóÊ±¼ä
-    private Date responseTime;// ÏìÓ¦Ê±¼ä
-    private Long elapsedTime;// ºÄÊ±
+    private Date requestTime; // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    private Date responseTime;// ï¿½ï¿½Ó¦Ê±ï¿½ï¿½
+    private Long elapsedTime;// ï¿½ï¿½Ê±
 
-    private String reqId; // ÄÚ²¿¶¨ÒåµÄÇëÇóid
+    private String traceId; // ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
 
-    private String printStr; // ÏìÓ¦£¬Õâ¸ö×îÖÕÐ´ÈëresponseµÄÁ÷ÖÐ
+    private String printStr; // ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½responseï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // private String serviceRsp; // ºó¶Ë·þÎñ·µ»ØÖµ
-    // ¹«¹²µÄ²ÎÊý begin ---
+    // private String serviceRsp; // ï¿½ï¿½Ë·ï¿½ï¿½ñ·µ»ï¿½Öµ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ begin ---
     private String appId;
     private String appToken;
     private String apiId;
@@ -56,12 +56,12 @@ public class OpenApiHttpRequestBean {
     private String deviceToken;
     private String userToken;
 
-    // ¹«¹²²ÎÊýend----
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½end----
 
-    // ¹«¹²²¿·ÖÔö¼Ó²ÎÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½
     private String format;
 
-    // ÒµÎñÇëÇó²ÎÊý
+    // Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     // private String request_data;
 
     public Date getRequestTime() {
@@ -228,17 +228,17 @@ public class OpenApiHttpRequestBean {
      * request_data; }
      */
 
-    public String getReqId() {
-        return reqId;
+    public String getTraceId() {
+        return traceId;
     }
 
-    public void setReqId(String reqId) {
-        this.reqId = reqId;
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
     }
 
     public String getRouteBeanKey() {
         if (this.operationType.equals(CommonCodeConstants.API_SERVICE_KEY)) {
-            return CommonCodeConstants.getRouteBeanRedisKey(reqId);
+            return CommonCodeConstants.getRouteBeanRedisKey(traceId);
         }
 
         return CommonCodeConstants.getRouteBeanRedisKey("");

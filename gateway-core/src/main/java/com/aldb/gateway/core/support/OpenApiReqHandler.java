@@ -107,15 +107,15 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
                 // bean.getReqHeader().get(CONTENT_TYPE_KEY);
                 if (url.startsWith("https")) {
                     if (bean.getServiceGetReqData() == null) {
-                        serviceRspData = apiHttpClientService.doHttpsGet(url);
+                        serviceRspData = apiHttpClientService.doHttpsGet(url,bean.getTraceId());
                     } else {
-                        serviceRspData = apiHttpClientService.doHttpsGet(url, bean.getServiceGetReqData());
+                        serviceRspData = apiHttpClientService.doHttpsGet(url, bean.getServiceGetReqData(),bean.getTraceId());
                     }
                 } else {
                     if (bean.getServiceGetReqData() == null) {
-                        serviceRspData = apiHttpClientService.doGet(url);
+                        serviceRspData = apiHttpClientService.doGet(url,bean.getTraceId());
                     } else {
-                        serviceRspData = apiHttpClientService.doGet(url, bean.getServiceGetReqData());
+                        serviceRspData = apiHttpClientService.doGet(url, bean.getServiceGetReqData(),bean.getTraceId());
                     }
                 }
 
@@ -130,9 +130,9 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
 
                 String contentType = bean.getReqHeader().get(CONTENT_TYPE_KEY);
                 if (url.startsWith("https://")) {
-                    serviceRspData = apiHttpClientService.doHttpsPost(url, bean.getServiceReqData(), contentType);
+                    serviceRspData = apiHttpClientService.doHttpsPost(url, bean.getServiceReqData(), contentType,bean.getTraceId());
                 } else {
-                    serviceRspData = apiHttpClientService.doPost(url, bean.getServiceReqData(), contentType);
+                    serviceRspData = apiHttpClientService.doPost(url, bean.getServiceReqData(), contentType,bean.getTraceId());
                 }
                 if ("timeout".equals(serviceRspData)) {
                     logger.error("invoke service: response is null!");

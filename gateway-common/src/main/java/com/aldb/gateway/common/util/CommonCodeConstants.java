@@ -38,36 +38,38 @@ public class CommonCodeConstants {
     public static final String MDF_CHARSET_UTF_8 = "UTF-8";
     public static final String LOSE_MESSAGE_SENDSTATUS_UNSEND = "0";
     public static final String USER_LOGIN_KEY = "BL_OPENAPI_USER_LOGIN";
+    
+    public static final String TRACE_ID="traceId";
 
     /**
-     * ¹«¹²µÄÇëÇó²ÎÊý
-       appId   String  16  ÊÇ   ´ò°üappµÄÎ¨Ò»±êÊ¶  not null
-       appToken    String  32  ÊÇ   appÊÚÈ¨ÁîÅÆ,ÓÃÓÚÊÚÈ¨  not null     
-       apiId   String  64  ÊÇ   API±àÂë¼´apiµÄÎ¨Ò»±êÊ¶ not null 
-       apiVersion  String  8   ÊÇ   API°æ±¾ºÅ not null 
-       timeStamp   String  19  ÊÇ   Ê±¼ä´Á£¬¸ñÊ½Îªyyyy-mm-dd HH:mm:ss£¬Ê±ÇøÎªGMT+8 not null    
-       signMethod  String  8   ÊÇ   Éú³É·þÎñÇëÇóÇ©Ãû×Ö·û´®ËùÊ¹ÓÃµÄËã·¨ÀàÐÍ£¬Ä¿Ç°½öÖ§³ÖMD5£¬ 
-       sign    String  32  ÊÇ   ·þÎñÇëÇóµÄÇ©Ãû×Ö·û´®  not null 
-       deviceToken String  16  ·ñ   Ó²¼þ±êÊ¶token,appÊ×´Î°²×°Ê±·¢·ÅµÄÓ²¼þÎ¨Ò»ÐÔ±êÊ¶
-       userToken   String  16  ·ñ   ÓÃ»§token
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+       appId   String  16  ï¿½ï¿½   ï¿½ï¿½ï¿½appï¿½ï¿½Î¨Ò»ï¿½ï¿½Ê¶  not null
+       appToken    String  32  ï¿½ï¿½   appï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨  not null     
+       apiId   String  64  ï¿½ï¿½   APIï¿½ï¿½ï¿½ë¼´apiï¿½ï¿½Î¨Ò»ï¿½ï¿½Ê¶ not null 
+       apiVersion  String  8   ï¿½ï¿½   APIï¿½æ±¾ï¿½ï¿½ not null 
+       timeStamp   String  19  ï¿½ï¿½   Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Îªyyyy-mm-dd HH:mm:ssï¿½ï¿½Ê±ï¿½ï¿½ÎªGMT+8 not null    
+       signMethod  String  8   ï¿½ï¿½   ï¿½ï¿½É·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ã·¨ï¿½ï¿½ï¿½Í£ï¿½Ä¿Ç°ï¿½ï¿½Ö§ï¿½ï¿½MD5ï¿½ï¿½ 
+       sign    String  32  ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½ï¿½Ö·ï¿½  not null 
+       deviceToken String  16  ï¿½ï¿½   Ó²ï¿½ï¿½ï¿½ï¿½Ê¶token,appï¿½×´Î°ï¿½×°Ê±ï¿½ï¿½ï¿½Åµï¿½Ó²ï¿½ï¿½Î¨Ò»ï¿½Ô±ï¿½Ê¶
+       userToken   String  16  ï¿½ï¿½   ï¿½Ã»ï¿½token
      * 
-     * ÇëÇó¸ñÊ½: 
-     * 1.¶ÔÓÚpost·½·¨: { "publAttrs":{}, "busiAttrs":{} }
-     * 2.¶ÔÓÚget·½·¨: ¹«¹²²ÎÊý¼°ÒµÎñ²ÎÊýÖ±½Ó´®½ÓÔÚurlµØÖ·ÉÏ ¶ÔÓÚºó¶ËÊ¹ÓÃrestful¸ñÊ½µÄget£¬ÔÚ½øÐÐ·þÎñ×¢²áÊ±Ê¹ÓÃ·½·¨Ãû
-     * user/1000 ¶ÔÓ¦µÄ×¢²á¸ñÊ½ user/{userId} 
-     * È»ºóÇ°¶ËÇëÇëÊ¹ÓÃµÄ²ÎÊýÃûÎªuserId,
-     * Ç°¶ËÇëÇó¸ñÊ½ GET
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ê½: 
+     * 1.ï¿½ï¿½ï¿½ï¿½postï¿½ï¿½ï¿½ï¿½: { "publAttrs":{}, "busiAttrs":{} }
+     * 2.ï¿½ï¿½ï¿½ï¿½getï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½urlï¿½ï¿½Ö·ï¿½ï¿½ ï¿½ï¿½ï¿½Úºï¿½ï¿½Ê¹ï¿½ï¿½restfulï¿½ï¿½Ê½ï¿½ï¿½getï¿½ï¿½ï¿½Ú½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ê±Ê¹ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½
+     * user/1000 ï¿½ï¿½Ó¦ï¿½ï¿½×¢ï¿½ï¿½ï¿½Ê½ user/{userId} 
+     * È»ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ÃµÄ²ï¿½ï¿½ï¿½ï¿½ï¿½ÎªuserId,
+     * Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ GET
      * /serice.htm?userId=1000 
-     * ¶ø¶ÔÓÚÊ¹ÓÃ·Çrestful¸ñÊ½µÄget·½·¨Ö±½Ó½«²ÎÊý´®ÔÚurlµØÖ·ÉÏ¾Í¿ÉÒÔÁË
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã·ï¿½restfulï¿½ï¿½Ê½ï¿½ï¿½getï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½urlï¿½ï¿½Ö·ï¿½Ï¾Í¿ï¿½ï¿½ï¿½ï¿½ï¿½
      */
 
     public static String pub_attrs = "publAttrs";
     public static String busi_attrs = "busiAttrs";
     public static String content_type = "application/json";
-    // Ð­ÒéµÄ¹«¹²²ÎÊý
+    // Ð­ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public static String app_id = "appId";
     public static String app_token = "appToken";
-    public static String api_id = "service"; // ±ØÐë
+    public static String api_id = "service"; // ï¿½ï¿½ï¿½ï¿½
     public static String version = "version";
     public static String time_stamp = "timeStamp";
     public static String sign_method = "signMethod";

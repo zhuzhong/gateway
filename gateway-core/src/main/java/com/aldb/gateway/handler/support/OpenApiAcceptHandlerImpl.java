@@ -33,15 +33,15 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler, Applicati
 
     private static Log logger = LogFactory.getLog(OpenApiAcceptHandlerImpl.class);
     @Autowired
-    private IdService idGenerator;
+    private IdService idService;
 
     @Override
     public void acceptRequest(HttpServletRequest request, HttpServletResponse response) {
 
         OpenApiHttpRequestBean reqBean = (OpenApiHttpRequestBean) request
                 .getAttribute(CommonCodeConstants.REQ_BEAN_KEY);
-        String reqId = idGenerator.genInnerRequestId();
-        reqBean.setReqId(reqId);
+        String traceId = idService.genInnerRequestId();
+        reqBean.setTraceId(traceId);
         request.setAttribute(CommonCodeConstants.REQ_BEAN_KEY, reqBean); // 重新设置bean
         // 将当前请求放入线程池处理，若超过线程池最大处理数则抛出reach queue max deepth 异常
         addTask2Pool(response, new OpenApiHttpSessionBean(reqBean));
