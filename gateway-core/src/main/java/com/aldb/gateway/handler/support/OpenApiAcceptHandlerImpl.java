@@ -23,6 +23,7 @@ import com.aldb.gateway.protocol.OpenApiHttpReqTask;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 import com.aldb.gateway.service.IdService;
 import com.aldb.gateway.util.OpenApiResponseUtils;
+import com.alibaba.fastjson.JSON;
 
 /**
  * @author Administrator
@@ -43,6 +44,9 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler, Applicati
         String traceId = idService.genInnerRequestId();
         reqBean.setTraceId(traceId);
         request.setAttribute(CommonCodeConstants.REQ_BEAN_KEY, reqBean); // 重新设置bean
+        if (logger.isInfoEnabled()) {
+            logger.info(String.format("requestId=%s request begin,reqeust=%s", traceId, JSON.toJSONString(reqBean)));
+        }
         // 将当前请求放入线程池处理，若超过线程池最大处理数则抛出reach queue max deepth 异常
         addTask2Pool(response, new OpenApiHttpSessionBean(reqBean));
     }
