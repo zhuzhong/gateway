@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.aldb.gateway.common.OpenApiHttpRequestBean;
 import com.aldb.gateway.common.util.CommonCodeConstants;
-import com.aldb.gateway.util.NetworkUtil;
+import com.aldb.gateway.common.util.NetworkUtil;
 import com.alibaba.fastjson.JSONObject;
 
 /**
