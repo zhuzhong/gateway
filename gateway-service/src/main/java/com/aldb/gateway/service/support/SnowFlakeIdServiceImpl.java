@@ -13,7 +13,7 @@ import com.sohu.idcenter.IdWorker;
  * @author sunff
  *
  */
-public class SnowFlakeIdService implements IdService, InitializingBean {
+public class SnowFlakeIdServiceImpl implements IdService, InitializingBean {
 
 	private IdWorker idWorker;
 
