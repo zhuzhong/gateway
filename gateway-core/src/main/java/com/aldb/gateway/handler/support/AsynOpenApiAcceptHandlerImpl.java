@@ -34,7 +34,16 @@ public class AsynOpenApiAcceptHandlerImpl implements OpenApiAcceptHandler, Appli
 
     private ThreadPoolTaskExecutor taskExecutor;
     private IdService idService;
-    private static Log logger = LogFactory.getLog(OpenApiAcceptHandlerImpl.class);
+
+    public void setTaskExecutor(ThreadPoolTaskExecutor taskExecutor) {
+        this.taskExecutor = taskExecutor;
+    }
+
+    public void setIdService(IdService idService) {
+        this.idService = idService;
+    }
+
+    private static Log logger = LogFactory.getLog(AsynOpenApiAcceptHandlerImpl.class);
 
     @Override
     public void acceptRequest(HttpServletRequest request, HttpServletResponse response) {

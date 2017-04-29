@@ -28,11 +28,11 @@
 		<property name="taskExecutor" ref="taskExecutor" />
 	</bean>-->
 	
-	<bean id="openApiAcceptHandlerImpl"
+<!-- -->	<bean id="openApiAcceptHandlerImpl"
 		class="com.aldb.gateway.handler.support.OpenApiAcceptHandlerImpl">
 		<property name="idService" ref="idService" />
 		<property name="poolHandler" ref="poolHandler" />
-	</bean>
+	</bean> 
 	<bean id="poolHandler" class="com.aldb.gateway.handler.support.ThreadPoolHandlerImpl">
 		<property name="taskExecutor" ref="taskExecutor" />
 	</bean>

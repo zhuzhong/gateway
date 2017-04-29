@@ -19,6 +19,7 @@
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -27,6 +28,7 @@
 			<param-name>forceEncoding</param-name>
 			<param-value>true</param-value>
 		</init-param>
+		
 	</filter>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
@@ -37,6 +39,7 @@
 	<filter>
 		<filter-name>requestFilter</filter-name>
 		<filter-class>com.aldb.gateway.filter.GateWayFilter</filter-class>
+		<async-supported>true</async-supported>
 	</filter>
 
 	<filter-mapping>
@@ -54,6 +57,7 @@
 			<param-value>classpath*:spring/spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
