@@ -21,10 +21,16 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan> -->
 
+<!-- 异步处理servlet3 
+	<bean id="openApiAcceptHandlerImpl"
+		class="com.aldb.gateway.handler.support.AsynOpenApiAcceptHandlerImpl">
+		<property name="idService" ref="idService" />
+		<property name="taskExecutor" ref="taskExecutor" />
+	</bean>-->
+	
 	<bean id="openApiAcceptHandlerImpl"
 		class="com.aldb.gateway.handler.support.OpenApiAcceptHandlerImpl">
 		<property name="idService" ref="idService" />
-		<property name="asynAcceptReqeust" value="false" />
 		<property name="poolHandler" ref="poolHandler" />
 	</bean>
 	<bean id="poolHandler" class="com.aldb.gateway.handler.support.ThreadPoolHandlerImpl">
