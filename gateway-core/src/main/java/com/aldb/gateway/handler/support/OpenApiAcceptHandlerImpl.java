@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Service;
 
 import com.aldb.gateway.common.OpenApiHttpRequestBean;
 import com.aldb.gateway.common.util.CommonCodeConstants;
@@ -27,18 +25,29 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * @author Administrator
- *
+ * 
  */
-@Service
+
 public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler, ApplicationContextAware {
 
     private static Log logger = LogFactory.getLog(OpenApiAcceptHandlerImpl.class);
-    @Autowired
     private IdService idService;
+
+    private ThreadPoolHandler poolHandler;
+    
+    
+    public void setIdService(IdService idService) {
+        this.idService = idService;
+    }
+
+   
+
+    public void setPoolHandler(ThreadPoolHandler poolHandler) {
+        this.poolHandler = poolHandler;
+    }
 
     @Override
     public void acceptRequest(HttpServletRequest request, HttpServletResponse response) {
-
         OpenApiHttpRequestBean reqBean = (OpenApiHttpRequestBean) request
                 .getAttribute(CommonCodeConstants.REQ_BEAN_KEY);
         String traceId = idService.genInnerRequestId();
@@ -51,8 +60,7 @@ public class OpenApiAcceptHandlerImpl implements OpenApiAcceptHandler, Applicati
         addTask2Pool(response, new OpenApiHttpSessionBean(reqBean));
     }
 
-    @Autowired
-    private ThreadPoolHandler poolHandler;
+    
 
     private void addTask2Pool(HttpServletResponse response, OpenApiHttpSessionBean sessionBean) {
         long currentTime = System.currentTimeMillis();

@@ -7,10 +7,8 @@ import java.util.concurrent.FutureTask;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskRejectedException;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.stereotype.Service;
 
 import com.aldb.gateway.common.exception.OpenApiException;
 import com.aldb.gateway.common.exception.OpenApiServiceErrorEnum;
@@ -20,15 +18,17 @@ import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 
 /**
  * @author Administrator
- *
+ * 
  */
-@Service
 public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
 
     private static Log logger = LogFactory.getLog(ThreadPoolHandlerImpl.class);
 
-    @Autowired
     private ThreadPoolTaskExecutor taskExecutor;
+
+    public void setTaskExecutor(ThreadPoolTaskExecutor taskExecutor) {
+        this.taskExecutor = taskExecutor;
+    }
 
     @Override
     public Object addTask(AbstractTask task) {
@@ -36,12 +36,13 @@ public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
             FutureTask<OpenApiHttpSessionBean> tsFutre = new FutureTask<OpenApiHttpSessionBean>(task);
             taskExecutor.execute(tsFutre);
             while (!tsFutre.isDone()) {
-                /*try {
-                    // logger.debug("waitting for result");
-                    TimeUnit.MICROSECONDS.sleep(200);
-                } catch (InterruptedException e) {
-                    logger.error(String.format("exception happend on executing task with ", e.getMessage()));
-                }*/
+                /*
+                 * try { // logger.debug("waitting for result");
+                 * TimeUnit.MICROSECONDS.sleep(200); } catch
+                 * (InterruptedException e) { logger.error(String.format(
+                 * "exception happend on executing task with ",
+                 * e.getMessage())); }
+                 */
             }
             return tsFutre.get();
         } catch (TaskRejectedException e) {

@@ -16,12 +16,20 @@
 	<context:property-placeholder
 		location="classpath*:config/thread_pool.properties" />
 
-
-
-	<context:component-scan base-package="com.aldb.gateway">
+<!-- 	<context:component-scan base-package="com.aldb.gateway">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
+	</context:component-scan> -->
+
+	<bean id="openApiAcceptHandlerImpl"
+		class="com.aldb.gateway.handler.support.OpenApiAcceptHandlerImpl">
+		<property name="idService" ref="idService" />
+		<property name="asynAcceptReqeust" value="false" />
+		<property name="poolHandler" ref="poolHandler" />
+	</bean>
+	<bean id="poolHandler" class="com.aldb.gateway.handler.support.ThreadPoolHandlerImpl">
+		<property name="taskExecutor" ref="taskExecutor" />
+	</bean>
 	<!-- 配置线程池 -->
 	<bean id="taskExecutor"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
@@ -66,7 +74,9 @@
 	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
-	<bean id="apiHttpClientService" class="com.aldb.gateway.core.support.OpenApiHttpClientServiceImpl" init-method="init"/>
+	<bean id="apiHttpClientService"
+		class="com.aldb.gateway.core.support.OpenApiHttpClientServiceImpl"
+		init-method="init" />
 
 	<bean id="cacheServiceImpl"
 		class="com.aldb.gateway.service.support.DefaultCacheServiceImpl" />

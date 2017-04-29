@@ -29,7 +29,6 @@ public class GateWayController {
     public void service(HttpServletRequest request, HttpServletResponse response) {
         this.acceptHandler.acceptRequest(request, response);
     }
-    
     //这个供内部使用
     @RequestMapping(value = "getToken",method = {RequestMethod.POST,RequestMethod.GET})
     public void getToken(HttpServletRequest request, HttpServletResponse response) {

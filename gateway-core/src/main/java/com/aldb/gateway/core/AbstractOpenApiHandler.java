@@ -15,8 +15,6 @@ import org.apache.commons.logging.LogFactory;
 import com.aldb.gateway.common.OpenApiHttpRequestBean;
 import com.aldb.gateway.common.exception.OauthErrorEnum;
 import com.aldb.gateway.common.exception.OpenApiException;
-import com.aldb.gateway.service.CacheService;
-import com.aldb.gateway.service.support.DefaultCacheServiceImpl;
 
 public abstract class AbstractOpenApiHandler implements Command {
 

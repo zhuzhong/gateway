@@ -17,5 +17,5 @@ public interface OpenApiAcceptHandler {
      * @param response
      */
     void acceptRequest(HttpServletRequest request, HttpServletResponse response);
-
+    
 }
