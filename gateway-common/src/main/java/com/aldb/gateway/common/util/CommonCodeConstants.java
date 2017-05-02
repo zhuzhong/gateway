@@ -50,14 +50,20 @@ public class CommonCodeConstants {
        sign    String  32  是   服务请求的签名字符串  not null 
        deviceToken String  16  否   硬件标识token,app首次安装时发放的硬件唯一性标识
        userToken   String  16  否   用户token
+       
+       
+       application/xxxx-wwww.form
+       
      * 
      * 请求格式: 
-     * 1.对于post方法: { "publAttrs":{}, "busiAttrs":{} }
+     * 1.对于post方法: { "publAttrs":{}, "busiAttrs":{} }  //content_type:application/json
+     * {}
+     * 
      * 2.对于get方法: 公共参数及业务参数直接串接在url地址上 对于后端使用restful格式的get，在进行服务注册时使用方法名
      * user/1000 对应的注册格式 user/{userId} 
      * 然后前端请请使用的参数名为userId,
      * 前端请求格式 GET
-     * /serice.htm?userId=1000 
+     * /gateway.do 
      * 而对于使用非restful格式的get方法直接将参数串在url地址上就可以了
      */
 
