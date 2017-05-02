@@ -1,7 +1,6 @@
 package com.aldb.gateway.util;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.aldb.gateway.common.OpenApiHttpRequestBean;
+import com.alibaba.fastjson.JSON;
 
 public class OpenApiResponseUtils {
 
@@ -40,6 +40,9 @@ public class OpenApiResponseUtils {
         /*finally {
             sessionMap.remove(requestBean.getReqId());
         }*/
+        if(logger.isInfoEnabled()){
+        	logger.info(String.format("requestId=%s request end,request=%s", requestBean.getTraceId(),JSON.toJSONString(requestBean)));
+        }
     }
 
     private static void setResponseHeader(HttpServletResponse response, Map<String, String> httpHeader) {

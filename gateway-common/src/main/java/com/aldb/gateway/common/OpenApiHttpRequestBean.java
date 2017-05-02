@@ -3,6 +3,7 @@
  */
 package com.aldb.gateway.common;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,35 +17,32 @@ import com.alibaba.fastjson.JSON;
  * @author Administrator
  *
  */
-public class OpenApiHttpRequestBean {
+public class OpenApiHttpRequestBean implements Serializable{
 
-    private Map<String, String> reqHeader;// 请求头
+    private Map<String, String> reqHeader;//
 
-    private String operationType;// 内部请求类型
+    private String operationType;// 
 
-    private String clientAddr; // 客户端ip
-    private String localAddr;// 服务端ip
-    private int localPort;// 服务端口
+    private String clientAddr; // 
+    private String localAddr;// 
+    private int localPort;// 
 
-    private Map<String, String> thdApiUrlParams;// 第三方接口所需传入的url参数
-    private String serviceReqData; // post请求方法参数
+    private Map<String, String> thdApiUrlParams;//
+    private String serviceReqData; // 
     private String requestMethod;
-    /**
-     * 这两个有部分内容是重复的，为了后面调用的方便所以增加了　queryString参数，实际上不需要
-     */
-    private Map<String, String> serviceGetReqData; // get请求参数
-    private String queryString; // get请求string
+  
+    private Map<String, String> serviceGetReqData; //
+    private String queryString; // 
 
-    private Date requestTime; // 请求时间
-    private Date responseTime;// 响应时间
-    private Long elapsedTime;// 耗时
+    private Date requestTime; //
+    private Date responseTime;// 
+    private Long elapsedTime;// 
 
-    private String reqId; // 内部定义的请求id
+    private String traceId; //
 
-    private String printStr; // 响应，这个最终写入response的流中
-
-    // private String serviceRsp; // 后端服务返回值
-    // 公共的参数 begin ---
+    private String printStr; //
+    // private String serviceRsp; // 值
+    // begin ---
     private String appId;
     private String appToken;
     private String apiId;
@@ -56,12 +54,12 @@ public class OpenApiHttpRequestBean {
     private String deviceToken;
     private String userToken;
 
-    // 公共参数end----
+    
 
-    // 公共部分增加参数
+    
     private String format;
 
-    // 业务请求参数
+ 
     // private String request_data;
 
     public Date getRequestTime() {
@@ -228,17 +226,17 @@ public class OpenApiHttpRequestBean {
      * request_data; }
      */
 
-    public String getReqId() {
-        return reqId;
+    public String getTraceId() {
+        return traceId;
     }
 
-    public void setReqId(String reqId) {
-        this.reqId = reqId;
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
     }
 
     public String getRouteBeanKey() {
         if (this.operationType.equals(CommonCodeConstants.API_SERVICE_KEY)) {
-            return CommonCodeConstants.getRouteBeanRedisKey(reqId);
+            return CommonCodeConstants.getRouteBeanRedisKey(traceId);
         }
 
         return CommonCodeConstants.getRouteBeanRedisKey("");

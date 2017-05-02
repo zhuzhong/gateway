@@ -30,7 +30,7 @@ public class OpenApiReqAdapter extends AbstractOpenApiHandler {
         }
         logger.info("init 路由bean ");
         routeBean = new OpenApiRouteBean();
-        routeBean.setReqId(request.getReqId()); // 内部请求id,利于跟踪
+        routeBean.setTraceId(request.getTraceId()); // 内部请求id,利于跟踪
         routeBean.setApiId(request.getApiId());// 请求api_id
         routeBean.setVersion(request.getVersion());// api_version
         routeBean.setReqHeader(request.getReqHeader());// 请求头

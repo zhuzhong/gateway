@@ -3,6 +3,7 @@
  */
 package com.aldb.gateway.core;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Properties;
 
@@ -10,9 +11,9 @@ import java.util.Properties;
  * @author Administrator
  *
  */
-public class OpenApiRouteBean {
+public class OpenApiRouteBean implements Serializable{
 
-    private String reqId; // 内部定义的请求id
+    private String traceId; // 内部定义的请求id
 
     private String apiId;
     private String requestMethod;
@@ -93,12 +94,12 @@ public class OpenApiRouteBean {
         this.operationType = operationType;
     }
 
-    public String getReqId() {
-        return reqId;
+    public String getTraceId() {
+        return traceId;
     }
 
-    public void setReqId(String reqId) {
-        this.reqId = reqId;
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
     }
 
     public String getApiId() {

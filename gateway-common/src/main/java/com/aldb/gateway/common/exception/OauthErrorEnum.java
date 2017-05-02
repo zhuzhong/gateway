@@ -17,7 +17,7 @@ public enum OauthErrorEnum {
 	INVALID_TOKEN("zz10012", "invalid token"),
 	ACCESS_DENIED("zz10013", "access denied"),
 	API_ID("zz10014", "apiId is required"),
-	ACCESSTOKEN("zz10015", "access_token is required"),
+	ACCESSTOKEN("zz10015", "appToken is required"),
 	INVALID_SERVICENAME("zz10016", "invalid service_name"),
 	CONTENTTYPE("zz10017", "httprequest header content-type is required"),
 	INVALID_CONTENTTYPE("zz10018", "invalid content-type,just application/xml or application/json"),

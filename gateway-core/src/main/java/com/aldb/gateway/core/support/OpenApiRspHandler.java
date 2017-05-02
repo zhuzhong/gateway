@@ -1,15 +1,11 @@
 package com.aldb.gateway.core.support;
 
-import java.util.Map;
-
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.cache.Cache;
 
 import com.aldb.gateway.common.OpenApiHttpRequestBean;
-import com.aldb.gateway.common.exception.OauthErrorEnum;
 import com.aldb.gateway.common.exception.OpenApiException;
 import com.aldb.gateway.common.exception.OpenApiServiceErrorEnum;
 import com.aldb.gateway.core.AbstractOpenApiHandler;
@@ -17,7 +13,6 @@ import com.aldb.gateway.core.OpenApiRouteBean;
 import com.aldb.gateway.protocol.OpenApiContext;
 import com.aldb.gateway.protocol.OpenApiHttpSessionBean;
 import com.aldb.gateway.service.CacheService;
-import com.alibaba.fastjson.JSON;
 
 public class OpenApiRspHandler extends AbstractOpenApiHandler {
 	private static final Log logger = LogFactory
