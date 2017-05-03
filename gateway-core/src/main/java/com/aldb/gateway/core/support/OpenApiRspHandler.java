@@ -72,7 +72,7 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
 			}
 			logger.error("executePrint error, " + e.getMessage());
 			// return XmlUtils.bean2xml((ex.getShortMsg("unknow")));
-			return "errrrrrrrrrrrrrr";
+			return "error";
 		} finally {
 			// 从redis移除当前routebean
 			String routeBeanKey = request.getRouteBeanKey();
