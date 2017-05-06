@@ -93,7 +93,7 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
             logger.info(String.format("{serviceId:%s ,version:%s }", bean.getApiId(), bean.getVersion()));
             ApiInterface apiInfo = apiInterfaceService.findOne(bean.getApiId(), bean.getVersion());
             if (apiInfo == null) {
-                return String.format("该apiId=%s,version=%s已下线", bean.getApiId(), bean.getVersion());
+                return String.format("this apiId=%s,version=%s has off line,please use another one", bean.getApiId(), bean.getVersion());
             }
             if (CommonCodeConstants.REQUEST_METHOD.GET.name().equalsIgnoreCase(requestMethod)) { // get请求
                 String url = apiInfo.getUrl();

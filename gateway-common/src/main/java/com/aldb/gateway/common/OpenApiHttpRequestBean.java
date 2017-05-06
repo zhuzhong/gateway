@@ -15,28 +15,33 @@ import com.alibaba.fastjson.JSON;
  * 
  * 
  * @author Administrator
- *
+ * 
  */
-public class OpenApiHttpRequestBean implements Serializable{
+public class OpenApiHttpRequestBean implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     private Map<String, String> reqHeader;//
 
-    private String operationType;// 
+    private String operationType;//
 
-    private String clientAddr; // 
-    private String localAddr;// 
-    private int localPort;// 
+    private String clientAddr; //
+    private String localAddr;//
+    private int localPort;//
 
     private Map<String, String> thdApiUrlParams;//
-    private String serviceReqData; // 
+    private String serviceReqData; //
     private String requestMethod;
-  
+
     private Map<String, String> serviceGetReqData; //
-    private String queryString; // 
+    private String queryString; //
 
     private Date requestTime; //
-    private Date responseTime;// 
-    private Long elapsedTime;// 
+    private Date responseTime;//
+    private Long elapsedTime;//
 
     private String traceId; //
 
@@ -47,19 +52,15 @@ public class OpenApiHttpRequestBean implements Serializable{
     private String appToken;
     private String apiId;
     private String version;
-   
+
     private String timeStamp;
     private String signMethod;
     private String sign;
     private String deviceToken;
     private String userToken;
 
-    
-
-    
     private String format;
 
- 
     // private String request_data;
 
     public Date getRequestTime() {
@@ -102,10 +103,10 @@ public class OpenApiHttpRequestBean implements Serializable{
         this.serviceGetReqData.put(key, value);
     }
 
-   
-   /* public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
-        this.serviceGetReqData = serviceGetReqData;
-    }*/
+    /*
+     * public void setServiceGetReqData(Map<String, Object> serviceGetReqData) {
+     * this.serviceGetReqData = serviceGetReqData; }
+     */
 
     public String getRequestMethod() {
         return requestMethod;

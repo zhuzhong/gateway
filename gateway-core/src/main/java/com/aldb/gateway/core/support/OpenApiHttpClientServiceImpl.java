@@ -172,6 +172,7 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
         return body;
     }
 
+    
     @Override
     public String doGet(String webUrl, String traceId) {
         logger.info(String.format("run doGet method,weburl=%s", webUrl));
@@ -233,6 +234,11 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
         return prestr;
     }
 
+public static void main(String args[]){
+     OpenApiHttpClientServiceImpl p=new OpenApiHttpClientServiceImpl();
+     p.init();
+     System.out.println(p.doHttpsGet("https://www.baidu.com/","110"));
+    }
     @Override
     public String doHttpsGet(String webUrl, String traceId) { // https 协议
         return doGet(webUrl, traceId);

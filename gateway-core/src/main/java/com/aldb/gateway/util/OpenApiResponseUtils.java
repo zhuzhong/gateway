@@ -31,6 +31,8 @@ public class OpenApiResponseUtils {
         setResponseHeader(response, requestBean.getReqHeader());
         try {
             PrintWriter writer = response.getWriter();
+            String body=requestBean.getPrintStr();
+            logger.info(String.format("body==%s",body));
             writer.print(requestBean.getPrintStr());
             writer.flush();
             writer.close();

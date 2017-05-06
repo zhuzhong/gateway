@@ -52,6 +52,28 @@ public class TestApiInterfaceServiceImpl implements ApiInterfaceService {
             aif.setRequestMethod(CommonCodeConstants.REQUEST_METHOD.GET.name());
             // aif.setTargetUrl("/");
             return aif;
+        }else  if (apiId.equals("4")) {
+
+            ApiInterface aif = new ApiInterface();
+            aif.setApiId(apiId);
+            aif.setVersion(version);
+            aif.setProtocol("https");
+            aif.setHostAddress("www.baidu.com");
+            // aif.setPort(null);
+            aif.setRequestMethod(CommonCodeConstants.REQUEST_METHOD.GET.name());
+            // aif.setTargetUrl("/");
+            return aif;
+        }else  if (apiId.equals("5")) {
+
+            ApiInterface aif = new ApiInterface();
+            aif.setApiId(apiId);
+            aif.setVersion(version);
+            aif.setProtocol("https");
+            aif.setHostAddress("www.jd.com");
+            // aif.setPort(null);
+            aif.setRequestMethod(CommonCodeConstants.REQUEST_METHOD.GET.name());
+            // aif.setTargetUrl("/");
+            return aif;
         }
         return null;
 

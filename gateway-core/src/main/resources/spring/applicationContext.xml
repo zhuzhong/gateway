@@ -21,18 +21,18 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan> -->
 
-<!-- 异步处理servlet3 
+<!-- 异步处理servlet3 -->
 	<bean id="openApiAcceptHandlerImpl"
 		class="com.aldb.gateway.handler.support.AsynOpenApiAcceptHandlerImpl">
 		<property name="idService" ref="idService" />
 		<property name="taskExecutor" ref="taskExecutor" />
-	</bean>-->
+	</bean>
 	
-<!-- -->	<bean id="openApiAcceptHandlerImpl"
+<!-- 	<bean id="openApiAcceptHandlerImpl"
 		class="com.aldb.gateway.handler.support.OpenApiAcceptHandlerImpl">
 		<property name="idService" ref="idService" />
 		<property name="poolHandler" ref="poolHandler" />
-	</bean> 
+	</bean> -->
 	<bean id="poolHandler" class="com.aldb.gateway.handler.support.ThreadPoolHandlerImpl">
 		<property name="taskExecutor" ref="taskExecutor" />
 	</bean>
@@ -80,9 +80,13 @@
 	<bean id="serviceRspHandler" class="com.aldb.gateway.core.support.OpenApiRspHandler">
 		<property name="cacheService" ref="cacheServiceImpl"></property>
 	</bean>
-	<bean id="apiHttpClientService"
+	<!-- <bean id="apiHttpClientService"
 		class="com.aldb.gateway.core.support.OpenApiHttpClientServiceImpl"
-		init-method="init" />
+		init-method="init" />-->
+		
+	<bean id="apiHttpClientService"
+		class="com.aldb.gateway.core.support.OpenApiHttpAsynClientServiceImpl"
+		init-method="init" /> 
 
 	<bean id="cacheServiceImpl"
 		class="com.aldb.gateway.service.support.DefaultCacheServiceImpl" />
