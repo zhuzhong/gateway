@@ -13,8 +13,8 @@ import java.util.Map;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.z.gateway.common.OpenApiHttpRequestBean;
@@ -27,7 +27,7 @@ import com.z.gateway.common.util.NetworkUtil;
  */
 public class OpenApiServiceParamValidateInterceptor extends AbstractOpenApiValidateInterceptor {
 
-    private static final Log log = LogFactory.getLog(OpenApiServiceParamValidateInterceptor.class);
+    private static final Logger log = LoggerFactory.getLogger(OpenApiServiceParamValidateInterceptor.class);
 
     /**
      * 根据请求的协议进行解析
@@ -116,7 +116,7 @@ public class OpenApiServiceParamValidateInterceptor extends AbstractOpenApiValid
     private void parsePostMethod(HttpServletRequest request, OpenApiHttpRequestBean bean) throws IOException {
 
         String contentType = request.getContentType();
-        if (CommonCodeConstants.content_type.equalsIgnoreCase(contentType)) { // 是son格式的，我们能够处理
+        if (CommonCodeConstants.content_type.equalsIgnoreCase(contentType)) { // 是json格式的，我们能够处理
 
             int len = request.getContentLength();
             ServletInputStream iii = request.getInputStream();

@@ -124,7 +124,7 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/gateway**" />
+			<mvc:mapping path="/index**" />
 			<bean
 				class="com.z.gateway.interceptor.OpenApiServiceParamValidateInterceptor" />
 		</mvc:interceptor>

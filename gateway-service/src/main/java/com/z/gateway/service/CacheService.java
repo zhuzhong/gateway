@@ -8,6 +8,7 @@ package com.z.gateway.service;
  * @author Administrator
  *
  */
+@Deprecated
 public interface CacheService {
 
     

@@ -2,8 +2,8 @@ package com.z.gateway.core.support;
 
 import org.apache.commons.chain.Context;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.z.gateway.common.OpenApiHttpRequestBean;
 import com.z.gateway.common.exception.OpenApiException;
@@ -14,9 +14,10 @@ import com.z.gateway.protocol.OpenApiContext;
 import com.z.gateway.protocol.OpenApiHttpSessionBean;
 import com.z.gateway.service.CacheService;
 
+
+@Deprecated
 public class OpenApiRspHandler extends AbstractOpenApiHandler {
-	private static final Log logger = LogFactory
-			.getLog(OpenApiRspHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(OpenApiRspHandler.class);
 
 	/*
 	 * @Override public boolean execute(Context context) {
@@ -24,40 +25,34 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
 	 */
 
 	@Override
-	public boolean doExcuteBiz(Context context) {
+	protected boolean doExcuteBiz(Context context) {
 		logger.info("step2----");
 		OpenApiContext blCtx = (OpenApiContext) context;
-		OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) blCtx
-				.getOpenApiHttpSessionBean();
+		OpenApiHttpSessionBean httpSessionBean = (OpenApiHttpSessionBean) blCtx.getOpenApiHttpSessionBean();
 		OpenApiHttpRequestBean request = httpSessionBean.getRequest();
 		long currentTime = System.currentTimeMillis();
-		if (logger.isDebugEnabled()) {
-			logger.info(String.format(
-					"begin run doExecuteBiz,currentTime=%d,httpSessonBean=%s",
-					currentTime, httpSessionBean));
-		}
-		String printStr = this.executePrint(request);
-		request.setPrintStr(printStr);
+		
+			logger.debug("begin run doExecuteBiz,currentTime={},httpSessonBean={}", currentTime,
+					httpSessionBean);
+		
+		/*String printStr = this.executePrint(request);
+		request.setPrintStr(printStr);*/
 
-		if (logger.isDebugEnabled()) {
-			logger.info(String
-					.format("end run doExecuteBiz,currentTime=%d,elapase_time=%d milseconds,httpSessonBean=%s",
-							System.currentTimeMillis(),
-							(System.currentTimeMillis() - currentTime),
-							httpSessionBean));
-		}
+		
+			logger.debug(
+					"end run doExecuteBiz,currentTime={},elapase_time={} milseconds,httpSessonBean={}",
+							System.currentTimeMillis(), (System.currentTimeMillis() - currentTime), httpSessionBean);
+		
 
 		return false;
 	}
 
-	
-    private  CacheService cacheService;
+	private CacheService cacheService;
 
-    public void setCacheService(CacheService cacheService) {
-        this.cacheService = cacheService;
-    }
-    
-    
+	public void setCacheService(CacheService cacheService) {
+		this.cacheService = cacheService;
+	}
+
 	private String executePrint(OpenApiHttpRequestBean request) {
 		logger.info("step3...");
 		try {
@@ -67,8 +62,7 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
 			if (e instanceof OpenApiException) {
 				ex = (OpenApiException) e;
 			} else {
-				ex = new OpenApiException(OpenApiServiceErrorEnum.SYSTEM_BUSY,
-						e.getCause());
+				ex = new OpenApiException(OpenApiServiceErrorEnum.SYSTEM_BUSY, e.getCause());
 			}
 			logger.error("executePrint error, " + e.getMessage());
 			// return XmlUtils.bean2xml((ex.getShortMsg("unknow")));
@@ -95,8 +89,7 @@ public class OpenApiRspHandler extends AbstractOpenApiHandler {
 	private String getResponseBody(OpenApiHttpRequestBean bean) {
 		logger.info("step4....");
 		String routeBeanKey = bean.getRouteBeanKey();
-		OpenApiRouteBean routeBean = (OpenApiRouteBean) cacheService
-				.get(routeBeanKey);
+		OpenApiRouteBean routeBean = (OpenApiRouteBean) cacheService.get(routeBeanKey);
 		Object body = (Object) routeBean.getServiceRsp();
 		if (body instanceof String) {
 			return body.toString();

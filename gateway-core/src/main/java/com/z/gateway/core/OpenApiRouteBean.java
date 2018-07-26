@@ -7,123 +7,129 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Properties;
 
-/**
+/**去掉中间的routeBean
  * @author Administrator
  *
  */
-public class OpenApiRouteBean implements Serializable{
+@Deprecated
+public class OpenApiRouteBean implements Serializable {
 
-    private String traceId; // 内部定义的请求id
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5437248914612381520L;
 
-    private String apiId;
-    private String requestMethod;
-    private String version; // api_version
-    private String timeStamp;
+	private String traceId; // 内部定义的请求id
 
-    private Map<String, String> reqHeader;
+	private String apiId;
+	private String requestMethod;
+	private String version; // api_version
+	private String timeStamp;
 
-    private String operationType;
+	private Map<String, String> reqHeader;
 
-    private String serviceReqData;// post请求方法参数
-    // private String queryString; // 请求string
-    private Map<String, String> serviceGetReqData; // get请求参数
-    private Properties thdApiUrlParams;// 第三方接口所需传入的url参数
+	private String operationType;
 
-    private String serviceRsp; // 后端服务返回值
+	private String serviceReqData;// post请求方法参数
+	// private String queryString; // 请求string
+	private Map<String, String> serviceGetReqData; // get请求参数
+	private Properties thdApiUrlParams;// 第三方接口所需传入的url参数
 
-    public String getServiceRsp() {
-        return serviceRsp;
-    }
+	private String serviceRsp; // 后端服务返回值
 
-    public void setServiceRsp(String serviceRsp) {
-        this.serviceRsp = serviceRsp;
-    }
+	public String getServiceRsp() {
+		return serviceRsp;
+	}
 
-    public void setThdApiUrlParams(Properties thdApiUrlParams) {
-        this.thdApiUrlParams = thdApiUrlParams;
-    }
+	public void setServiceRsp(String serviceRsp) {
+		this.serviceRsp = serviceRsp;
+	}
 
-    public Map<String, String> getServiceGetReqData() {
-        return serviceGetReqData;
-    }
+	public void setThdApiUrlParams(Properties thdApiUrlParams) {
+		this.thdApiUrlParams = thdApiUrlParams;
+	}
 
-    public void setServiceGetReqData(Map<String, String> serviceGetReqData) {
-        this.serviceGetReqData = serviceGetReqData;
-    }
+	public Map<String, String> getServiceGetReqData() {
+		return serviceGetReqData;
+	}
 
-    public Properties getThdApiUrlParams() {
-        return this.thdApiUrlParams;
-    }
+	public void setServiceGetReqData(Map<String, String> serviceGetReqData) {
+		this.serviceGetReqData = serviceGetReqData;
+	}
 
-    public void addThdApiUrlParams(String key, String value) {
-        if (thdApiUrlParams == null) {
-            this.thdApiUrlParams = new Properties();
-        }
-        this.thdApiUrlParams.put(key, value);
-    }
+	public Properties getThdApiUrlParams() {
+		return this.thdApiUrlParams;
+	}
 
-    public String getRequestMethod() {
-        return requestMethod;
-    }
+	public void addThdApiUrlParams(String key, String value) {
+		if (thdApiUrlParams == null) {
+			this.thdApiUrlParams = new Properties();
+		}
+		this.thdApiUrlParams.put(key, value);
+	}
 
-    public void setRequestMethod(String requestMethod) {
-        this.requestMethod = requestMethod;
-    }
+	public String getRequestMethod() {
+		return requestMethod;
+	}
 
-    public String getVersion() {
-        return version;
-    }
+	public void setRequestMethod(String requestMethod) {
+		this.requestMethod = requestMethod;
+	}
 
-    public void setVersion(String version) {
-        this.version = version;
-    }
+	public String getVersion() {
+		return version;
+	}
 
-    public String getServiceReqData() {
-        return serviceReqData;
-    }
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
-    public void setServiceReqData(String serviceReqData) {
-        this.serviceReqData = serviceReqData;
-    }
+	public String getServiceReqData() {
+		return serviceReqData;
+	}
 
-    public String getOperationType() {
-        return operationType;
-    }
+	public void setServiceReqData(String serviceReqData) {
+		this.serviceReqData = serviceReqData;
+	}
 
-    public void setOperationType(String operationType) {
-        this.operationType = operationType;
-    }
+	public String getOperationType() {
+		return operationType;
+	}
 
-    public String getTraceId() {
-        return traceId;
-    }
+	public void setOperationType(String operationType) {
+		this.operationType = operationType;
+	}
 
-    public void setTraceId(String traceId) {
-        this.traceId = traceId;
-    }
+	public String getTraceId() {
+		return traceId;
+	}
 
-    public String getApiId() {
-        return apiId;
-    }
+	public void setTraceId(String traceId) {
+		this.traceId = traceId;
+	}
 
-    public void setApiId(String apiId) {
-        this.apiId = apiId;
-    }
+	public String getApiId() {
+		return apiId;
+	}
 
-    public String getTimeStamp() {
-        return timeStamp;
-    }
+	public void setApiId(String apiId) {
+		this.apiId = apiId;
+	}
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
+	public String getTimeStamp() {
+		return timeStamp;
+	}
 
-    public Map<String, String> getReqHeader() {
-        return reqHeader;
-    }
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 
-    public void setReqHeader(Map<String, String> reqHeader) {
-        this.reqHeader = reqHeader;
-    }
+	public Map<String, String> getReqHeader() {
+		return reqHeader;
+	}
+
+	public void setReqHeader(Map<String, String> reqHeader) {
+		this.reqHeader = reqHeader;
+	}
 
 }

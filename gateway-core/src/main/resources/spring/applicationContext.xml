@@ -58,7 +58,7 @@
 			<list>
 				<ref bean="serviceReqAdapter" />
 				<ref bean="serviceReqHandler" />
-				<ref bean="serviceRspHandler" />
+				<!-- <ref bean="serviceRspHandler" /> -->
 			</list>
 		</constructor-arg>
 	</bean>
@@ -66,13 +66,12 @@
 
 
 	<bean id="serviceReqAdapter" class="com.z.gateway.core.support.OpenApiReqAdapter">
-		<property name="cacheService" ref="cacheServiceImpl"></property>
+		<property name="cacheService" ref="cacheServiceImpl" />
 	</bean>
 
 	<bean id="serviceReqHandler" class="com.z.gateway.core.support.OpenApiReqHandler">
-		<property name="cacheService" ref="cacheServiceImpl"></property>
-		<property name="apiInterfaceService" ref="apiInterfaceServiceImpl"></property>
-		<property name="apiHttpClientService" ref="apiHttpClientService"></property>
+		<property name="apiInterfaceService" ref="apiInterfaceServiceImpl" />
+		<property name="apiHttpClientService" ref="apiHttpClientService" />
 	</bean>
 
 

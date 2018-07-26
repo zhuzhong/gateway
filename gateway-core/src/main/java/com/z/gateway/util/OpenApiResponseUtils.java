@@ -7,17 +7,16 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
 import com.z.gateway.common.OpenApiHttpRequestBean;
 
 public class OpenApiResponseUtils {
 
 
     
-    private static Log logger = LogFactory.getLog(OpenApiResponseUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(OpenApiResponseUtils.class);
     
     
     public static final String CONTENT_TYPE_KEY = "content-type";
@@ -32,19 +31,19 @@ public class OpenApiResponseUtils {
         try {
             PrintWriter writer = response.getWriter();
             String body=requestBean.getPrintStr();
-            logger.info(String.format("body==%s",body));
+            logger.debug("响应内容body={}",body);
             writer.print(requestBean.getPrintStr());
             writer.flush();
             writer.close();
         } catch (Exception e) {
-            logger.error("Write body to response error, " + e.getMessage());
+            logger.error("Write body to response error, errorMsg={}" , e.getMessage(),e);
         } 
         /*finally {
             sessionMap.remove(requestBean.getReqId());
         }*/
-        if(logger.isInfoEnabled()){
-        	logger.info(String.format("requestId=%s request end,request=%s", requestBean.getTraceId(),JSON.toJSONString(requestBean)));
-        }
+        
+        	logger.info("requestId={} request end,request={}", requestBean.getTraceId(),requestBean);
+        
     }
 
     private static void setResponseHeader(HttpServletResponse response, Map<String, String> httpHeader) {

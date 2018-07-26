@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.z.gateway.handler.OpenApiHandlerExecuteTemplate;
 
@@ -19,9 +18,9 @@ import com.z.gateway.handler.OpenApiHandlerExecuteTemplate;
  * @author Administrator
  *
  */
-public class OpenApiServiceHandlerExecuteTemplateImpl implements OpenApiHandlerExecuteTemplate, Chain {
+public class OpenApiServiceHandlerExecuteTemplateImpl implements OpenApiHandlerExecuteTemplate {
 
-    private static Log logger = LogFactory.getLog(OpenApiServiceHandlerExecuteTemplateImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(OpenApiServiceHandlerExecuteTemplateImpl.class);
     private List<Command> commands = new ArrayList<Command>();
 
     public OpenApiServiceHandlerExecuteTemplateImpl(List<Command> commands) {

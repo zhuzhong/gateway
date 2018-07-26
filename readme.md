@@ -22,15 +22,17 @@
 前端请求统一的url地址/gateway/gateway.do,然后根据请求方法的不同拼接不同的url参数或提交相应的请求体。
 ### 业务方法的公共请求参数：
 
-	appId   String  16  是   打包app的唯一标识  not null    
-	service   String  64  是   API编码即api的唯一标识 not null 
-	version  String  8   是   API版本号 not null 
-	appToken    String  32  是   app授权令牌,用于授权  not null      
-	timeStamp   String  19  是   时间戳,对应时间的毫秒数 not null    
-	signMethod  String  8   是   生成服务请求签名字符串所使用的算法类型，目前仅支持MD5， 
-	sign    String  32  是   服务请求的签名字符串  not null 
-	deviceToken String  16  否   硬件标识token,app首次安装时发放的硬件唯一性标识
-	userToken   String  16  否   用户token
+|参数名称|参数类型|最大长度|是否必须|说明|
+|-------|-------|-------|-------|----|
+|method| String| 64 |  是  | API编码即api的唯一标识|
+|appId  | String|  16| 否  |打包app的唯一标识|   
+|v      |String | 8 |  否  | API版本号| 
+|appToken|String| 32|  否  | app授权令牌,用于授权|      
+|timestamp|String|19|是| 时间戳,对应时间的毫秒数|    
+|signMethod|String|8|否|生成服务请求签名字符串所使用的算法类型，目前仅支持MD5|
+|sign|String|32|否|服务请求的签名字符串|
+|deviceToken|String|16|否|硬件标识token,app首次安装时发放的硬件唯一性标识|
+|userToken  | String | 16 | 否 |  用户token|
 
 ### GET请求
 
@@ -38,17 +40,25 @@
 
 ### POST请求
    对于post请求，则相应格式如下：
-   { "publAttrs":{}, "busiAttrs":{} }，其只publAttrs中放的是公共请求参数，busiAttrs为业务请求参数，并且格式为application/json，目前也只支持这种请求格式
+
+	   { "pub_json":{}, "param_json":{} }
+
+其只pub_json 中放的是公共请求参数，param_json为业务请求参数，并且格式为application/json，目前也只支持这种请求格式
 
 ## 如何开始
-gateway网关系统，可以不依赖任何外部系统测试运行。对于api服务默认实现在com.aldb.gateway.service.support.TestApiInterfaceServiceImpl
+
+gateway网关系统，可以不依赖任何外部系统测试运行。对于api服务默认实现在
+ 
+ 	com.aldb.gateway.service.support.TestApiInterfaceServiceImpl
+
 只需要将该实现类配置在spring配置文件即可进行测试,测试类似如下:
-http://localhost:8080/gateway/gateway.do?appId=test&apiId=2&apiVersion=1.1.0&appToken=token&timeStamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000
+
+http://localhost:8080/gateway/index.do?method=test&apiId=2&v=1.1.0&appToken=token&timestamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000
 
 
-- apiId=1 为百度
-- apiId=2 为sina
-- apiId=3为jd.com
+- method=1 为百度
+- method=2 为sina
+- method=3为jd.com
 
-其他的参数均没有校验，对于需要权限认证及注册与订阅api功能的请参考[网关注册服务系统](https://github.com/zhuzhong/gateway_register "网关注册服务")
+其他的参数均没有校验
 

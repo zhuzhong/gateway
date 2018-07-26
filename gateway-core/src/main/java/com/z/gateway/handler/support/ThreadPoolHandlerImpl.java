@@ -5,8 +5,8 @@ package com.z.gateway.handler.support;
 
 import java.util.concurrent.FutureTask;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.task.TaskRejectedException;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -22,7 +22,7 @@ import com.z.gateway.protocol.OpenApiHttpSessionBean;
  */
 public class ThreadPoolHandlerImpl implements ThreadPoolHandler {
 
-    private static Log logger = LogFactory.getLog(ThreadPoolHandlerImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(ThreadPoolHandlerImpl.class);
 
     private ThreadPoolTaskExecutor taskExecutor;
 
