@@ -84,8 +84,10 @@
 		init-method="init" />-->
 		
 	<bean id="apiHttpClientService"
-		class="com.z.gateway.core.support.OpenApiHttpAsynClientServiceImpl"
-		init-method="init" /> 
+		class="com.z.gateway.core.support.OpenApiHttpClientServiceImpl"
+		init-method="init" >
+		<property name="usingHead" value="true" />
+		</bean> 
 
 	<bean id="cacheServiceImpl"
 		class="com.z.gateway.service.support.DefaultCacheServiceImpl" />

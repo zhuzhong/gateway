@@ -53,7 +53,7 @@ gateway网关系统，可以不依赖任何外部系统测试运行。对于api�
 
 只需要将该实现类配置在spring配置文件即可进行测试,测试类似如下:
 
-http://localhost:8080/gateway/index.do?method=test&apiId=2&v=1.1.0&appToken=token&timestamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000
+http://localhost:8080/gateway/index.do?method=2&v=1.1.0&appToken=token&timestamp=123456789&signMethod=md5&sign=223&deviceToken=444&userToken=66&format=json&testa=0000000
 
 
 - method=1 为百度

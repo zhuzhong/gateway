@@ -52,6 +52,12 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
 	private static PoolingHttpClientConnectionManager manager = null;
 	private static CloseableHttpClient httpClient = null;
 
+	private Boolean usingHead;
+
+	public void setUsingHead(Boolean usingHead) {
+		this.usingHead = usingHead;
+	}
+
 	public void init() {
 		initHttpClient();
 	}
@@ -147,11 +153,15 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
 		String body = "";
 		org.apache.http.client.methods.HttpPost httpPost = new org.apache.http.client.methods.HttpPost(url);
 		// 将所有的header都传过去
-		if (requestHeader != null) {
+		if (requestHeader != null && usingHead) {
+			
+			for(Map.Entry<String, String> kv:requestHeader.entrySet()){
+				if(kv.getKey().equalsIgnoreCase("Content-Length")){
+					continue;
+				}
+				httpPost.addHeader(kv.getKey(), kv.getValue());
+			}
 
-			requestHeader.forEach((k, v) -> {
-				httpPost.setHeader(k, v);
-			});
 		}
 
 		httpPost.setEntity(new StringEntity(reqData, "utf-8"));
@@ -172,6 +182,7 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
 			// 释放链接
 			response.close();
 		} catch (IOException e) {
+			logger.error("url={}调用失败", e);
 			e.printStackTrace();
 		}
 		return body;
@@ -183,11 +194,14 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
 		String body = "";
 		org.apache.http.client.methods.HttpGet httpGet = new org.apache.http.client.methods.HttpGet(webUrl);
 		// 将所有的header都传过去
-		if (requestHeader != null) {
+		if (requestHeader != null && usingHead) {
 
-			requestHeader.forEach((k, v) -> {
-				httpGet.setHeader(k, v);
-			});
+			for(Map.Entry<String, String> kv:requestHeader.entrySet()){
+				if(kv.getKey().equalsIgnoreCase("Content-Length")){
+					continue;
+				}
+				httpGet.addHeader(kv.getKey(), kv.getValue());
+			}
 		}
 		try {
 			CloseableHttpResponse response = getHttpClient().execute(httpGet);
@@ -244,12 +258,6 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
 		return prestr;
 	}
 
-	/*
-	 * public static void main(String args[]) { OpenApiHttpClientServiceImpl p =
-	 * new OpenApiHttpClientServiceImpl(); p.init();
-	 * System.out.println(p.doHttpsGet("https://www.baidu.com/", "110")); }
-	 */
-
 	@Override
 	public String doHttpsGet(String webUrl, Map<String, String> requestHeader) { // https
 																					// 协议
@@ -262,23 +270,4 @@ public class OpenApiHttpClientServiceImpl implements OpenApiHttpClientService {
 		return doGet(webUrl, paramMap, requestHeader);
 	}
 
-	/*
-	 * public String doPost(String url, String reqData, String contentType,
-	 * String params) { return null; }
-	 * 
-	 * public Map<String, String> HttpGet(String webUrl, Map paramMap) {
-	 * 
-	 * return null; }
-	 * 
-	 * public Map<String, String> HttpGet(String url, String method, Map
-	 * paramMap) {
-	 * 
-	 * return null; }
-	 * 
-	 * public String HttpPost(String webUrl, Map paramMap) { return null; }
-	 * 
-	 * public String HttpPost(String url, String method, Map paramMap) {
-	 * 
-	 * return null; }
-	 */
 }

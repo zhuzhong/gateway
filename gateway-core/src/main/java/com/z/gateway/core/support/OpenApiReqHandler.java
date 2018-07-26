@@ -52,7 +52,7 @@ public class OpenApiReqHandler extends AbstractOpenApiHandler {
 		logger.debug("end run doExecuteBiz,currentTime={},elapase_time={} milseconds,httpSessonBean={}",
 				System.currentTimeMillis(), (System.currentTimeMillis() - currentTime), httpSessionBean);
 
-		return false;
+		return true;
 	}
 
 	/**
