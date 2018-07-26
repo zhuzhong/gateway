@@ -74,16 +74,6 @@ public class TestApiInterfaceServiceImpl implements ApiInterfaceService {
             aif.setRequestMethod(CommonCodeConstants.REQUEST_METHOD.GET.name());
             // aif.setTargetUrl("/");
             return aif;
-        }else if(apiId.equals("v5")){
-            ApiInterface aif = new ApiInterface();
-            aif.setApiId(apiId);
-            aif.setVersion(version);
-            aif.setProtocol("http");
-            aif.setHostAddress("10.148.16.240");
-            // aif.setPort(null);
-            aif.setRequestMethod(CommonCodeConstants.REQUEST_METHOD.POST.name());
-             aif.setTargetUrl("magicmall/activitys/commonProduct/v5");
-            return aif;
         }
         return null;
 
